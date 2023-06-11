@@ -1,0 +1,12 @@
+﻿@model string
+
+@if (!String.IsNullOrEmpty(Model))
+{
+    var statusMessageClass = Model.Contains("succès") ? "success" : "danger";
+    var statusMessageIcon = Model.Contains("succès") ? "check-circle-o" : "times-circle-o";
+<div class="alert alert-@statusMessageClass alert-dismissible" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <span class="fa fa-@statusMessageIcon mr-2"></span>
+    @Model
+</div>
+}

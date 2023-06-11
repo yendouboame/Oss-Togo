@@ -1,0 +1,9 @@
+﻿@model Diocese
+
+<form asp-action="Create" method="post">
+    <div class="form-group">
+        <label class="required" asp-for="Name"></label>
+        <input asp-for="Name" class="form-control" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Enregistrer</button>
+</form>
