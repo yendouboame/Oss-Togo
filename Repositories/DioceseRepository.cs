@@ -34,9 +34,23 @@ namespace SolidarityFund.Repositories
 
         public Diocese Details(int dioceseId)
         {
-            return _context.Dioceses
-                .Include(d => d.Priests)
-                .FirstOrDefault(d => d.Id == dioceseId);
+            return _context.Dioceses.Find(dioceseId);
+        }
+
+        public void Edit(Diocese diocese)
+        {
+            var old = _context.Dioceses.Find(diocese.Id);
+
+            old.Name = diocese.Name;
+            _context.SaveChanges();
+        }
+
+        public void Delete(int dioceseId)
+        {
+            var diocese = _context.Dioceses.Find(dioceseId);
+
+            diocese.IsDeleted = true;
+            _context.SaveChanges();
         }
     }
 }

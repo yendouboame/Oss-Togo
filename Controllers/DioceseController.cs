@@ -38,5 +38,43 @@ namespace SolidarityFund.Controllers
         {
             return Ok(_dioceseRepository.Details(dioceseId));
         }
+
+        [HttpPost]
+        public IActionResult Edit(Diocese diocese)
+        {
+            string message = string.Empty;
+            try
+            {
+                _dioceseRepository.Edit(diocese);
+
+                message = $"Informations mises à jour avec succès";
+            }
+            catch (Exception ex)
+            {
+                message = $"Erreur: {ex.Message}";
+            }
+
+            TempData["StatusMessage"] = message;
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost]
+        public IActionResult Delete(int dioceseId)
+        {
+            string message = string.Empty;
+
+            try
+            {
+                _dioceseRepository.Delete(dioceseId);
+                message = "Informations supprimées avec succès";
+            }
+            catch (Exception ex)
+            {
+                message = $"Erreur: {ex.Message}";
+            }
+
+            TempData["StatusMessage"] = message;
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

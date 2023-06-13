@@ -14,9 +14,6 @@ namespace SolidarityFund.Models.Entities
         [Display(Name = "Nom du diocèse")]
         public string Name { get; set; }
 
-        [Display(Name = "Nombre de prêtres")]
-        public int NumberOfPriests { get { return Priests.Count; } }
-
         public virtual ICollection<Priest> Priests { get; set; }
     }
 }

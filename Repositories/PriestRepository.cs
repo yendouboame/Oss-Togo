@@ -57,5 +57,39 @@ namespace SolidarityFund.Repositories
             priest.IsDeleted = true;
             _context.SaveChanges();
         }
+
+        public IEnumerable<Priest> GetEligiblePriests()
+        {
+            var allPriests = GetAll();
+            var eligiblePriests = new List<Priest>();
+
+            foreach (var priest in allPriests)
+            {
+                int age = CalculateAge(priest.DateOfBirth);
+
+                if (age < 70 && DateTime.Now >= priest.OrdinationDate.AddMonths(1))
+                {
+                    eligiblePriests.Add(priest);
+                }
+                else if (age == 70 && DateTime.Now < priest.DateOfBirth.AddYears(70).AddMonths(1))
+                {
+                    eligiblePriests.Add(priest);
+                }
+            }
+
+            return eligiblePriests;
+        }
+
+        private int CalculateAge(DateTime birthDate)
+        {
+            int age = DateTime.Now.Year - birthDate.Year;
+
+            if (DateTime.Now < birthDate.AddYears(age))
+            {
+                age--;
+            }
+
+            return age;
+        }
     }
 }

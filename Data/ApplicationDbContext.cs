@@ -16,5 +16,6 @@ namespace SolidarityFund.Data
 
         public DbSet<Priest> Priests { get; set; }
         public DbSet<Diocese> Dioceses { get; set; }
+        public DbSet<Contribution> Contributions { get; set; }
     }
 }

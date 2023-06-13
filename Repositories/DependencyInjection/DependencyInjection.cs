@@ -13,6 +13,8 @@ namespace SolidarityFund.Repositories.DependencyInjection
             services.AddScoped<PriestRepository>();
 
             services.AddScoped<DioceseRepository>();
+
+            services.AddScoped<ContributionRepository>();
         }
     }
 }
