@@ -59,7 +59,7 @@ namespace SolidarityFund.Repositories
             _context.SaveChanges();
         }
 
-        public IEnumerable<Priest> GetEligiblePriests()
+        public IEnumerable<Priest> GetEligiblePriestsForContribution()
         {
             var allPriests = GetAll();
             var eligiblePriests = new List<Priest>();
@@ -80,6 +80,41 @@ namespace SolidarityFund.Repositories
 
             return eligiblePriests;
         }
+
+        public IEnumerable<Priest> GetEligiblePriestsForPension()
+        {
+            var allPriests = GetAll();
+
+            var eligiblePriests = allPriests.Where(priest =>
+                CalculateAge(priest.DateOfBirth) >= 70 &&
+                DateTime.Now >= priest.DateOfBirth.AddYears(70).AddMonths(1)
+            ).ToList();
+
+            return eligiblePriests;
+        }
+
+
+        /*public IEnumerable<Priest> GetEligiblePriestsForPension()
+        {
+            var allPriests = GetAll();
+            var eligiblePriests = new List<Priest>();
+
+            foreach (var priest in allPriests)
+            {
+                int age = CalculateAge(priest.DateOfBirth);
+
+                if (age == 70 && DateTime.Now > priest.DateOfBirth.AddYears(70).AddMonths(1))
+                {
+                    eligiblePriests.Add(priest);
+                }
+                else if (age > 70)
+                {
+                    eligiblePriests.Add(priest);
+                }
+            }
+
+            return eligiblePriests;
+        }*/
 
         private int CalculateAge(DateTime birthDate)
         {

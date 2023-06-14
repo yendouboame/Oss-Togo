@@ -34,5 +34,7 @@ namespace SolidarityFund.Models.Entities
         public int DioceseId { get; set; }
         [Display(Name = "Diocèse")]
         public virtual Diocese Diocese { get; set; }
+
+        public virtual ICollection<Contribution> Contributions { get; set; }
     }
 }

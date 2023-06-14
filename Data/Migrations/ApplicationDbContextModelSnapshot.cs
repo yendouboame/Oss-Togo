@@ -269,6 +269,35 @@ namespace SolidarityFund.Data.Migrations
                     b.ToTable("DIOCESES");
                 });
 
+            modelBuilder.Entity("SolidarityFund.Models.Entities.Pension", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<double>("Ammount")
+                        .HasColumnType("float");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("date");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("PriestId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PriestId");
+
+                    b.ToTable("PENSIONS");
+                });
+
             modelBuilder.Entity("SolidarityFund.Models.Entities.Priest", b =>
                 {
                     b.Property<int>("Id")
@@ -361,6 +390,17 @@ namespace SolidarityFund.Data.Migrations
             modelBuilder.Entity("SolidarityFund.Models.Entities.Contribution", b =>
                 {
                     b.HasOne("SolidarityFund.Models.Entities.Priest", "Priest")
+                        .WithMany("Contributions")
+                        .HasForeignKey("PriestId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Priest");
+                });
+
+            modelBuilder.Entity("SolidarityFund.Models.Entities.Pension", b =>
+                {
+                    b.HasOne("SolidarityFund.Models.Entities.Priest", "Priest")
                         .WithMany()
                         .HasForeignKey("PriestId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -383,6 +423,11 @@ namespace SolidarityFund.Data.Migrations
             modelBuilder.Entity("SolidarityFund.Models.Entities.Diocese", b =>
                 {
                     b.Navigation("Priests");
+                });
+
+            modelBuilder.Entity("SolidarityFund.Models.Entities.Priest", b =>
+                {
+                    b.Navigation("Contributions");
                 });
 #pragma warning restore 612, 618
         }

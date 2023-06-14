@@ -17,7 +17,7 @@ namespace SolidarityFund.Controllers
 
         public IActionResult Add()
         {
-            ViewBag.Priests = new SelectList(_priestRepository.GetEligiblePriests(), "Id", "FullName");
+            ViewBag.Priests = new SelectList(_priestRepository.GetEligiblePriestsForContribution(), "Id", "FullName");
             return View();
         }
 

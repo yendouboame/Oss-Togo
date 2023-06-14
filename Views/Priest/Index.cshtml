@@ -12,7 +12,7 @@
             <div class="card-body">
                 <h5 class="card-title"><strong>@ViewData["Title"]</strong></h5>
                 <hr />
-                <div class="toolbar">
+                <div class="toolbar mb-4">
                     <div class="row">
                         <div class="col-auto mr-auto">
                             <a asp-action="Create" class="btn btn-sm btn-success">
@@ -27,7 +27,7 @@
                     </div>
                 </div>
 
-                <table id="entitiesTable" class="table table-sm table-bordered table-hover mt-4 text-center">
+                <table id="customDataTable" class="table table-sm table-bordered table-hover text-center">
                     <thead class="thead-dark">
                         <tr>
                             <th>@Html.DisplayNameFor(model => model.FullName)</th>
@@ -88,7 +88,7 @@
 
 @section Scripts {
     <script>
-        $('#entitiesTable tbody').on('click', '.btn-delete', function () {
+        $('#customDataTable tbody').on('click', '.btn-delete', function () {
             var priestId = $(this).data('priest-id');
             $("#confirm-delete").find(".modal-body #priestId").val(priestId);
         });

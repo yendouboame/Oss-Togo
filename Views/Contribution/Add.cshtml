@@ -4,35 +4,39 @@
     ViewData["Title"] = "Nouvelle cotisation";
 }
 
-<div class="card shadow mx-auto" style="width: 30%">
-    <div class="card-body">
-        <h5 class="card-title"><strong>@ViewData["Title"]</strong></h5>
-        <hr />
+<div class="row">
+    <div class="mx-auto my-4" style="width: 30%;">
 
         <partial name="_StatusMessage" model='TempData["StatusMessage"]' />
 
-        <form asp-action="Add" method="post">
-            <div class="form-group">
-                <label asp-for="Priest" class="required"></label>
-                <select asp-for="PriestId" class="form-control" asp-items="ViewBag.Priests"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="Date" class="required"></label>
-                <input asp-for="Date" type="date" value="@DateTime.Now.ToString("yyyy-MM-dd")" class="form-control" />
-            </div>
-            <div class="form-group">
-                <label asp-for="Ammount" class="required"></label>
-                <div class="input-group mb-3">
-                    <input asp-for="Ammount" class="form-control" value="5000" readonly>
-                    <div class="input-group-append">
-                        <span class="input-group-text">F CFA</span>
+        <div class="card shadow">
+            <div class="card-body">
+                <h5 class="card-title"><strong>@ViewData["Title"]</strong></h5>
+                <hr />
+                <form asp-action="Add" method="post">
+                    <div class="form-group">
+                        <label asp-for="Priest" class="required"></label>
+                        <select asp-for="PriestId" class="form-control select-picker" data-live-search="true"
+                                title="-- Veuillez sélectionner --" asp-items="ViewBag.Priests" required></select>
                     </div>
-                </div>
+                    <div class="form-group">
+                        <label asp-for="Date" class="required"></label>
+                        <input asp-for="Date" type="date" value="@DateTime.Now.ToString("yyyy-MM-dd")" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Ammount" class="required"></label>
+                        <div class="input-group mb-3">
+                            <input asp-for="Ammount" class="form-control" value="5000" readonly>
+                            <div class="input-group-append">
+                                <span class="input-group-text">F CFA</span>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-success">
+                        Enregistrer
+                    </button>
+                </form>
             </div>
-            <hr />
-            <button type="submit" class="btn btn-success">
-                Enregistrer
-            </button>
-        </form>
+        </div>
     </div>
 </div>

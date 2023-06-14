@@ -14,6 +14,8 @@ namespace SolidarityFund.Repositories.DependencyInjection
 
             services.AddScoped<DioceseRepository>();
 
+            services.AddScoped<PensionRepository>();
+
             services.AddScoped<ContributionRepository>();
         }
     }

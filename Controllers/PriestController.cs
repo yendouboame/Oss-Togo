@@ -12,7 +12,7 @@ namespace SolidarityFund.Controllers
     {
         private void GetSelectList()
         {
-            ViewBag.Dioceses = new SelectList(_dioceseRepository.GetAll().ToList(), "Id", "Name");
+            ViewBag.Dioceses = new SelectList(_dioceseRepository.GetAll(), "Id", "Name");
         }
 
         public IActionResult Index()

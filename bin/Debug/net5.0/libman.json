@@ -21,6 +21,10 @@
     {
       "library": "datatables.net-bs@2.1.1",
       "destination": "wwwroot/lib/datatables.net-bs/"
+    },
+    {
+      "library": "datatables@1.10.21",
+      "destination": "wwwroot/lib/datatables/"
     }
   ]
 }
