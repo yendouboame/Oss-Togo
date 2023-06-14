@@ -17,8 +17,13 @@ namespace SolidarityFund.Controllers
 
         public IActionResult Index()
         {
-            GetSelectList();
             return View(_priestRepository.GetAll());
+        }
+
+        public IActionResult Create()
+        {
+            GetSelectList();
+            return View();
         }
 
         [HttpPost]
