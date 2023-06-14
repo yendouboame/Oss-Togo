@@ -20,7 +20,7 @@ namespace SolidarityFund.Repositories
         public IEnumerable<Diocese> GetAll()
         {
             return _context.Dioceses
-                .Include(d => d.Priests)
+                .Include(d => d.Priests.Where(p => !p.IsDeleted))
                 .Where(d => !d.IsDeleted)
                 .OrderBy(d => d.Name)
                 .ToList();

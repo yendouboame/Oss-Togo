@@ -4,72 +4,30 @@
     ViewData["Title"] = "Liste de tous les diocèses";
 }
 
-<h2 class="page-title">@ViewData["Title"]</h2>
-
 <partial name="_StatusMessage" model='TempData["StatusMessage"]' />
 
 <div class="row">
     <div class="col-md-12 my-4">
         <div class="card shadow">
             <div class="card-body">
+                <h5 class="card-title"><strong>@ViewData["Title"]</strong></h5>
+                <hr />
                 <div class="toolbar">
                     <div class="row">
                         <div class="col-auto mr-auto">
-                            <a href="#" data-toggle="modal" data-target="#create" class="btn btn-success">
+                            <a href="#" data-toggle="modal" data-target="#create" class="btn btn-sm btn-success">
                                 <i class="fa fa-plus-circle" aria-hidden="true"></i> Nouveau
                             </a>
                         </div>
                         <div class="col-auto">
-                            <button id="btn-filter-toggle" class="btn btn-light" title="Trier la liste">
-                                <i class="fa fa-filter" aria-hidden="true"></i>
-                            </button>
-                            <a asp-action="Index" asp-controller="Diocese" class="btn btn-light" title="Actualiser">
+                            <a asp-action="Index" asp-controller="Diocese" class="btn btn-sm btn-light btn-outline-dark" title="Actualiser">
                                 <i class="fa fa-refresh" aria-hidden="true"></i>
                             </a>
                         </div>
                     </div>
-                    @*<div id="filter-toggle" class="w-50 mx-auto d-none">
-                            <form id="filter-form" asp-action="Filter" method="post">
-                                <div class="form-group row">
-                                    <label class="col-sm-4 col-form-label-sm">Etat du profil</label>
-                                    <select name="profileCompleted" class="col-sm-8 form-control-sm w-75 select-picker filter-selectpicker">
-                                        <option value="">Tout --</option>
-                                        <option value="@true">Complet</option>
-                                        <option value="@false">Incomplet</option>
-                                    </select>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-4 col-form-label-sm">Département</label>
-                                    <select name="deptId" class="col-sm-8 form-control-sm w-75 select-picker filter-selectpicker"
-                                            asp-items="ViewBag.Departments" data-live-search="true">
-                                        <option value="">Tous les départements --</option>
-                                    </select>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-4 col-form-label-sm">Site</label>
-                                    <select name="branchId" class="col-sm-8 form-control-sm w-75 select-picker filter-selectpicker"
-                                            asp-items="ViewBag.Branches" data-live-search="true">
-                                        <option value="">Tous les sites --</option>
-                                    </select>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-4 col-form-label-sm">Date d'embauche</label>
-                                    <div class="col-sm-4 px-2">
-                                        <label class="col-form-label-sm">Entre</label>
-                                        <input type="date" name="startDate" class="filter-input form-control-sm w-75" />
-                                    </div>
-                                    <div class="col-sm-4 px-2 text-right">
-                                        <label class="col-form-label-sm">Et</label>
-                                        <input type="date" name="endDate" class="filter-input form-control-sm w-75" />
-                                    </div>
-                                </div>
-                                <button type="submit" class="btn btn-sm btn-primary">Rechercher</button>
-                                <button type="button" id="reset-btn" class="btn btn-sm btn-danger">Réinitialiser</button>
-                            </form>
-                        </div>*@
                 </div>
                 <hr />
-                <table id="entitiesTable" class="table table-bordered table-hover">
+                <table id="entitiesTable" class="table table-sm table-bordered table-hover mt-4 text-center">
                     <thead class="thead-dark">
                         <tr>
                             <th>@Html.DisplayNameFor(model => model.Name)</th>

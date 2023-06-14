@@ -22,6 +22,7 @@ namespace SolidarityFund.Repositories
             return _context.Priests
                 .Include(p => p.Diocese)
                 .Where(p => !p.IsDeleted)
+                .OrderBy(p => p.LastName).ThenBy(p => p.FirstName)
                 .ToList();
         }
 
