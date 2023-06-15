@@ -1,10 +1,11 @@
-﻿
+﻿@model PriestReportViewModel
+
 @{
     ViewData["Title"] = "Etat des prêtres";
 }
 
 <style>
-    .form-group {
+    .form-group, .dropdown-item, legend {
         font-size: 14px;
     }
 
@@ -22,20 +23,20 @@
             <div class="card-body">
                 <h5 class="card-title"><strong>@ViewData["Title"]</strong></h5>
                 <hr />
-                <form action="/" method="post">
+                <form asp-action="PriestReport" method="post">
                     <fieldset class="form-group border pt-1 px-3 pb-3">
                         <legend class="w-auto px-2">Date de naissance</legend>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group m-0">
                                     <label>Entre le</label>
-                                    <input type="date" class="form-control-sm" name="DoBStartDate">
+                                    <input type="date" class="form-control-sm" asp-for="DoBStartDate">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group m-0">
                                     <label>Et le</label>
-                                    <input type="date" class="form-control-sm" name="DoBEndDate">
+                                    <input type="date" class="form-control-sm" asp-for="DoBEndDate">
                                 </div>
                             </div>
                         </div>
@@ -45,10 +46,10 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group m-0">
-                                    <select class="form-control-sm select-picker" name="Age" title="-- Veuillez sélectionner --">
-                                        <option value="LessThanSeventy">Moins de 70 ans</option>
-                                        <option value="Seventy">70 ans</option>
-                                        <option value="MoreThanSeventy">Plus de 70 ans</option>
+                                    <select class="form-control-sm select-picker" asp-for="Age" title="-- Veuillez sélectionner --">
+                                        <option value="@Enums.PriestAgeInterval.LessThanSeventy">Moins de 70 ans</option>
+                                        <option value="@Enums.PriestAgeInterval.Seventy">70 ans</option>
+                                        <option value="@Enums.PriestAgeInterval.MoreThanSeventy">Plus de 70 ans</option>
                                     </select>
                                 </div>
                             </div>
@@ -60,17 +61,19 @@
                             <div class="col-md-6">
                                 <div class="form-group m-0">
                                     <label>Entre le</label>
-                                    <input type="date" class="form-control-sm" name="DoBStartDate">
+                                    <input type="date" class="form-control-sm" asp-for="OrdinationStartDate">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group m-0">
                                     <label>Et le</label>
-                                    <input type="date" class="form-control-sm" name="DoBEndDate">
+                                    <input type="date" class="form-control-sm" asp-for="OrdinationEndDate">
                                 </div>
                             </div>
                         </div>
                     </fieldset>
+                    <a asp-action="Index" asp-controller="Home" class="btn btn-secondary">Accueil</a>
+                    <button type="submit" class="btn btn-primary">Suivant</button>
                 </form>
             </div>
         </div>

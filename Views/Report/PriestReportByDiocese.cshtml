@@ -1,0 +1,66 @@
+﻿@model IEnumerable<IGrouping<Diocese, Priest>>
+
+@{
+    ViewData["Title"] = "Etat des prêtres par diocèse";
+}
+
+<div class="row">
+    <div class="col-md-12 my-4">
+        <div class="card shadow">
+            <div class="card-body">
+                <h5 class="card-title"><strong>@ViewData["Title"]</strong></h5>
+                <hr />
+
+                <table id="customDataTable" class="table table-sm table-bordered table-hover text-center">
+                    @if (Model.Count() > 0)
+                    {
+                        @foreach (var group in Model)
+                        {
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th colspan="4">@group.Key.Name</th>
+                                </tr>
+                            </thead>
+                            <thead>
+                                <tr>
+                                    <th>@Html.DisplayNameFor(model => model.Key.Priests.FirstOrDefault().FullName)</th>
+                                    <th>@Html.DisplayNameFor(model => model.Key.Priests.FirstOrDefault().DateOfBirth)</th>
+                                    <th>@Html.DisplayNameFor(model => model.Key.Priests.FirstOrDefault().OrdinationDate)</th>
+                                    <th>@Html.DisplayNameFor(model => model.Key.Priests.FirstOrDefault().Diocese)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var priest in group)
+                                {
+                                    <tr>
+                                        <td>@priest.FullName</td>
+                                        <td>@priest.DateOfBirth.ToShortDateString()</td>
+                                        <td>@priest.OrdinationDate.ToShortDateString()</td>
+                                        <td>@priest.Diocese?.Name</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        }
+                    }
+                    else
+                    {
+                        <thead>
+                            <tr>
+                                <th>@Html.DisplayNameFor(model => model.Key.Priests.FirstOrDefault().FullName)</th>
+                                <th>@Html.DisplayNameFor(model => model.Key.Priests.FirstOrDefault().DateOfBirth)</th>
+                                <th>@Html.DisplayNameFor(model => model.Key.Priests.FirstOrDefault().OrdinationDate)</th>
+                                <th>@Html.DisplayNameFor(model => model.Key.Priests.FirstOrDefault().Diocese)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr role="group" class="bg-light text-center">
+                                <td colspan="4">Aucune entrée correspondante trouvée</td>
+                            </tr>
+                        </tbody>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+

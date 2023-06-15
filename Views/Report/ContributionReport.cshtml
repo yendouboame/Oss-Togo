@@ -1,0 +1,36 @@
+﻿@model IEnumerable<Contribution>
+
+@{
+    ViewData["Title"] = "Etat des cotisations";
+}
+
+<div class="row">
+    <div class="col-md-12 my-4">
+        <div class="card shadow">
+            <div class="card-body">
+                <h5 class="card-title"><strong>@ViewData["Title"]</strong></h5>
+                <hr />
+
+                <table id="customDataTable" class="table table-sm table-bordered table-hover text-center">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.Date)</th>
+                            <th>@Html.DisplayNameFor(model => model.Priest)</th>
+                            <th>@Html.DisplayNameFor(model => model.Ammount)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var contribution in Model)
+                        {
+                            <tr>
+                                <td>@contribution.Date.ToShortDateString()</td>
+                                <td>@contribution.Priest?.FullName</td>
+                                <td>@contribution.Ammount</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

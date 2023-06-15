@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SolidarityFund.Data;
 using SolidarityFund.Models.Entities;
+using SolidarityFund.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -51,6 +52,11 @@ namespace SolidarityFund.Repositories
 
             diocese.IsDeleted = true;
             _context.SaveChanges();
+        }
+
+        public IEnumerable<CheckBoxViewModel> DioceseCheckBox()
+        {
+            return GetAll().Select(d => new CheckBoxViewModel { ValueCode = d.Id, DisplayValue = d.Name }).ToList();
         }
     }
 }

@@ -28,13 +28,27 @@ using SolidarityFund.Models;
 #nullable disable
 #nullable restore
 #line 3 "C:\Users\COECEPT-SIG\Desktop\Repositories\FreeLance\Caisse de Solidarité Eglise Catholique\SolidarityFund\Views\_ViewImports.cshtml"
+using SolidarityFund.Helpers;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 4 "C:\Users\COECEPT-SIG\Desktop\Repositories\FreeLance\Caisse de Solidarité Eglise Catholique\SolidarityFund\Views\_ViewImports.cshtml"
+using SolidarityFund.ViewModels;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 5 "C:\Users\COECEPT-SIG\Desktop\Repositories\FreeLance\Caisse de Solidarité Eglise Catholique\SolidarityFund\Views\_ViewImports.cshtml"
 using SolidarityFund.Models.Entities;
 
 #line default
 #line hidden
 #nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"caa7a8142fb73044a2392e922407f28d20417d39", @"/Views/Priest/Index.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"524de69d60682994d1db5fb6a3c353f9a040693d", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"cb69d6d8baa61fb6d2c40532a56aaba51be488ac", @"/Views/_ViewImports.cshtml")]
     public class Views_Priest_Index : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<IEnumerable<Priest>>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("name", "_StatusMessage", global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
@@ -86,7 +100,7 @@ using SolidarityFund.Models.Entities;
 #line hidden
 #nullable disable
             WriteLiteral("\r\n");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("partial", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "caa7a8142fb73044a2392e922407f28d20417d398117", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("partial", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "caa7a8142fb73044a2392e922407f28d20417d398606", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_TagHelpers_PartialTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.TagHelpers.PartialTagHelper>();
@@ -117,7 +131,7 @@ __Microsoft_AspNetCore_Mvc_TagHelpers_PartialTagHelper.Model = TempData["StatusM
 #line hidden
 #nullable disable
             WriteLiteral("</strong></h5>\r\n                <hr />\r\n                <div class=\"toolbar mb-4\">\r\n                    <div class=\"row\">\r\n                        <div class=\"col-auto mr-auto\">\r\n                            ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "caa7a8142fb73044a2392e922407f28d20417d3910485", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "caa7a8142fb73044a2392e922407f28d20417d3910974", async() => {
                 WriteLiteral("\r\n                                <i class=\"fa fa-plus-circle\" aria-hidden=\"true\"></i> Nouveau\r\n                            ");
             }
             );
@@ -134,7 +148,7 @@ __Microsoft_AspNetCore_Mvc_TagHelpers_PartialTagHelper.Model = TempData["StatusM
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\r\n                        </div>\r\n                        <div class=\"col-auto\">\r\n                            ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "caa7a8142fb73044a2392e922407f28d20417d3911964", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "caa7a8142fb73044a2392e922407f28d20417d3912453", async() => {
                 WriteLiteral("\r\n                                <i class=\"fa fa-refresh\" aria-hidden=\"true\"></i>\r\n                            ");
             }
             );
@@ -242,7 +256,7 @@ __Microsoft_AspNetCore_Mvc_TagHelpers_PartialTagHelper.Model = TempData["StatusM
                                         </button>
                                         <div class=""dropdown-menu dropdown-menu-right"" aria-labelledby=""actions"" style=""line-height: 2;"">
                                             ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "caa7a8142fb73044a2392e922407f28d20417d3917933", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "caa7a8142fb73044a2392e922407f28d20417d3918422", async() => {
                 WriteLiteral("Modifier");
             }
             );
@@ -308,7 +322,7 @@ __Microsoft_AspNetCore_Mvc_TagHelpers_PartialTagHelper.Model = TempData["StatusM
                 Êtes-vous sûr(e) de vouloir supprimer ces informations ?
                 <hr class=""mb-2"" />
                 ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "caa7a8142fb73044a2392e922407f28d20417d3922173", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "caa7a8142fb73044a2392e922407f28d20417d3922662", async() => {
                 WriteLiteral(@"
                     <input type=""hidden"" id=""priestId"" name=""priestId"" />
                     <button type=""button"" class=""btn btn-secondary"" data-dismiss=""modal"">Non</button>

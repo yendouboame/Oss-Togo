@@ -1,0 +1,51 @@
+﻿@model List<CheckBoxViewModel>
+
+@{
+    ViewData["Title"] = "Etat des prêtres par diocèse";
+}
+
+<style>
+    .form-group, .dropdown-item, legend {
+        font-size: 14px;
+    }
+
+    legend {
+        font-size: 14px;
+        font-weight: bold;
+        color: #6c757d;
+        text-transform: uppercase;
+    }
+</style>
+
+<div class="row">
+    <div class="col-md-12 my-4">
+        <div class="card shadow mx-auto" style="width: 30%;">
+            <div class="card-body">
+                <h5 class="card-title"><strong>@ViewData["Title"]</strong></h5>
+                <hr />
+                <form asp-action="PriestReportByDiocese" method="post">
+                    <fieldset class="form-group border pt-1 px-3 pb-3">
+                        <legend class="w-auto px-2">Diocèse</legend>
+                        <div class="row">
+                            <div class="form-group m-0">
+                                @for (int i = 0; i < Model.Count; i++)
+                                {
+                                    <div class="form-check mx-3 pb-2">
+                                        <input class="form-check-input" type="checkbox" asp-for="@Model[i].IsSelected">
+                                        <input type="hidden" asp-for="@Model[i].DisplayValue">
+                                        <input type="hidden" asp-for="@Model[i].ValueCode">
+                                        <label class="form-check-label" asp-for="@Model[i].IsSelected" style="padding-top: 1px;">
+                                            @Model[i].DisplayValue
+                                        </label>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </fieldset>
+                    <a asp-action="Index" asp-controller="Home" class="btn btn-secondary">Accueil</a>
+                    <button type="submit" class="btn btn-primary">Suivant</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

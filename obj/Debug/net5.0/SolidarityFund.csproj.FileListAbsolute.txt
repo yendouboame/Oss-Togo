@@ -169,3 +169,9 @@ C:\Users\COECEPT-SIG\Desktop\Repositories\FreeLance\Caisse de Solidarité Eglise
 C:\Users\COECEPT-SIG\Desktop\Repositories\FreeLance\Caisse de Solidarité Eglise Catholique\SolidarityFund\obj\Debug\net5.0\Razor\Views\Pension\New.cshtml.g.cs
 C:\Users\COECEPT-SIG\Desktop\Repositories\FreeLance\Caisse de Solidarité Eglise Catholique\SolidarityFund\obj\Debug\net5.0\Razor\Views\Pension\Index.cshtml.g.cs
 C:\Users\COECEPT-SIG\Desktop\Repositories\FreeLance\Caisse de Solidarité Eglise Catholique\SolidarityFund\obj\Debug\net5.0\Razor\Views\Report\PriestReportFilter.cshtml.g.cs
+C:\Users\COECEPT-SIG\Desktop\Repositories\FreeLance\Caisse de Solidarité Eglise Catholique\SolidarityFund\obj\Debug\net5.0\Razor\Views\Report\PriestReport.cshtml.g.cs
+C:\Users\COECEPT-SIG\Desktop\Repositories\FreeLance\Caisse de Solidarité Eglise Catholique\SolidarityFund\obj\Debug\net5.0\Razor\Views\Report\PriestReportByDioceseFilter.cshtml.g.cs
+C:\Users\COECEPT-SIG\Desktop\Repositories\FreeLance\Caisse de Solidarité Eglise Catholique\SolidarityFund\obj\Debug\net5.0\Razor\Views\Report\PriestReportByDiocese.cshtml.g.cs
+C:\Users\COECEPT-SIG\Desktop\Repositories\FreeLance\Caisse de Solidarité Eglise Catholique\SolidarityFund\obj\Debug\net5.0\Razor\Views\Report\DioceseReport.cshtml.g.cs
+C:\Users\COECEPT-SIG\Desktop\Repositories\FreeLance\Caisse de Solidarité Eglise Catholique\SolidarityFund\obj\Debug\net5.0\Razor\Views\Report\ContributionReportFilter.cshtml.g.cs
+C:\Users\COECEPT-SIG\Desktop\Repositories\FreeLance\Caisse de Solidarité Eglise Catholique\SolidarityFund\obj\Debug\net5.0\Razor\Views\Report\ContributionReport.cshtml.g.cs

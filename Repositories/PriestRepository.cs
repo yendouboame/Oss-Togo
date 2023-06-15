@@ -1,9 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SolidarityFund.Data;
 using SolidarityFund.Models.Entities;
+using SolidarityFund.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using SolidarityFund.Helpers;
 using System.Threading.Tasks;
 
 namespace SolidarityFund.Repositories
@@ -126,6 +128,80 @@ namespace SolidarityFund.Repositories
             }
 
             return age;
+        }
+
+        //public IEnumerable<Priest> ReportFilter(PriestReportViewModel priestReport)
+        //{
+        //    var priests = GetAll().ToList();
+
+        //    if (priestReport.DoBStartDate.HasValue)
+        //    {
+        //        priests = priests.Where(p => p.DateOfBirth >= priestReport.DoBStartDate.Value).ToList();
+        //    }
+
+        //    if (priestReport.DoBEndDate.HasValue)
+        //    {
+        //        priests = priests.Where(p => p.DateOfBirth <= priestReport.DoBEndDate.Value).ToList();
+        //    }
+
+        //    if (priestReport.Age.HasValue)
+        //    {
+        //        var age = priestReport.Age.Value;
+
+        //        priests = age switch
+        //        {
+        //            Enums.PriestAgeInterval.LessThanSeventy => priests.Where(p => CalculateAge(p.DateOfBirth) < 70).ToList(),
+        //            Enums.PriestAgeInterval.Seventy => priests.Where(p => CalculateAge(p.DateOfBirth) == 70).ToList(),
+        //            _ => priests.Where(p => CalculateAge(p.DateOfBirth) > 70).ToList()
+        //        };
+        //    }
+
+        //    if (priestReport.OrdinationStartDate.HasValue)
+        //    {
+        //        priests = priests.Where(p => p.OrdinationDate >= priestReport.OrdinationStartDate.Value).ToList();
+        //    }
+
+        //    if (priestReport.OrdinationEndDate.HasValue)
+        //    {
+        //        priests = priests.Where(p => p.OrdinationDate <= priestReport.OrdinationEndDate.Value).ToList();
+        //    }
+
+        //    return priests;
+        //}
+
+        public IEnumerable<Priest> ReportFilter(PriestReportViewModel priestReport)
+        {
+            var priests = GetAll().ToList();
+
+            priests = priests
+                .Where(p => !priestReport.DoBStartDate.HasValue || p.DateOfBirth >= priestReport.DoBStartDate.Value)
+                .Where(p => !priestReport.DoBEndDate.HasValue || p.DateOfBirth <= priestReport.DoBEndDate.Value)
+                .Where(p => !priestReport.Age.HasValue ||
+                    (priestReport.Age == Enums.PriestAgeInterval.LessThanSeventy && CalculateAge(p.DateOfBirth) < 70) ||
+                    (priestReport.Age == Enums.PriestAgeInterval.Seventy && CalculateAge(p.DateOfBirth) == 70) ||
+                    (priestReport.Age == Enums.PriestAgeInterval.MoreThanSeventy && CalculateAge(p.DateOfBirth) > 70))
+                .Where(p => !priestReport.OrdinationStartDate.HasValue || p.OrdinationDate >= priestReport.OrdinationStartDate.Value)
+                .Where(p => !priestReport.OrdinationEndDate.HasValue || p.OrdinationDate <= priestReport.OrdinationEndDate.Value)
+                .ToList();
+
+            return priests;
+        }
+
+        public IEnumerable<IGrouping<Diocese, Priest>> ReportByDioceseFilter(List<CheckBoxViewModel> dioceses)
+        {
+            var selectedDioceses = dioceses
+                .Where(d => d.IsSelected)
+                .Select(d => d.ValueCode)
+                .ToList();
+
+            var priests = _context.Priests
+                .Include(p => p.Diocese)
+                .Where(p => !p.IsDeleted && selectedDioceses.Contains(p.Diocese.Id))
+                .ToList();
+
+            var groupedByDiocese = priests.GroupBy(p => p.Diocese);
+
+            return groupedByDiocese;
         }
     }
 }

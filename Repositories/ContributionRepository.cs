@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SolidarityFund.Data;
 using SolidarityFund.Models.Entities;
+using SolidarityFund.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -44,6 +45,50 @@ namespace SolidarityFund.Repositories
             return _context.Contributions
                 .Any(c => !c.IsDeleted && c.PriestId == contribution.PriestId
                  && c.Date == contribution.Date && c.Ammount == contribution.Ammount);
+        }
+
+        public IEnumerable<Contribution> ReportFilter(ContributionReportViewModel contributionReport)
+        {
+            var contributions = GetAll().ToList();
+
+            contributions = contributions
+                .Where(c => !contributionReport.StartDate.HasValue || c.Date >= contributionReport.StartDate.Value)
+                .Where(c => !contributionReport.EndDate.HasValue || c.Date <= contributionReport.EndDate.Value)
+                .ToList();
+
+            return contributions;
+        }
+
+        public IEnumerable<IGrouping<Priest, Contribution>> ReportFilterGroupByPriest(ContributionReportViewModel contributionReport)
+        {
+            var contributions = GetAll().ToList();
+
+            contributions = contributions
+                .Where(c => !contributionReport.StartDate.HasValue || c.Date >= contributionReport.StartDate.Value)
+                .Where(c => !contributionReport.EndDate.HasValue || c.Date <= contributionReport.EndDate.Value)
+                .ToList();
+            
+            var groupedByPriest = contributions.GroupBy(c => c.Priest);
+
+            return groupedByPriest;
+        }
+
+        public IEnumerable<IGrouping<Diocese, Contribution>> ReportFilterGroupByDiocese(ContributionReportViewModel contributionReport)
+        {
+            var contributions = _context.Contributions
+                .Include(c => c.Priest).ThenInclude(p => p.Diocese)
+                .Where(c => !c.IsDeleted)
+                .OrderByDescending(c => c.Date)
+                .ToList();
+
+            contributions = contributions
+                .Where(c => !contributionReport.StartDate.HasValue || c.Date >= contributionReport.StartDate.Value)
+                .Where(c => !contributionReport.EndDate.HasValue || c.Date <= contributionReport.EndDate.Value)
+                .ToList();
+
+            var groupedByDiocese = contributions.GroupBy(c => c.Priest.Diocese);
+
+            return groupedByDiocese;
         }
     }
 }
