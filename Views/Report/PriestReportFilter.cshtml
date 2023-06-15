@@ -1,0 +1,78 @@
+﻿
+@{
+    ViewData["Title"] = "Etat des prêtres";
+}
+
+<style>
+    .form-group {
+        font-size: 14px;
+    }
+
+    legend {
+        font-size: 14px;
+        font-weight: bold;
+        color: #6c757d;
+        text-transform: uppercase;
+    }
+</style>
+
+<div class="row">
+    <div class="col-md-12 my-4">
+        <div class="card shadow mx-auto" style="width: 40%;">
+            <div class="card-body">
+                <h5 class="card-title"><strong>@ViewData["Title"]</strong></h5>
+                <hr />
+                <form action="/" method="post">
+                    <fieldset class="form-group border pt-1 px-3 pb-3">
+                        <legend class="w-auto px-2">Date de naissance</legend>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group m-0">
+                                    <label>Entre le</label>
+                                    <input type="date" class="form-control-sm" name="DoBStartDate">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group m-0">
+                                    <label>Et le</label>
+                                    <input type="date" class="form-control-sm" name="DoBEndDate">
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset class="form-group border pt-1 px-3 pb-3">
+                        <legend class="w-auto px-2">Âge</legend>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group m-0">
+                                    <select class="form-control-sm select-picker" name="Age" title="-- Veuillez sélectionner --">
+                                        <option value="LessThanSeventy">Moins de 70 ans</option>
+                                        <option value="Seventy">70 ans</option>
+                                        <option value="MoreThanSeventy">Plus de 70 ans</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset class="form-group border pt-1 px-3 pb-3">
+                        <legend class="w-auto px-2">Date d'ordination</legend>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group m-0">
+                                    <label>Entre le</label>
+                                    <input type="date" class="form-control-sm" name="DoBStartDate">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group m-0">
+                                    <label>Et le</label>
+                                    <input type="date" class="form-control-sm" name="DoBEndDate">
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
