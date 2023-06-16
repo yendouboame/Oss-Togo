@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SolidarityFund.Data;
 using SolidarityFund.Models.Entities;
+using SolidarityFund.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -44,6 +45,43 @@ namespace SolidarityFund.Repositories
             return _context.Pensions
                 .Any(p => !p.IsDeleted && p.PriestId == pension.PriestId
                  && p.Date == pension.Date && p.Ammount == pension.Ammount);
+        }
+
+        public IEnumerable<Pension> ReportFilter(PensionReportViewModel pensionReport)
+        {
+            var pensions = GetAll().ToList();
+
+            pensions = pensions
+                .Where(p => !pensionReport.StartDate.HasValue || p.Date >= pensionReport.StartDate.Value)
+                .Where(p => !pensionReport.EndDate.HasValue || p.Date <= pensionReport.EndDate.Value)
+                .ToList();
+
+            return pensions;
+        }
+
+        public IEnumerable<IGrouping<Priest, Pension>> ReportFilterGroupByPriest(PensionReportViewModel pensionReport)
+        {
+            var pensions = GetAll().ToList();
+
+            pensions = pensions
+                .Where(p => !pensionReport.StartDate.HasValue || p.Date >= pensionReport.StartDate.Value)
+                .Where(p => !pensionReport.EndDate.HasValue || p.Date <= pensionReport.EndDate.Value)
+                .ToList();
+
+            var groupedByPriest = pensions.GroupBy(p => p.Priest);
+
+            return groupedByPriest;
+        }
+
+        public IEnumerable<Pension> ReportByPriestFilter(PensionReportByPriestViewModel pensionReport)
+        {
+            var pensions = GetAll()
+                .Where(p => p.PriestId == pensionReport.PriestId)
+                .Where(p => !pensionReport.StartDate.HasValue || p.Date >= pensionReport.StartDate.Value)
+                .Where(p => !pensionReport.EndDate.HasValue || p.Date <= pensionReport.EndDate.Value)
+                .ToList();
+
+            return pensions;
         }
     }
 }

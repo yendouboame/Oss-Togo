@@ -1,0 +1,62 @@
+﻿@model IEnumerable<IGrouping<Priest, Pension>>
+
+@{
+    ViewData["Title"] = "Etat des allocations";
+}
+
+<div class="row">
+    <div class="col-md-12 my-4">
+        <div class="card shadow">
+            <div class="card-body">
+                <h5 class="card-title"><strong>@ViewData["Title"]</strong></h5>
+                <hr />
+
+                <table id="customDataTable" class="table table-sm table-bordered table-hover text-center">
+                    @if (Model.Count() > 0)
+                    {
+                        @foreach (var group in Model)
+                        {
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th colspan="4">@group.Key?.FullName</th>
+                                </tr>
+                            </thead>
+                            <thead>
+                                <tr>
+                                    <th>Date de l'allocation</th>
+                                    <th>Nom et prénom(s) du prêtre</th>
+                                    <th>Montant de l'allocation</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var pension in group)
+                                {
+                                    <tr>
+                                        <td>@pension.Date.ToShortDateString()</td>
+                                        <td>@pension.Priest?.FullName</td>
+                                        <td>@pension.Ammount</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        }
+                    }
+                    else
+                    {
+                        <thead>
+                            <tr>
+                                <th>Date de l'allocation</th>
+                                <th>Nom et prénom(s) du prêtre</th>
+                                <th>Montant de l'allocation</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr role="group" class="bg-light text-center">
+                                <td colspan="3">Aucune entrée correspondante trouvée</td>
+                            </tr>
+                        </tbody>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

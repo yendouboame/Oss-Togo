@@ -1,0 +1,63 @@
+﻿@model SelectList
+
+@{
+    ViewData["Title"] = "Etat des cotisations par diocèse";
+}
+
+<style>
+    .form-group, .dropdown-item, legend {
+        font-size: 14px;
+    }
+
+    legend {
+        font-size: 14px;
+        font-weight: bold;
+        color: #6c757d;
+        text-transform: uppercase;
+    }
+</style>
+
+<div class="row">
+    <div class="col-md-12 my-4">
+        <div class="card shadow mx-auto" style="width: 30%;">
+            <div class="card-body">
+                <h5 class="card-title"><strong>@ViewData["Title"]</strong></h5>
+                <hr />
+                <form asp-action="ContributionReportByDiocese" method="post">
+                    <fieldset class="form-group border pt-1 px-3 pb-3">
+                        <legend class="w-auto px-2">Diocèse</legend>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="form-group m-0">
+                                    <select class="form-control-sm select-picker" name="DioceseId"
+                                            title="-- Veuillez sélectionner --" asp-items="Model" required>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset class="form-group border pt-1 px-3 pb-3">
+                        <legend class="w-auto px-2">Période</legend>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group m-0">
+                                    <label>Entre le</label>
+                                    <input type="date" class="form-control-sm" name="StartDate">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group m-0">
+                                    <label>Et le</label>
+                                    <input type="date" class="form-control-sm" name="EndDate">
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <a asp-action="Index" asp-controller="Home" class="btn btn-secondary">Accueil</a>
+                    <button type="submit" class="btn btn-primary">Suivant</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

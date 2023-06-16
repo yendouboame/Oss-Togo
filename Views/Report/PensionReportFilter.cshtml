@@ -1,0 +1,62 @@
+﻿@model PensionReportViewModel
+
+@{
+    ViewData["Title"] = "Etat des allocations";
+}
+
+<style>
+    .form-group, .dropdown-item, legend {
+        font-size: 14px;
+    }
+
+    legend {
+        font-size: 14px;
+        font-weight: bold;
+        color: #6c757d;
+        text-transform: uppercase;
+    }
+</style>
+
+<div class="row">
+    <div class="col-md-12 my-4">
+        <div class="card shadow mx-auto" style="width: 40%;">
+            <div class="card-body">
+                <h5 class="card-title"><strong>@ViewData["Title"]</strong></h5>
+                <hr />
+                <form asp-action="PensionReport" method="post">
+                    <fieldset class="form-group border pt-1 px-3 pb-3">
+                        <legend class="w-auto px-2">Date de l'allocation</legend>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group m-0">
+                                    <label>Entre le</label>
+                                    <input type="date" class="form-control-sm" asp-for="StartDate">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group m-0">
+                                    <label>Et le</label>
+                                    <input type="date" class="form-control-sm" asp-for="EndDate">
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset class="form-group border pt-1 px-3 pb-3">
+                        <legend class="w-auto px-2">Groupé par</legend>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group m-0">
+                                    <select class="form-control-sm select-picker" asp-for="GroupBy" title="-- Veuillez sélectionner --">
+                                        <option value="@Enums.GroupBy.Priest">Prêtres</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <a asp-action="Index" asp-controller="Home" class="btn btn-secondary">Accueil</a>
+                    <button type="submit" class="btn btn-primary">Suivant</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

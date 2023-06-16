@@ -21,7 +21,7 @@ namespace SolidarityFund.Repositories
         public IEnumerable<Contribution> GetAll()
         {
             return _context.Contributions
-                .Include(c => c.Priest)
+                .Include(c => c.Priest).ThenInclude(p => p.Diocese)
                 .Where(c => !c.IsDeleted)
                 .OrderByDescending(c => c.Date)
                 .ToList();
@@ -89,6 +89,28 @@ namespace SolidarityFund.Repositories
             var groupedByDiocese = contributions.GroupBy(c => c.Priest.Diocese);
 
             return groupedByDiocese;
+        }
+
+        public IEnumerable<Contribution> ReportByPriestFilter(ContributionReportByPriestViewModel contributionReport)
+        {
+            var contributions = GetAll()
+                .Where(c => c.PriestId == contributionReport.PriestId)
+                .Where(c => !contributionReport.StartDate.HasValue || c.Date >= contributionReport.StartDate.Value)
+                .Where(c => !contributionReport.EndDate.HasValue || c.Date <= contributionReport.EndDate.Value)
+                .ToList();
+
+            return contributions;
+        }
+
+        public IEnumerable<Contribution> ReportByDioceseFilter(ContributionReportByDioceseViewModel contributionReport)
+        {
+            var contributions = GetAll()
+                .Where(c => c.Priest.DioceseId == contributionReport.DioceseId)
+                .Where(c => !contributionReport.StartDate.HasValue || c.Date >= contributionReport.StartDate.Value)
+                .Where(c => !contributionReport.EndDate.HasValue || c.Date <= contributionReport.EndDate.Value)
+                .ToList();
+
+            return contributions;
         }
     }
 }

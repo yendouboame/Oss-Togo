@@ -1,0 +1,62 @@
+﻿@model IEnumerable<IGrouping<Diocese, Contribution>>
+
+@{
+    ViewData["Title"] = "Etat des cotisations";
+}
+
+<div class="row">
+    <div class="col-md-12 my-4">
+        <div class="card shadow">
+            <div class="card-body">
+                <h5 class="card-title"><strong>@ViewData["Title"]</strong></h5>
+                <hr />
+
+                <table id="customDataTable" class="table table-sm table-bordered table-hover text-center">
+                    @if (Model.Count() > 0)
+                    {
+                        @foreach (var group in Model)
+                        {
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th colspan="4">@group.Key?.Name</th>
+                                </tr>
+                            </thead>
+                            <thead>
+                                <tr>
+                                    <th>Date de cotisation</th>
+                                    <th>Diocèse</th>
+                                    <th>Montant de la cotisation</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var contribution in group)
+                                {
+                                    <tr>
+                                        <td>@contribution.Date.ToShortDateString()</td>
+                                        <td>@contribution.Priest?.Diocese?.Name</td>
+                                        <td>@contribution.Ammount</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        }
+                    }
+                    else
+                    {
+                        <thead>
+                            <tr>
+                                <th>Date de cotisation</th>
+                                <th>Diocèse</th>
+                                <th>Montant de la cotisation</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr role="group" class="bg-light text-center">
+                                <td colspan="3">Aucune entrée correspondante trouvée</td>
+                            </tr>
+                        </tbody>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
