@@ -38,10 +38,10 @@ namespace SolidarityFund.Data.Seeds
         private async static Task SeedClaimsForSuperAdmin(this RoleManager<IdentityRole> roleManager)
         {
             var adminRole = await roleManager.FindByNameAsync("SuperAdmin");
-            await roleManager.AddPermissionClaim(adminRole, "Products");
+            await roleManager.AddAllPermissionClaim(adminRole, "Products");
         }
 
-        public static async Task AddPermissionClaim(this RoleManager<IdentityRole> roleManager, IdentityRole role, string module)
+        public static async Task AddAllPermissionClaim(this RoleManager<IdentityRole> roleManager, IdentityRole role, string module)
         {
             var allClaims = await roleManager.GetClaimsAsync(role);
             var allPermissions = Permissions.GeneratePermissionsForModule(module);
