@@ -10,5 +10,7 @@ namespace SolidarityFund.Helpers
         public enum PriestAgeInterval { LessThanSeventy, Seventy, MoreThanSeventy }
 
         public enum GroupBy { Priest, Diocese }
+
+        public enum Roles { SuperAdmin, Manager }
     }
 }
