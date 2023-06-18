@@ -70,6 +70,15 @@
                                 <a class="dropdown-item" asp-action="PensionReportByPriestFilter" asp-controller="Report">Etat des allocations par prêtre</a>
                             </div>
                         </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link text-dark dropdown-toggle" href="#" id="dr2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Paramètres
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="dr2">
+                                <a class="dropdown-item" asp-action="Index" asp-controller="Users">Utilisateurs</a>
+                                <a class="dropdown-item" asp-action="Index" asp-controller="Roles">Groupe d'utilisateurs</a>
+                            </div>
+                        </li>
                     </ul>
                     <partial name="_LoginPartial" />
                 </div>
