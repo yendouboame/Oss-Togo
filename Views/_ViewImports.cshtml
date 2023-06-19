@@ -1,6 +1,14 @@
-﻿@using SolidarityFund
+﻿@inject IAuthorizationService AuthorizationService
+
+@using SolidarityFund
 @using SolidarityFund.Models
 @using SolidarityFund.Helpers
 @using SolidarityFund.ViewModels
+@using Microsoft.AspNetCore.Identity
 @using SolidarityFund.Models.Entities
+@using Microsoft.AspNetCore.Authorization
+@using static SolidarityFund.Helpers.Constants.Permissions
+@using static SolidarityFund.Helpers.Constants.Enumerations
+@using static SolidarityFund.Helpers.Functions.StringHelpers
+
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers

@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using SolidarityFund.Helpers.Constants;
 using SolidarityFund.Models.Entities;
 using System;
 using System.Collections.Generic;
@@ -8,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace SolidarityFund.Controllers
 {
+    [Authorize(Permissions.Priests.Access)]
     public class PriestController : BaseController
     {
         private void GetSelectList()
@@ -15,11 +18,13 @@ namespace SolidarityFund.Controllers
             ViewBag.Dioceses = new SelectList(_dioceseRepository.GetAll(), "Id", "Name");
         }
 
+        [Authorize(Permissions.Priests.Access)]
         public IActionResult Index()
         {
             return View(_priestRepository.GetAll());
         }
 
+        [Authorize(Permissions.Priests.Create)]
         public IActionResult Create()
         {
             GetSelectList();
@@ -27,6 +32,7 @@ namespace SolidarityFund.Controllers
         }
 
         [HttpPost]
+        [Authorize(Permissions.Priests.Create)]
         public IActionResult Create(Priest priest)
         {
             string message = string.Empty;
@@ -45,6 +51,7 @@ namespace SolidarityFund.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [Authorize(Permissions.Priests.Edit)]
         public IActionResult Edit(int priestId)
         {
             GetSelectList();
@@ -52,6 +59,7 @@ namespace SolidarityFund.Controllers
         }
 
         [HttpPost]
+        [Authorize(Permissions.Priests.Edit)]
         public IActionResult Edit(Priest priest)
         {
             try
@@ -69,6 +77,7 @@ namespace SolidarityFund.Controllers
         }
 
         [HttpPost]
+        [Authorize(Permissions.Priests.Delete)]
         public IActionResult Delete(int priestId)
         {
             string message = string.Empty;

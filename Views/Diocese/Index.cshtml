@@ -4,10 +4,11 @@
     ViewData["Title"] = "Liste de tous les diocèses";
 }
 
-<partial name="_StatusMessage" model='TempData["StatusMessage"]' />
-
 <div class="row">
     <div class="col-md-12 my-4">
+        
+        <partial name="_StatusMessage" model='TempData["StatusMessage"]' />
+        
         <div class="card shadow">
             <div class="card-body">
                 <h5 class="card-title"><strong>@ViewData["Title"]</strong></h5>
@@ -15,18 +16,21 @@
                 <div class="toolbar mb-4">
                     <div class="row">
                         <div class="col-auto mr-auto">
-                            <a href="#" data-toggle="modal" data-target="#create" class="btn btn-sm btn-success">
-                                <i class="fa fa-plus-circle" aria-hidden="true"></i> Nouveau
-                            </a>
+                            @if ((AuthorizationService.AuthorizeAsync(User, Dioceses.Create)).Result.Succeeded)
+                            { 
+                                <a href="#" data-toggle="modal" data-target="#create" class="btn btn-success">
+                                    <i class="fa fa-plus-circle" aria-hidden="true"></i> Nouveau
+                                </a>
+                            }
                         </div>
                         <div class="col-auto">
-                            <a asp-action="Index" asp-controller="Diocese" class="btn btn-sm btn-light btn-outline-dark" title="Actualiser">
+                            <a asp-action="Index" asp-controller="Diocese" class="btn btn-light btn-outline-dark" title="Actualiser">
                                 <i class="fa fa-refresh" aria-hidden="true"></i>
                             </a>
                         </div>
                     </div>
                 </div>
-                <table id="customDataTable" class="table table-sm table-bordered table-hover text-center">
+                <table id="customDataTable" class="table table-bordered table-hover text-center">
                     <thead class="thead-dark">
                         <tr>
                             <th>@Html.DisplayNameFor(model => model.Name)</th>
@@ -45,9 +49,19 @@
                                         <button class="btn btn-sm dropdown-toggle" type="button" id="actions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             <span class="text-muted sr-only">Action</span>
                                         </button>
-                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="actions" style="line-height: 2;">
-                                            <a class="dropdown-item btn-edit" href="#" data-diocese-id="@diocese.Id">Modifier</a>
-                                            <a class="dropdown-item btn-delete" href="#" data-toggle="modal" data-target="#confirm-delete" data-diocese-id="@diocese.Id">Supprimer</a>
+                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="actions">
+                                            @if ((AuthorizationService.AuthorizeAsync(User, Dioceses.Edit)).Result.Succeeded)
+                                            {
+                                                <a class="dropdown-item btn-edit" href="#" data-diocese-id="@diocese.Id">Modifier</a>
+                                            }
+                                            @if ((AuthorizationService.AuthorizeAsync(User, Dioceses.Delete)).Result.Succeeded)
+                                            {
+                                                <a class="dropdown-item btn-delete" href="#" data-toggle="modal" data-target="#confirm-delete" data-diocese-id="@diocese.Id">Supprimer</a>
+                                            }
+                                            @if ((AuthorizationService.AuthorizeAsync(User, Dioceses.ImportData)).Result.Succeeded)
+                                            { 
+                                                <a class="dropdown-item btn-import" href="#" data-toggle="modal" data-target="#import-data" data-diocese-id="@diocese.Id" data-diocese-name="@diocese.Name">Importer la liste des prêtres</a>
+                                            }
                                         </div>
                                     </div>
                                 </td>
@@ -90,7 +104,10 @@
                         <label class="required">Nom du diocèse</label>
                         <input id="Name" name="Name" class="form-control" required>
                     </div>
-                    <button type="submit" class="btn btn-primary">Modifier</button>
+                    <div class="text-right mt-3">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                        <button type="submit" class="btn btn-primary">Modifier</button>
+                    </div>
                 </form>
             </div>
         </div>
@@ -100,18 +117,50 @@
 <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-body pb-2">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Fermer">
+            <div class="modal-header">
+                <h5 class="modal-title"><strong>Confirmation de suppression</strong></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                <h5 class="modal-title">Confirmation de suppression</h5>
-                <hr class="mt-2" />
+            </div>
+            <div class="modal-body">
                 Êtes-vous sûr(e) de vouloir supprimer ces informations ?
-                <hr class="mb-2" />
+            </div>
+            <div class="modal-footer">
                 <form asp-action="Delete" method="post" class="text-right">
                     <input type="hidden" id="dioceseId" name="dioceseId" />
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Non</button>
                     <button type="submit" class="btn btn-danger">Oui</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="import-data" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><strong>Importation de données</strong></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form asp-action="ImportData" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="dioceseId" id="dioceseId" />
+                    <div class="form-group">
+                        <label class="required">Nom du diocèse</label>
+                        <input class="form-control" id="dioceseName" disabled />
+                    </div>
+                    <div class="form-group">
+                        <label class="required">Liste des prêtres</label>
+                        <input type="file" class="form-control-file" name="priests" />
+                    </div>
+                    <div class="text-right mt-3">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                        <button type="submit" class="btn btn-success">Importer</button>
+                    </div>
                 </form>
             </div>
         </div>
@@ -143,7 +192,14 @@
 
             $('#customDataTable tbody').on('click', '.btn-delete', function () {
                 var dioceseId = $(this).data('diocese-id');
-                $("#confirm-delete").find(".modal-body #dioceseId").val(dioceseId);
+                $("#confirm-delete").find(".modal-footer #dioceseId").val(dioceseId);
+            });
+
+            $('#customDataTable tbody').on('click', '.btn-import', function () {
+                var dioceseId = $(this).data('diocese-id');
+                var dioceseName = $(this).data('diocese-name');
+                $("#import-data").find(".modal-body #dioceseId").val(dioceseId);
+                $("#import-data").find(".modal-body #dioceseName").val(dioceseName);
             });
         });
     </script>

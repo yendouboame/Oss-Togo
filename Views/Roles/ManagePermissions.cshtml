@@ -1,0 +1,39 @@
+﻿@model PermissionsFormViewModel
+
+@{
+    ViewData["Title"] = "Gestion des habilitations";
+}
+
+<div class="row">
+    <div class="col-md-5 my-4 mx-auto">
+
+        <partial name="_StatusMessage" model='TempData["StatusMessage"]' />
+
+        <div class="card shadow">
+            <div class="card-body">
+                <h5 class="card-title"><strong>@ViewData["Title"]</strong></h5>
+                <small>Ajouter / Retirer des droits d'accès au rôle @Model.RoleName</small>
+                <hr />
+
+                <form asp-action="UpdatePermissions" method="post">
+                    <input type="hidden" asp-for="RoleId" />
+                    @for (int i = 0; i < Model.RoleClaims.Count; i++)
+                    {
+                        <div class="form-check m-1 mb-2" style="font-size: 16px;">
+                            <input type="hidden" asp-for="@Model.RoleClaims[i].DisplayValue" />
+                            <input asp-for="@Model.RoleClaims[i].IsSelected" class="form-check-input" />
+                            <label class="form-check-label" asp-for="@Model.RoleClaims[i].IsSelected">
+                                @Model.RoleClaims[i].DisplayValue.Split(':')[1].Trim()
+                            </label>
+                        </div>
+                    }
+                    <div class="form-group mt-3">
+                        <button type="submit" class="btn btn-success">Enregistrer</button>
+                        <a asp-action="Index" class="btn btn-secondary">Annuler</a>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>

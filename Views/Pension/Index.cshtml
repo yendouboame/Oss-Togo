@@ -4,10 +4,11 @@
     ViewData["Title"] = "Liste de toutes les allocations";
 }
 
-<partial name="_StatusMessage" model='TempData["StatusMessage"]' />
-
 <div class="row">
     <div class="col-md-12 my-4">
+        
+        <partial name="_StatusMessage" model='TempData["StatusMessage"]' />
+        
         <div class="card shadow">
             <div class="card-body">
                 <h5 class="card-title"><strong>@ViewData["Title"]</strong></h5>
@@ -15,23 +16,26 @@
                 <div class="toolbar mb-4">
                     <div class="row">
                         <div class="col-auto mr-auto">
-                            <a asp-action="New" class="btn btn-sm btn-success">
-                                <i class="fa fa-plus-circle" aria-hidden="true"></i> Nouveau
-                            </a>
+                            @if ((AuthorizationService.AuthorizeAsync(User, Pensions.Add)).Result.Succeeded)
+                            { 
+                                <a asp-action="New" class="btn btn-success">
+                                    <i class="fa fa-plus-circle" aria-hidden="true"></i> Nouveau
+                                </a>
+                            }
                         </div>
                         <div class="col-auto">
-                            <a asp-action="Index" asp-controller="Pension" class="btn btn-sm btn-light btn-outline-dark" title="Actualiser">
+                            <a asp-action="Index" asp-controller="Pension" class="btn btn-light btn-outline-dark" title="Actualiser">
                                 <i class="fa fa-refresh" aria-hidden="true"></i>
                             </a>
                         </div>
                     </div>
                 </div>
-                <table id="customDataTable" class="table text-center table-sm table-hover table-bordered">
+                <table id="eventsDataTable" class="table text-center table-hover table-bordered">
                     <thead class="thead-dark">
                         <tr>
                             <th>@Html.DisplayNameFor(model => model.Date)</th>
                             <th>@Html.DisplayNameFor(model => model.Priest)</th>
-                            <th class="text-right">@Html.DisplayNameFor(model => model.Ammount)</th>
+                            <th>@Html.DisplayNameFor(model => model.Ammount)</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -40,7 +44,7 @@
                             <tr>
                                 <td>@contribution.Date.ToString("dd MMM yyyy")</td>
                                 <td>@contribution.Priest?.FullName</td>
-                                <td class="text-right">@contribution.Ammount</td>
+                                <td>@FormatNumberWithSpaces(contribution.Ammount) XOF</td>
                             </tr>
                         }
                     </tbody>

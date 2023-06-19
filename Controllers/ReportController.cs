@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using static SolidarityFund.Helpers.Constants.Enumerations;
 
 namespace SolidarityFund.Controllers
 {
@@ -48,7 +49,7 @@ namespace SolidarityFund.Controllers
         {
             if (contributionReport.GroupBy != null)
             {
-                if (contributionReport.GroupBy == Helpers.Enums.GroupBy.Priest)
+                if (contributionReport.GroupBy == GroupBy.Priest)
                 {
                     return View(nameof(ContributionReportGroupByPriest), _contributionRepository.ReportFilterGroupByPriest(contributionReport));
                 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using static SolidarityFund.Helpers.Enums;
+using static SolidarityFund.Helpers.Constants.Enumerations;
 
 namespace SolidarityFund.ViewModels
 {

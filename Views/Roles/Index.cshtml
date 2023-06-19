@@ -1,0 +1,85 @@
+﻿@model IEnumerable<IdentityRole>
+
+@{
+    ViewData["Title"] = "Liste de tous les rôles";
+}
+
+<div class="row">
+    <div class="col-md-12 my-4">
+
+        <partial name="_StatusMessage" model='TempData["StatusMessage"]' />
+
+        <div class="card shadow">
+            <div class="card-body">
+                <h5 class="card-title"><strong>@ViewData["Title"]</strong></h5>
+                <hr />
+                <div class="toolbar mb-4">
+                    <div class="row">
+                        <div class="col-auto mr-auto">
+                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#createModal">
+                                <i class="fa fa-plus-circle" aria-hidden="true"></i> Nouveau
+                            </button>
+                        </div>
+                        <div class="col-auto">
+                            <a asp-action="Index" asp-controller="Roles" class="btn btn-light btn-outline-dark" title="Actualiser">
+                                <i class="fa fa-refresh" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <table id="customDataTable" class="table table-bordered table-hover text-center">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Nom</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var role in Model)
+                        {
+                            <tr>
+                                <td>@role.Name</td>
+                                <td class="text-right">
+                                    <div class="dropdown">
+                                        <button class="btn btn-sm dropdown-toggle" type="button" id="actions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <span class="text-muted sr-only">Action</span>
+                                        </button>
+                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="actions" style="line-height: 2;">
+                                            <a class="dropdown-item" asp-action="ManagePermissions" asp-route-roleId="@role.Id">Gestion des habilitations</a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="createModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="createModalLabel"><strong>Nouveau rôle</strong></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form asp-action="Add" method="post">
+                    <div class="form-group">
+                        <label class="required">Nom</label>
+                        <input name="roleName" class="form-control" required />
+                    </div>
+                    <div class="form-group text-right mt-3">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                        <button type="submit" class="btn btn-success">Ajouter</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

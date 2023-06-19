@@ -166,7 +166,6 @@ C:\Users\COECEPT-SIG\Desktop\Repositories\FreeLance\Caisse de Solidarité Eglise
 C:\Users\COECEPT-SIG\Desktop\Repositories\FreeLance\Caisse de Solidarité Eglise Catholique\SolidarityFund\obj\Debug\net5.0\Razor\Views\Contribution\Index.cshtml.g.cs
 C:\Users\COECEPT-SIG\Desktop\Repositories\FreeLance\Caisse de Solidarité Eglise Catholique\SolidarityFund\obj\Debug\net5.0\Razor\Views\Priest\Create.cshtml.g.cs
 C:\Users\COECEPT-SIG\Desktop\Repositories\FreeLance\Caisse de Solidarité Eglise Catholique\SolidarityFund\obj\Debug\net5.0\SolidarityFund.csproj.AssemblyReference.cache
-C:\Users\COECEPT-SIG\Desktop\Repositories\FreeLance\Caisse de Solidarité Eglise Catholique\SolidarityFund\obj\Debug\net5.0\Razor\Views\Pension\New.cshtml.g.cs
 C:\Users\COECEPT-SIG\Desktop\Repositories\FreeLance\Caisse de Solidarité Eglise Catholique\SolidarityFund\obj\Debug\net5.0\Razor\Views\Pension\Index.cshtml.g.cs
 C:\Users\COECEPT-SIG\Desktop\Repositories\FreeLance\Caisse de Solidarité Eglise Catholique\SolidarityFund\obj\Debug\net5.0\Razor\Views\Report\PriestReportFilter.cshtml.g.cs
 C:\Users\COECEPT-SIG\Desktop\Repositories\FreeLance\Caisse de Solidarité Eglise Catholique\SolidarityFund\obj\Debug\net5.0\Razor\Views\Report\PriestReport.cshtml.g.cs
@@ -186,3 +185,15 @@ C:\Users\COECEPT-SIG\Desktop\Repositories\FreeLance\Caisse de Solidarité Eglise
 C:\Users\COECEPT-SIG\Desktop\Repositories\FreeLance\Caisse de Solidarité Eglise Catholique\SolidarityFund\obj\Debug\net5.0\Razor\Views\Report\PensionReportGroupByPriest.cshtml.g.cs
 C:\Users\COECEPT-SIG\Desktop\Repositories\FreeLance\Caisse de Solidarité Eglise Catholique\SolidarityFund\obj\Debug\net5.0\Razor\Views\Report\PensionReportByPriestFilter.cshtml.g.cs
 C:\Users\COECEPT-SIG\Desktop\Repositories\FreeLance\Caisse de Solidarité Eglise Catholique\SolidarityFund\obj\Debug\net5.0\Razor\Views\Report\PensionReportByPriest.cshtml.g.cs
+C:\Users\COECEPT-SIG\Desktop\Repositories\FreeLance\Caisse de Solidarité Eglise Catholique\SolidarityFund\obj\Debug\net5.0\Razor\Areas\Identity\Pages\Account\Login.cshtml.g.cs
+C:\Users\COECEPT-SIG\Desktop\Repositories\FreeLance\Caisse de Solidarité Eglise Catholique\SolidarityFund\obj\Debug\net5.0\Razor\Areas\Identity\Pages\Account\_StatusMessage.cshtml.g.cs
+C:\Users\COECEPT-SIG\Desktop\Repositories\FreeLance\Caisse de Solidarité Eglise Catholique\SolidarityFund\obj\Debug\net5.0\Razor\Areas\Identity\Pages\Account\_ViewImports.cshtml.g.cs
+C:\Users\COECEPT-SIG\Desktop\Repositories\FreeLance\Caisse de Solidarité Eglise Catholique\SolidarityFund\obj\Debug\net5.0\Razor\Areas\Identity\Pages\_ValidationScriptsPartial.cshtml.g.cs
+C:\Users\COECEPT-SIG\Desktop\Repositories\FreeLance\Caisse de Solidarité Eglise Catholique\SolidarityFund\obj\Debug\net5.0\Razor\Areas\Identity\Pages\_ViewImports.cshtml.g.cs
+C:\Users\COECEPT-SIG\Desktop\Repositories\FreeLance\Caisse de Solidarité Eglise Catholique\SolidarityFund\obj\Debug\net5.0\Razor\Views\Shared\_AuthnLayout.cshtml.g.cs
+C:\Users\COECEPT-SIG\Desktop\Repositories\FreeLance\Caisse de Solidarité Eglise Catholique\SolidarityFund\obj\Debug\net5.0\Razor\Views\Users\Index.cshtml.g.cs
+C:\Users\COECEPT-SIG\Desktop\Repositories\FreeLance\Caisse de Solidarité Eglise Catholique\SolidarityFund\obj\Debug\net5.0\Razor\Views\Shared\_YesOrNoBadgePartial.cshtml.g.cs
+C:\Users\COECEPT-SIG\Desktop\Repositories\FreeLance\Caisse de Solidarité Eglise Catholique\SolidarityFund\obj\Debug\net5.0\Razor\Views\Users\ManageRoles.cshtml.g.cs
+C:\Users\COECEPT-SIG\Desktop\Repositories\FreeLance\Caisse de Solidarité Eglise Catholique\SolidarityFund\obj\Debug\net5.0\Razor\Views\Roles\Index.cshtml.g.cs
+C:\Users\COECEPT-SIG\Desktop\Repositories\FreeLance\Caisse de Solidarité Eglise Catholique\SolidarityFund\obj\Debug\net5.0\Razor\Views\Roles\ManagePermissions.cshtml.g.cs
+C:\Users\COECEPT-SIG\Desktop\Repositories\FreeLance\Caisse de Solidarité Eglise Catholique\SolidarityFund\obj\Debug\net5.0\Razor\Views\Pension\EligiblePriests.cshtml.g.cs
