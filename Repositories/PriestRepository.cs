@@ -24,7 +24,7 @@ namespace SolidarityFund.Repositories
         {
             return _context.Priests
                 .Include(p => p.Diocese)
-                .Where(p => !p.IsDeleted)
+                .Where(p => !p.IsDeleted && p.SuspensionReason == null)
                 .OrderBy(p => p.FullName)
                 .ToList();
         }
@@ -49,6 +49,7 @@ namespace SolidarityFund.Repositories
             old.DateOfBirth = priest.DateOfBirth;
             old.OrdinationDate = priest.OrdinationDate;
             old.DioceseId = priest.DioceseId;
+            old.IsIncardinated = priest.IsIncardinated;
 
             _context.SaveChanges();
         }
@@ -61,18 +62,32 @@ namespace SolidarityFund.Repositories
             _context.SaveChanges();
         }
 
-        public IEnumerable<Priest> GetEligiblePriestsForContribution()
+        public IEnumerable<Priest> GetEligibleForContribution()
         {
-            var allPriests = GetAll();
+            var currentDate = DateTime.Now;
             var eligiblePriests = new List<Priest>();
 
-            foreach (var priest in allPriests)
+            foreach (var priest in GetAll())
             {
-                if (priest.Age < 70 && DateTime.Now >= priest.OrdinationDate.AddMonths(1))
+                bool isEligible = false;
+
+                if (priest.Age < 70)
                 {
-                    eligiblePriests.Add(priest);
+                    if (priest.IsIncardinated)
+                    {
+                        isEligible = true;
+                    }
+                    else if (currentDate >= priest.OrdinationDate.AddMonths(1))
+                    {
+                        isEligible = true;
+                    }
                 }
-                else if (priest.Age == 70 && DateTime.Now < priest.DateOfBirth.AddYears(70).AddMonths(1))
+                else if (priest.Age == 70 && currentDate < priest.DateOfBirth.AddYears(70).AddMonths(1))
+                {
+                    isEligible = true;
+                }
+
+                if (isEligible)
                 {
                     eligiblePriests.Add(priest);
                 }
@@ -81,105 +96,53 @@ namespace SolidarityFund.Repositories
             return eligiblePriests;
         }
 
-        public IEnumerable<Priest> GetEligiblePriestsForPension()
+        public IEnumerable<Priest> GetEligibleForPension()
         {
+            var currentDate = DateTime.Now;
+            var eligiblePriests = new List<Priest>();
+
             var allPriests = _context.Priests
-                .Where(p => !p.IsDeleted)
+                .Include(p => p.Pensions)
+                .Where(p => !p.IsDeleted && p.SuspensionReason == null)
                 .OrderBy(p => p.FullName)
                 .ToList();
 
             foreach (var priest in allPriests)
             {
-                priest.Pensions = _context.Pensions
-                    .Where(p => p.PriestId == priest.Id)
-                    .OrderByDescending(p => p.Date)
-                    .Take(1)
-                    .ToList();
-            }
+                if (priest.Age >= 70 && currentDate >= priest.DateOfBirth.AddYears(70).AddMonths(1))
+                {
+                    priest.Pensions = _context.Pensions
+                        .Where(p => p.PriestId == priest.Id)
+                        .OrderByDescending(p => p.Date)
+                        .Take(1)
+                        .ToList();
 
-            var eligiblePriests = allPriests.Where(priest =>
-                priest.Age >= 70 &&
-                DateTime.Now >= priest.DateOfBirth.AddYears(70).AddMonths(1)
-            ).ToList();
+                    eligiblePriests.Add(priest);
+                }
+            }
 
             return eligiblePriests;
         }
 
-
-        /*public IEnumerable<Priest> GetEligiblePriestsForPension()
-        {
-            var allPriests = GetAll();
-            var eligiblePriests = new List<Priest>();
-
-            foreach (var priest in allPriests)
-            {
-                int age = CalculateAge(priest.DateOfBirth);
-
-                if (age == 70 && DateTime.Now > priest.DateOfBirth.AddYears(70).AddMonths(1))
-                {
-                    eligiblePriests.Add(priest);
-                }
-                else if (age > 70)
-                {
-                    eligiblePriests.Add(priest);
-                }
-            }
-
-            return eligiblePriests;
-        }*/
-
-        //public IEnumerable<Priest> ReportFilter(PriestReportViewModel priestReport)
-        //{
-        //    var priests = GetAll().ToList();
-
-        //    if (priestReport.DoBStartDate.HasValue)
-        //    {
-        //        priests = priests.Where(p => p.DateOfBirth >= priestReport.DoBStartDate.Value).ToList();
-        //    }
-
-        //    if (priestReport.DoBEndDate.HasValue)
-        //    {
-        //        priests = priests.Where(p => p.DateOfBirth <= priestReport.DoBEndDate.Value).ToList();
-        //    }
-
-        //    if (priestReport.Age.HasValue)
-        //    {
-        //        var age = priestReport.Age.Value;
-
-        //        priests = age switch
-        //        {
-        //            Enums.PriestAgeInterval.LessThanSeventy => priests.Where(p => CalculateAge(p.DateOfBirth) < 70).ToList(),
-        //            Enums.PriestAgeInterval.Seventy => priests.Where(p => CalculateAge(p.DateOfBirth) == 70).ToList(),
-        //            _ => priests.Where(p => CalculateAge(p.DateOfBirth) > 70).ToList()
-        //        };
-        //    }
-
-        //    if (priestReport.OrdinationStartDate.HasValue)
-        //    {
-        //        priests = priests.Where(p => p.OrdinationDate >= priestReport.OrdinationStartDate.Value).ToList();
-        //    }
-
-        //    if (priestReport.OrdinationEndDate.HasValue)
-        //    {
-        //        priests = priests.Where(p => p.OrdinationDate <= priestReport.OrdinationEndDate.Value).ToList();
-        //    }
-
-        //    return priests;
-        //}
-
         public IEnumerable<Priest> ReportFilter(PriestReportViewModel priestReport)
         {
-            var priests = GetAll().ToList();
+            var priests = GetAll();
 
             priests = priests
-                .Where(p => !priestReport.DoBStartDate.HasValue || p.DateOfBirth >= priestReport.DoBStartDate.Value)
-                .Where(p => !priestReport.DoBEndDate.HasValue || p.DateOfBirth <= priestReport.DoBEndDate.Value)
-                .Where(p => !priestReport.Age.HasValue ||
-                    (priestReport.Age == PriestAgeInterval.LessThanSeventy && p.Age < 70) ||
-                    (priestReport.Age == PriestAgeInterval.Seventy && p.Age == 70) ||
-                    (priestReport.Age == PriestAgeInterval.MoreThanSeventy && p.Age > 70))
-                .Where(p => !priestReport.OrdinationStartDate.HasValue || p.OrdinationDate >= priestReport.OrdinationStartDate.Value)
-                .Where(p => !priestReport.OrdinationEndDate.HasValue || p.OrdinationDate <= priestReport.OrdinationEndDate.Value)
+                .Where(p =>
+                    (!priestReport.DoBStartDate.HasValue || p.DateOfBirth >= priestReport.DoBStartDate.Value) &&
+                    (!priestReport.DoBEndDate.HasValue || p.DateOfBirth <= priestReport.DoBEndDate.Value) &&
+                    (!priestReport.Age.HasValue ||
+                        (priestReport.Age == PriestAgeInterval.LessThanSeventy && p.Age < 70) ||
+                        (priestReport.Age == PriestAgeInterval.Seventy && p.Age == 70) ||
+                        (priestReport.Age == PriestAgeInterval.MoreThanSeventy && p.Age > 70)) &&
+                    (!priestReport.SuspensionReason.HasValue ||
+                        (priestReport.SuspensionReason == SuspensionReason.Death && p.SuspensionReason == SuspensionReason.Death) ||
+                        (priestReport.SuspensionReason == SuspensionReason.Resignation && p.SuspensionReason == SuspensionReason.Resignation) ||
+                        (priestReport.SuspensionReason == SuspensionReason.Excardination && p.SuspensionReason == SuspensionReason.Resignation)) &&
+                    (!priestReport.OrdinationStartDate.HasValue || p.OrdinationDate >= priestReport.OrdinationStartDate.Value) &&
+                    (!priestReport.OrdinationEndDate.HasValue || p.OrdinationDate <= priestReport.OrdinationEndDate.Value)
+                )
                 .ToList();
 
             return priests;
@@ -200,6 +163,16 @@ namespace SolidarityFund.Repositories
             var groupedByDiocese = priests.GroupBy(p => p.Diocese);
 
             return groupedByDiocese;
+        }
+
+        public void SuspendPriest(SuspendPriestViewModel viewModel)
+        {
+            var priest = _context.Priests.Find(viewModel.PriestId);
+
+            priest.SuspensionReason = viewModel.Reason;
+            priest.SuspensionDate = DateTime.Now;
+
+            _context.SaveChanges();
         }
     }
 }

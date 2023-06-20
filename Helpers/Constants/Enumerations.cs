@@ -14,5 +14,7 @@ namespace SolidarityFund.Helpers.Constants
         public enum Roles { SuperAdmin, Admin, Manager, Basic }
 
         public enum Modules { Settings, Users, Roles, Dioceses, Priests, Contributions, Pensions, Reports }
+
+        public enum SuspensionReason { Death, Resignation, Excardination }
     }
 }

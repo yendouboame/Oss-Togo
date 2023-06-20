@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
+using static SolidarityFund.Helpers.Constants.Enumerations;
 
 namespace SolidarityFund.Models.Entities
 {
@@ -24,6 +25,15 @@ namespace SolidarityFund.Models.Entities
         [Display(Name = "Date d'ordination")]
         [Column(TypeName = "date")]
         public DateTime OrdinationDate { get; set; }
+
+        [Display(Name = "Prêtre incardiné")]
+        public bool IsIncardinated { get; set; } = false;
+
+        public SuspensionReason? SuspensionReason { get; set; }
+
+        [Display(Name = "Date d'arrêt")]
+        [Column(TypeName = "date")]
+        public DateTime? SuspensionDate { get; set; }
 
         public int DioceseId { get; set; }
         [Display(Name = "Diocèse")]

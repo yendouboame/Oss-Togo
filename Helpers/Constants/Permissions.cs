@@ -93,8 +93,10 @@ namespace SolidarityFund.Helpers.Constants
             public const string Create = "Permissions.Priests: Ajouter un nouveau prêtre";
             public const string Delete = "Permissions.Priests: Supprimer un prêtre";
             public const string Edit = "Permissions.Priests: Modifier les infos d'un prêtre";
+            public const string ViewAll = "Permissions.Priests: Consulter la liste de tous les prêtres";
+            public const string Suspend = "Permissions.Priests: Mettre fin aux actions d'un prêtre au sein de l'OSS-TOGO";
 
-            public static List<string> Permissions() => new List<string>() { Access, Create, Delete, Edit };
+            public static List<string> Permissions() => new List<string>() { Access, Create, Delete, Edit, ViewAll, Suspend };
         }
 
         public static class Contributions

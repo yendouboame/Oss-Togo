@@ -11,6 +11,7 @@ namespace SolidarityFund.ViewModels
         public DateTime? DoBStartDate { get; set; }
         public DateTime? DoBEndDate { get; set; }
         public PriestAgeInterval? Age { get; set; }
+        public SuspensionReason? SuspensionReason { get; set; }
         public DateTime? OrdinationStartDate { get; set; }
         public DateTime? OrdinationEndDate { get; set; }
     }

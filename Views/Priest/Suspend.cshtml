@@ -1,0 +1,47 @@
+﻿@model SuspendPriestViewModel
+
+@{
+    ViewData["Title"] = "Fin des actions d'un prêtre";
+}
+
+<div class="row">
+    <div class="col-md-4 my-4 mx-auto">
+
+        <partial name="_StatusMessage" model='TempData["StatusMessage"]' />
+
+        <div class="card shadow">
+            <div class="card-body">
+                <h5 class="card-title"><strong>@ViewData["Title"]</strong></h5>
+                <hr />
+                <form asp-action="Suspend" method="post">
+                    <div class="form-group">
+                        <label class="required">Nom et prénom(s) du prêtre</label>
+                        <select asp-for="PriestId" class="form-control select-picker" title="-- Veuillez sélectionner --"
+                                data-live-search="true" asp-items="ViewBag.Priests" required>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="required d-block">Motif</label>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" asp-for="Reason" id="@SuspensionReason.Death" value="@SuspensionReason.Death" required>
+                            <label class="form-check-label" for="@SuspensionReason.Death">Décès</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" asp-for="Reason" id="@SuspensionReason.Resignation" value="@SuspensionReason.Resignation" required>
+                            <label class="form-check-label" for="@SuspensionReason.Resignation">Démission</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" asp-for="Reason" id="@SuspensionReason.Excardination" value="@SuspensionReason.Excardination" required>
+                            <label class="form-check-label" for="@SuspensionReason.Excardination">Excardination</label>
+                        </div>
+                    </div>
+                    <div>
+                        <a asp-action="Index" class="btn btn-secondary">Retour</a>
+                        <button type="submit" class="btn btn-primary">Valider</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

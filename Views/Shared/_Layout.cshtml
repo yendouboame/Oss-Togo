@@ -35,9 +35,25 @@
                             </li>
                         }
                         @if ((AuthorizationService.AuthorizeAsync(User, Priests.Access)).Result.Succeeded)
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-controller="Priest" asp-action="Index">Prêtres</a>
+                        { 
+                            <li class="nav-item dropdown">
+                                <a class="nav-link text-dark dropdown-toggle" href="#" id="dr5" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Prêtres
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="dr5">
+                                    @if ((AuthorizationService.AuthorizeAsync(User, Priests.Create)).Result.Succeeded)
+                                    {
+                                        <a class="dropdown-item" asp-action="Create" asp-controller="Priest">Ajouter un prêtre</a>
+                                    }
+                                    @if ((AuthorizationService.AuthorizeAsync(User, Priests.ViewAll)).Result.Succeeded)
+                                    {
+                                        <a class="dropdown-item" asp-action="Index" asp-controller="Priest">Liste de tous les prêtres</a>
+                                    }
+                                    @if ((AuthorizationService.AuthorizeAsync(User, Priests.Suspend)).Result.Succeeded)
+                                    {
+                                        <a class="dropdown-item" asp-action="Suspend" asp-controller="Priest">Fin des actions d'un prêtre</a>
+                                    }
+                                </div>
                             </li>
                         }
                         @if ((AuthorizationService.AuthorizeAsync(User, Contributions.Access)).Result.Succeeded)
@@ -52,7 +68,7 @@
                                         <a class="dropdown-item" asp-action="Add" asp-controller="Contribution">Nouvelle cotisation</a>
                                     }
                                     @if ((AuthorizationService.AuthorizeAsync(User, Contributions.ViewAll)).Result.Succeeded)
-                                    { 
+                                    {
                                         <a class="dropdown-item" asp-action="Index" asp-controller="Contribution">Liste des cotisations</a>
                                     }
                                 </div>
@@ -70,7 +86,7 @@
                                         <a class="dropdown-item" asp-action="EligiblePriests" asp-controller="Pension">Attribuer une allocation</a>
                                     }
                                     @if ((AuthorizationService.AuthorizeAsync(User, Pensions.ViewAll)).Result.Succeeded)
-                                    { 
+                                    {
                                         <a class="dropdown-item" asp-action="Index" asp-controller="Pension">Liste des allocations</a>
                                     }
                                 </div>
@@ -79,10 +95,10 @@
                         @if ((AuthorizationService.AuthorizeAsync(User, Reports.Access)).Result.Succeeded)
                         {
                             <li class="nav-item dropdown">
-                                <a class="nav-link text-dark dropdown-toggle" href="#" id="dr2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <a class="nav-link text-dark dropdown-toggle" href="#" id="dr3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Etats
                                 </a>
-                                <div class="dropdown-menu" aria-labelledby="dr2">
+                                <div class="dropdown-menu" aria-labelledby="dr3">
                                     @if ((AuthorizationService.AuthorizeAsync(User, Reports.ViewPriests)).Result.Succeeded)
                                     {
                                         <a class="dropdown-item" asp-action="PriestReportFilter" asp-controller="Report">Etat des prêtres</a>
@@ -115,25 +131,25 @@
                                         <a class="dropdown-item" asp-action="PensionReportFilter" asp-controller="Report">Etat des allocations</a>
                                     }
                                     @if ((AuthorizationService.AuthorizeAsync(User, Reports.ViewPensionsByPriest)).Result.Succeeded)
-                                    { 
+                                    {
                                         <a class="dropdown-item" asp-action="PensionReportByPriestFilter" asp-controller="Report">Etat des allocations par prêtre</a>
                                     }
                                 </div>
                             </li>
                         }
                         @if ((AuthorizationService.AuthorizeAsync(User, Settings.Access)).Result.Succeeded)
-                        { 
+                        {
                             <li class="nav-item dropdown">
-                                <a class="nav-link text-dark dropdown-toggle" href="#" id="dr2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <a class="nav-link text-dark dropdown-toggle" href="#" id="dr4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Paramètres
                                 </a>
-                                <div class="dropdown-menu" aria-labelledby="dr2">
+                                <div class="dropdown-menu" aria-labelledby="dr4">
                                     @if ((AuthorizationService.AuthorizeAsync(User, Users.Access)).Result.Succeeded)
                                     {
                                         <a class="dropdown-item" asp-action="Index" asp-controller="Users">Utilisateurs</a>
                                     }
                                     @if ((AuthorizationService.AuthorizeAsync(User, SolidarityFund.Helpers.Constants.Permissions.Roles.Access)).Result.Succeeded)
-                                    { 
+                                    {
                                         <a class="dropdown-item" asp-action="Index" asp-controller="Roles">Rôles</a>
                                     }
                                 </div>

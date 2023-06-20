@@ -18,7 +18,7 @@
                         <div class="col-auto mr-auto">
                             @if ((AuthorizationService.AuthorizeAsync(User, Pensions.Add)).Result.Succeeded)
                             { 
-                                <a asp-action="New" class="btn btn-success">
+                                <a asp-action="EligiblePriests" class="btn btn-success">
                                     <i class="fa fa-plus-circle" aria-hidden="true"></i> Nouveau
                                 </a>
                             }

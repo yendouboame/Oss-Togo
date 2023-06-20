@@ -22,7 +22,7 @@ namespace SolidarityFund.Controllers
         [Authorize(Permissions.Pensions.Add)]
         public IActionResult EligiblePriests()
         {
-            return View(_priestRepository.GetEligiblePriestsForPension());
+            return View(_priestRepository.GetEligibleForPension());
         }
 
         [HttpPost]

@@ -31,6 +31,10 @@
                         <select asp-for="DioceseId" class="form-control select-picker" data-live-search="true"
                                 title="-- Veuillez sélectionner --" asp-items="ViewBag.Dioceses" required></select>
                     </div>
+                    <div class="form-check" style="margin-bottom: 1.5em;">
+                        <input class="form-check-input" asp-for="IsIncardinated">
+                        <label class="form-check-label" asp-for="IsIncardinated"></label>
+                    </div>
                     <a asp-action="Index" class="btn btn-secondary">Retour</a>
                     <button type="submit" class="btn btn-success">Enregistrer</button>
                 </form>

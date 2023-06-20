@@ -22,7 +22,7 @@ namespace SolidarityFund.Controllers
         [Authorize(Permissions.Contributions.Add)]
         public IActionResult Add()
         {
-            ViewBag.Priests = new SelectList(_priestRepository.GetEligiblePriestsForContribution(), "Id", "FullName");
+            ViewBag.Priests = new SelectList(_priestRepository.GetEligibleForContribution(), "Id", "FullName");
             return View();
         }
 

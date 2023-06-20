@@ -11,11 +11,12 @@
                 <h5 class="card-title"><strong>@ViewData["Title"]</strong></h5>
                 <hr />
 
-                <table id="customDataTable" class="table table-sm table-bordered table-hover text-center">
+                <table id="customDataTable" class="table table-bordered table-hover text-center">
                     <thead class="thead-dark">
                         <tr>
                             <th>@Html.DisplayNameFor(model => model.FullName)</th>
                             <th>@Html.DisplayNameFor(model => model.DateOfBirth)</th>
+                            <th>@Html.DisplayNameFor(model => model.Age)</th>
                             <th>@Html.DisplayNameFor(model => model.OrdinationDate)</th>
                             <th>@Html.DisplayNameFor(model => model.Diocese)</th>
                         </tr>
@@ -26,6 +27,7 @@
                             <tr>
                                 <td>@priest.FullName</td>
                                 <td>@priest.DateOfBirth.ToShortDateString()</td>
+                                <td>@priest.Age ans</td>
                                 <td>@priest.OrdinationDate.ToShortDateString()</td>
                                 <td>@priest.Diocese?.Name</td>                                
                             </tr>

@@ -5,7 +5,7 @@
 }
 
 <style>
-    .form-group, .dropdown-item, legend {
+    .form-group,.form-group .dropdown-item, legend {
         font-size: 14px;
     }
 
@@ -18,29 +18,12 @@
 </style>
 
 <div class="row">
-    <div class="col-md-12 my-4">
-        <div class="card shadow mx-auto" style="width: 40%;">
+    <div class="col-md-4 my-4 mx-auto">
+        <div class="card shadow mx-auto">
             <div class="card-body">
                 <h5 class="card-title"><strong>@ViewData["Title"]</strong></h5>
                 <hr />
                 <form asp-action="PriestReport" method="post">
-                    <fieldset class="form-group border pt-1 px-3 pb-3">
-                        <legend class="w-auto px-2">Date de naissance</legend>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group m-0">
-                                    <label>Entre le</label>
-                                    <input type="date" class="form-control-sm" asp-for="DoBStartDate">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group m-0">
-                                    <label>Et le</label>
-                                    <input type="date" class="form-control-sm" asp-for="DoBEndDate">
-                                </div>
-                            </div>
-                        </div>
-                    </fieldset>
                     <fieldset class="form-group border pt-1 px-3 pb-3">
                         <legend class="w-auto px-2">Âge</legend>
                         <div class="row">
@@ -56,17 +39,48 @@
                         </div>
                     </fieldset>
                     <fieldset class="form-group border pt-1 px-3 pb-3">
+                        <legend class="w-auto px-2">Raison d'inactivité</legend>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group m-0">
+                                    <select class="form-control-sm select-picker" asp-for="SuspensionReason" title="-- Veuillez sélectionner --">
+                                        <option value="@SuspensionReason.Death">Décès</option>
+                                        <option value="@SuspensionReason.Resignation">Démission</option>
+                                        <option value="@SuspensionReason.Excardination">Excardination</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset class="form-group border pt-1 px-3 pb-3">
+                        <legend class="w-auto px-2">Date de naissance</legend>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group m-0">
+                                    <label class="d-block">Entre le</label>
+                                    <input type="date" class="form-control-sm" asp-for="DoBStartDate">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group m-0">
+                                    <label class="d-block">Et le</label>
+                                    <input type="date" class="form-control-sm" asp-for="DoBEndDate">
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset class="form-group border pt-1 px-3 pb-3">
                         <legend class="w-auto px-2">Date d'ordination</legend>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group m-0">
-                                    <label>Entre le</label>
+                                    <label class="d-block">Entre le</label>
                                     <input type="date" class="form-control-sm" asp-for="OrdinationStartDate">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group m-0">
-                                    <label>Et le</label>
+                                    <label class="d-block">Et le</label>
                                     <input type="date" class="form-control-sm" asp-for="OrdinationEndDate">
                                 </div>
                             </div>
