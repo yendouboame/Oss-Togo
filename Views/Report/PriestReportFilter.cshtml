@@ -30,6 +30,7 @@
                             <div class="col-md-6">
                                 <div class="form-group m-0">
                                     <select class="form-control-sm select-picker" asp-for="Age" title="-- Veuillez sélectionner --">
+                                        <option value="">Tous les âges</option>
                                         <option value="@PriestAgeInterval.LessThanSeventy">Moins de 70 ans</option>
                                         <option value="@PriestAgeInterval.Seventy">70 ans</option>
                                         <option value="@PriestAgeInterval.MoreThanSeventy">Plus de 70 ans</option>
@@ -44,6 +45,7 @@
                             <div class="col-md-6">
                                 <div class="form-group m-0">
                                     <select class="form-control-sm select-picker" asp-for="SuspensionReason" title="-- Veuillez sélectionner --">
+                                        <option value="">Aucune</option>
                                         <option value="@SuspensionReason.Death">Décès</option>
                                         <option value="@SuspensionReason.Resignation">Démission</option>
                                         <option value="@SuspensionReason.Excardination">Excardination</option>
@@ -87,7 +89,7 @@
                         </div>
                     </fieldset>
                     <a asp-action="Index" asp-controller="Home" class="btn btn-secondary">Accueil</a>
-                    <button type="submit" class="btn btn-primary">Suivant</button>
+                    <button type="submit" class="btn btn-primary" formtarget="_blank">Suivant</button>
                 </form>
             </div>
         </div>

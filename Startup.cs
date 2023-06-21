@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Rotativa.AspNetCore;
 using SolidarityFund.Data;
 using SolidarityFund.Helpers.Filters;
 using SolidarityFund.Helpers.Functions;
@@ -86,6 +87,8 @@ namespace SolidarityFund
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
+
+            RotativaConfiguration.Setup(env.WebRootPath, "Rotativa");
         }
     }
 }

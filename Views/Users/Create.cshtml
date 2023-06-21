@@ -1,0 +1,130 @@
+﻿@model User
+
+@{
+    ViewData["Title"] = "Ajouter un nouvel utilisateur";
+}
+
+<div class="row">
+    <div class="col-md-4 my-4 mx-auto">
+
+        <partial name="_StatusMessage" model='TempData["StatusMessage"]' />
+
+        <div class="card shadow">
+            <div class="card-body">
+                <h5 class="card-title"><strong>@ViewData["Title"]</strong></h5>
+                <hr />
+                <form asp-action="Create" method="post">
+                    <div class="form-group">
+                        <label class="required">Nom</label>
+                        <input asp-for="LastName" class="form-control" required autofocus>
+                    </div>
+                    <div class="form-group">
+                        <label class="required">Prénom(s)</label>
+                        <input asp-for="FirstName" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="required">Nom d'utilisateur</label>
+                        <input asp-for="UserName" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="required">Email</label>
+                        <input type="email" asp-for="Email" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="required">Mot de passe</label>
+                        <div class="input-group">
+                            <input id="passwordInput" name="password" type="password" class="form-control">
+                            <div class="input-group-append">
+                                <button id="togglePassword" class="btn btn-outline-secondary" type="button">
+                                    <i id="eyeIcon" class="fa fa-eye-slash"></i>
+                                </button>
+                                <button id="generatePassword" class="btn btn-outline-secondary" type="button">Générer</button>
+                            </div>
+                        </div>
+                    </div>
+                    <a asp-action="Index" class="btn btn-secondary">Retour</a>
+                    <button type="submit" class="btn btn-success">Enregistrer</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function generateSecurePassword() {
+            var uppercaseLetters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            var lowercaseLetters = 'abcdefghijklmnopqrstuvwxyz';
+            var digits = '0123456789';
+            var specialCharacters = '!@@#$%^&*()-_=+';
+    
+            var password = '';
+            
+            // Générer un caractère spécial
+            var specialChar = specialCharacters.charAt(Math.floor(Math.random() * specialCharacters.length));
+            password += specialChar;
+    
+            // Générer une lettre majuscule
+            var uppercaseLetter = uppercaseLetters.charAt(Math.floor(Math.random() * uppercaseLetters.length));
+            password += uppercaseLetter;
+    
+            // Générer une lettre minuscule
+            var lowercaseLetter = lowercaseLetters.charAt(Math.floor(Math.random() * lowercaseLetters.length));
+            password += lowercaseLetter;
+            
+            // Générer un chiffre
+            var digit = digits.charAt(Math.floor(Math.random() * digits.length));
+            password += digit;
+    
+            // Générer les caractères restants
+            var remainingLength = 8; // Longueur restante pour atteindre 12 caractères
+            var allCharacters = uppercaseLetters + lowercaseLetters + digits + specialCharacters;
+            for (var i = 0; i < remainingLength; i++) {
+                var randomIndex = Math.floor(Math.random() * allCharacters.length);
+                password += allCharacters.charAt(randomIndex);
+            }
+            
+            // Mélanger les caractères du mot de passe
+            password = shuffleString(password);
+    
+            return password;
+        }
+
+        // Fonction pour mélanger une chaîne de caractères
+        function shuffleString(string) {
+            var shuffledString = '';
+            var array = string.split('');
+            while (array.length > 0) {
+                var randomIndex = Math.floor(Math.random() * array.length);
+                shuffledString += array[randomIndex];
+                array.splice(randomIndex, 1);
+            }
+            return shuffledString;
+        }
+
+
+        $(document).ready(function () {
+            // Afficher ou masquer le mot de passe
+            $('#togglePassword').click(function () {
+                var passwordInput = $('#passwordInput');
+                var eyeIcon = $('#eyeIcon');
+
+                if (passwordInput.attr('type') === 'password') {
+                    passwordInput.attr('type', 'text');
+                    eyeIcon.removeClass('fa-eye-slash').addClass('fa-eye');
+                } else {
+                    passwordInput.attr('type', 'password');
+                    eyeIcon.removeClass('fa-eye').addClass('fa-eye-slash');
+                }
+            });
+
+            // Générer un mot de passe sécurisé
+            $('#generatePassword').click(function () {
+                var passwordInput = $('#passwordInput');
+                var generatedPassword = generateSecurePassword(); // Remplacez cette fonction par votre générateur de mot de passe sécurisé
+
+                passwordInput.val(generatedPassword);
+            });
+        });
+    </script>
+}

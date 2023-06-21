@@ -16,9 +16,12 @@
                 <div class="toolbar mb-4">
                     <div class="row">
                         <div class="col-auto mr-auto">
-                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#createModal">
-                                <i class="fa fa-plus-circle" aria-hidden="true"></i> Nouveau
-                            </button>
+                            @if ((AuthorizationService.AuthorizeAsync(User, SolidarityFund.Helpers.Constants.Permissions.Roles.Create)).Result.Succeeded)
+                            { 
+                                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#createModal">
+                                    <i class="fa fa-plus-circle" aria-hidden="true"></i> Nouveau
+                                </button>
+                            }
                         </div>
                         <div class="col-auto">
                             <a asp-action="Index" asp-controller="Roles" class="btn btn-light btn-outline-dark" title="Actualiser">
@@ -46,7 +49,10 @@
                                             <span class="text-muted sr-only">Action</span>
                                         </button>
                                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="actions" style="line-height: 2;">
-                                            <a class="dropdown-item" asp-action="ManagePermissions" asp-route-roleId="@role.Id">Gestion des habilitations</a>
+                                            @if ((AuthorizationService.AuthorizeAsync(User, SolidarityFund.Helpers.Constants.Permissions.Roles.ManagePermissions)).Result.Succeeded)
+                                            { 
+                                                <a class="dropdown-item" asp-action="ManagePermissions" asp-route-roleId="@role.Id">Gestion des habilitations</a>
+                                            }
                                         </div>
                                     </div>
                                 </td>

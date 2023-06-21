@@ -2,35 +2,35 @@
 
 @{
     ViewData["Title"] = "Etat des cotisations par prêtre";
+    Layout = "_ReportLayout";
+
+    int i = 1;
 }
 
-<div class="row">
-    <div class="col-md-12 my-4">
-        <div class="card shadow">
-            <div class="card-body">
-                <h5 class="card-title"><strong>@ViewData["Title"]</strong></h5>
-                <hr />
+<h2 class="text-center mb-4 border-bottom"><strong>@ViewData["Title"]</strong></h2>
 
-                <table id="customDataTable" class="table table-bordered table-hover text-center">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th>@Html.DisplayNameFor(model => model.Date)</th>
-                            <th>@Html.DisplayNameFor(model => model.Priest)</th>
-                            <th>@Html.DisplayNameFor(model => model.Ammount)</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var contribution in Model)
-                        {
-                            <tr>
-                                <td>@contribution.Date.ToShortDateString()</td>
-                                <td>@contribution.Priest?.FullName</td>
-                                <td>@contribution.Ammount</td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-</div>
+<table class="table table-bordered text-center">
+    <thead class="thead-light">
+        <tr>
+            <th>#</th>
+            <th>@Html.DisplayNameFor(model => model.Date)</th>
+            <th>@Html.DisplayNameFor(model => model.Priest)</th>
+            <th>@Html.DisplayNameFor(model => model.Ammount)</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var contribution in Model)
+        {
+            <tr>
+                <td>@(i++)</td>
+                <td>@contribution.Date.ToShortDateString()</td>
+                <td>@contribution.Priest?.FullName</td>
+                <td>@FormatNumberWithSpaces(contribution.Ammount) XOF</td>
+            </tr>
+        }
+        <tr>
+            <td colspan="3"><strong>TOTAL</strong></td>
+            <td>@FormatNumberWithSpaces(Model.Sum(m => m.Ammount)) XOF</td>
+        </tr>
+    </tbody>
+</table>

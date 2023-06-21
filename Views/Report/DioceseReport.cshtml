@@ -2,33 +2,29 @@
 
 @{
     ViewData["Title"] = "Etat des diocèses";
+    Layout = "_ReportLayout";
+
+    int i = 1;
 }
 
-<div class="row">
-    <div class="col-md-12 my-4">
-        <div class="card shadow w-50 mx-auto">
-            <div class="card-body">
-                <h5 class="card-title"><strong>@ViewData["Title"]</strong></h5>
-                <hr />
+<h2 class="text-center mb-4 border-bottom"><strong>@ViewData["Title"]</strong></h2>
 
-                <table id="customDataTable" class="table table-bordered table-hover text-center">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th>@Html.DisplayNameFor(model => model.Name)</th>
-                            <th>Nombre de prêtres</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var diocese in Model)
-                        {
-                            <tr>
-                                <td>@diocese.Name</td>
-                                <td>@diocese.Priests.Count</td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-</div>
+<table class="table table-bordered text-center">
+    <thead class="thead-dark">
+        <tr>
+            <th>#</th>
+            <th>@Html.DisplayNameFor(model => model.Name)</th>
+            <th>Nombre de prêtres</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var diocese in Model)
+        {
+            <tr>
+                <td>@(i++)</td>
+                <td>@diocese.Name</td>
+                <td>@diocese.Priests.Count</td>
+            </tr>
+        }
+    </tbody>
+</table>

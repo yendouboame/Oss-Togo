@@ -110,7 +110,7 @@
                                     <div class="dropdown-divider"></div>
                                     @if ((AuthorizationService.AuthorizeAsync(User, Reports.ViewDioceses)).Result.Succeeded)
                                     {
-                                        <a class="dropdown-item" asp-action="DioceseReport" asp-controller="Report">Etat des diocèses</a>
+                                        <a class="dropdown-item" asp-action="DioceseReport" asp-controller="Report" target="_blank">Etat des diocèses</a>
                                     }
                                     <div class="dropdown-divider"></div>
                                     @if ((AuthorizationService.AuthorizeAsync(User, Reports.ViewContributions)).Result.Succeeded)

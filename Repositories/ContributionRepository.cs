@@ -66,6 +66,7 @@ namespace SolidarityFund.Repositories
             contributions = contributions
                 .Where(c => !contributionReport.StartDate.HasValue || c.Date >= contributionReport.StartDate.Value)
                 .Where(c => !contributionReport.EndDate.HasValue || c.Date <= contributionReport.EndDate.Value)
+                .OrderByDescending(c => c.Date)
                 .ToList();
             
             var groupedByPriest = contributions.GroupBy(c => c.Priest);
@@ -78,12 +79,12 @@ namespace SolidarityFund.Repositories
             var contributions = _context.Contributions
                 .Include(c => c.Priest).ThenInclude(p => p.Diocese)
                 .Where(c => !c.IsDeleted)
-                .OrderByDescending(c => c.Date)
                 .ToList();
 
             contributions = contributions
                 .Where(c => !contributionReport.StartDate.HasValue || c.Date >= contributionReport.StartDate.Value)
                 .Where(c => !contributionReport.EndDate.HasValue || c.Date <= contributionReport.EndDate.Value)
+                .OrderByDescending(c => c.Date)
                 .ToList();
 
             var groupedByDiocese = contributions.GroupBy(c => c.Priest.Diocese);

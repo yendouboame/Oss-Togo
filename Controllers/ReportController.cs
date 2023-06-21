@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Rotativa.AspNetCore;
 using SolidarityFund.Models.Entities;
 using SolidarityFund.ViewModels;
 using System;
@@ -20,7 +21,7 @@ namespace SolidarityFund.Controllers
         [HttpPost]
         public IActionResult PriestReport(PriestReportViewModel priestReport)
         {
-            return View(_priestRepository.ReportFilter(priestReport));
+            return new ViewAsPdf(_priestRepository.ReportFilter(priestReport));
         }
 
         public IActionResult PriestReportByDioceseFilter()
@@ -31,12 +32,12 @@ namespace SolidarityFund.Controllers
         [HttpPost]
         public IActionResult PriestReportByDiocese(List<CheckBoxViewModel> dioceses)
         {
-            return View(_priestRepository.ReportByDioceseFilter(dioceses));
+            return new ViewAsPdf(_priestRepository.ReportByDioceseFilter(dioceses));
         }
 
         public IActionResult DioceseReport()
         {
-            return View(_dioceseRepository.GetAll());
+            return new ViewAsPdf(_dioceseRepository.GetAll());
         }
 
         public IActionResult ContributionReportFilter()
@@ -51,16 +52,16 @@ namespace SolidarityFund.Controllers
             {
                 if (contributionReport.GroupBy == GroupBy.Priest)
                 {
-                    return View(nameof(ContributionReportGroupByPriest), _contributionRepository.ReportFilterGroupByPriest(contributionReport));
+                    return new ViewAsPdf(nameof(ContributionReportGroupByPriest), _contributionRepository.ReportFilterGroupByPriest(contributionReport));
                 }
                 else
                 {
-                    return View(nameof(ContributionReportGroupByDiocese), _contributionRepository.ReportFilterGroupByDiocese(contributionReport));
+                    return new ViewAsPdf(nameof(ContributionReportGroupByDiocese), _contributionRepository.ReportFilterGroupByDiocese(contributionReport));
                 }
             }
             else
             {
-                return View(_contributionRepository.ReportFilter(contributionReport));
+                return new ViewAsPdf(_contributionRepository.ReportFilter(contributionReport));
             }
         }
 
@@ -85,7 +86,7 @@ namespace SolidarityFund.Controllers
         [HttpPost]
         public IActionResult ContributionReportByPriest(ContributionReportByPriestViewModel contributionReport)
         {
-            return View(_contributionRepository.ReportByPriestFilter(contributionReport));
+            return new ViewAsPdf(_contributionRepository.ReportByPriestFilter(contributionReport));
         }
 
         public IActionResult ContributionReportByDioceseFilter()
@@ -97,7 +98,7 @@ namespace SolidarityFund.Controllers
         [HttpPost]
         public IActionResult ContributionReportByDiocese(ContributionReportByDioceseViewModel contributionReport)
         {
-            return View(_contributionRepository.ReportByDioceseFilter(contributionReport));
+            return new ViewAsPdf(_contributionRepository.ReportByDioceseFilter(contributionReport));
         }
 
         public IActionResult PensionReportFilter()
@@ -110,18 +111,18 @@ namespace SolidarityFund.Controllers
         {
             if (pensionReport.GroupBy != null)
             {
-                return View(nameof(PensionReportGroupByPriest), _pensionRepository.ReportFilterGroupByPriest(pensionReport));
+                return new ViewAsPdf(nameof(PensionReportGroupByPriest), _pensionRepository.ReportFilterGroupByPriest(pensionReport));
             }
             else
             {
-                return View(_pensionRepository.ReportFilter(pensionReport));
+                return new ViewAsPdf(_pensionRepository.ReportFilter(pensionReport));
             }
         }
 
         [HttpPost]
         public IActionResult PensionReportGroupByPriest(IEnumerable<IGrouping<Priest, Pension>> groupedByPriest)
         {
-            return View(groupedByPriest);
+            return new ViewAsPdf(groupedByPriest);
         }
 
         public IActionResult PensionReportByPriestFilter()
@@ -133,7 +134,7 @@ namespace SolidarityFund.Controllers
         [HttpPost]
         public IActionResult PensionReportByPriest(PensionReportByPriestViewModel pensionReport)
         {
-            return View(_pensionRepository.ReportByPriestFilter(pensionReport));
+            return new ViewAsPdf(_pensionRepository.ReportByPriestFilter(pensionReport));
         }
     }
 }

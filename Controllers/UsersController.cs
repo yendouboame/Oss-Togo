@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using SolidarityFund.Helpers.Constants;
+using SolidarityFund.Models.Entities;
 using SolidarityFund.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -8,8 +11,10 @@ using static SolidarityFund.Helpers.Constants.Enumerations;
 
 namespace SolidarityFund.Controllers
 {
+    [Authorize(Permissions.Users.Access)]
     public class UsersController : BaseController
     {
+        [Authorize(Permissions.Users.Access)]
         public async Task<IActionResult> Index()
         {
             var currentUser = await GetCurrentUserAsync();
@@ -30,6 +35,32 @@ namespace SolidarityFund.Controllers
             return View(users);
         }
 
+        [Authorize(Permissions.Users.Create)]
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [Authorize(Permissions.Users.Create)]
+        public async Task<IActionResult> Create(User user, string password)
+        {
+            var appUser = await _userManager.FindByNameAsync(user.UserName)
+                ?? await _userManager.FindByEmailAsync(user.Email);
+
+            if (appUser == null)
+            {
+                user.EmailConfirmed = true;
+                user.IsActive = true;
+                await _userManager.CreateAsync(user, password);
+                await _userManager.AddToRoleAsync(user, Roles.Basic.ToString());
+            }
+
+            TempData["StatusMessage"] = "Utilisateur ajouté avec succès.";
+            return RedirectToAction(nameof(Index));
+        }
+
+        [Authorize(Permissions.Users.ManageRoles)]
         public async Task<IActionResult> ManageRoles(string userId)
         {
             var user = await _userManager.FindByIdAsync(userId);
@@ -53,6 +84,7 @@ namespace SolidarityFund.Controllers
         }
 
         [HttpPost]
+        [Authorize(Permissions.Users.ManageRoles)]
         public async Task<IActionResult> UpdateRoles(UserRolesViewModel model)
         {
             var user = await _userManager.FindByIdAsync(model.UserId);
