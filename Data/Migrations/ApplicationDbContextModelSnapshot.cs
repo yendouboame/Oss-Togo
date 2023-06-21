@@ -179,6 +179,30 @@ namespace SolidarityFund.Data.Migrations
                     b.ToTable("COTISATIONS");
                 });
 
+            modelBuilder.Entity("SolidarityFund.Models.Entities.Cost", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<double>("Contribution")
+                        .HasColumnType("float");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<double>("Pension")
+                        .HasColumnType("float");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("FRAIS");
+                });
+
             modelBuilder.Entity("SolidarityFund.Models.Entities.Diocese", b =>
                 {
                     b.Property<int>("Id")
@@ -226,7 +250,7 @@ namespace SolidarityFund.Data.Migrations
 
                     b.HasIndex("PriestId");
 
-                    b.ToTable("PENSIONS");
+                    b.ToTable("ALLOCATIONS");
                 });
 
             modelBuilder.Entity("SolidarityFund.Models.Entities.Priest", b =>

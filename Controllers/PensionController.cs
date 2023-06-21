@@ -22,6 +22,7 @@ namespace SolidarityFund.Controllers
         [Authorize(Permissions.Pensions.Add)]
         public IActionResult EligiblePriests()
         {
+            ViewBag.PensionCosts = _costRepository.GetCosts()?.Pension;
             return View(_priestRepository.GetEligibleForPension());
         }
 
@@ -33,13 +34,13 @@ namespace SolidarityFund.Controllers
             {
                 _pensionRepository.New(pension);
 
-                TempData["StatusMessage"] = "Pension enregistrée avec succès";
-                return RedirectToAction(nameof(EligiblePriests));
+                TempData["StatusMessage"] = "Allocation enregistrée avec succès";
+                return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)
             {
                 TempData["StatusMessage"] = $"Erreur: {ex.Message}";
-                return RedirectToAction(nameof(New));
+                return RedirectToAction(nameof(EligiblePriests));
             }
         }
     }

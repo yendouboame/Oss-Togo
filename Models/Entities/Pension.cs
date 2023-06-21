@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SolidarityFund.Models.Entities
 {
-    [Table("PENSIONS")]
+    [Table("ALLOCATIONS")]
     public class Pension : BaseModel
     {
         public int PriestId { get; set; }

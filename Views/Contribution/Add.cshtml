@@ -26,7 +26,7 @@
                     <div class="form-group">
                         <label asp-for="Ammount" class="required"></label>
                         <div class="input-group mb-3">
-                            <input asp-for="Ammount" class="form-control" value="5000" readonly>
+                            <input asp-for="Ammount" class="form-control" value="@ViewBag.ContributionCosts" readonly>
                             <div class="input-group-append">
                                 <span class="input-group-text">XOF</span>
                             </div>

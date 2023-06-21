@@ -54,8 +54,9 @@ namespace SolidarityFund.Helpers.Constants
         public static class Settings
         {
             public const string Access = "Permissions.Settings: Accéder au module des paramètres";
+            public const string ManageCosts = "Permissions.Settings: Paramétrer les frais de cotisation et d'allocation";
 
-            public static List<string> Permissions() => new List<string>() { Access };
+            public static List<string> Permissions() => new List<string>() { Access, ManageCosts };
         }
 
         public static class Users

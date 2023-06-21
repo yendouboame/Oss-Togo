@@ -152,6 +152,10 @@
                                     {
                                         <a class="dropdown-item" asp-action="Index" asp-controller="Roles">Rôles</a>
                                     }
+                                    @if ((AuthorizationService.AuthorizeAsync(User, Settings.ManageCosts)).Result.Succeeded)
+                                    { 
+                                        <a class="dropdown-item" asp-action="Index" asp-controller="Cost">Gestion des frais</a>
+                                    }
                                 </div>
                             </li>
                         }

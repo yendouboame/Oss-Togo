@@ -10,7 +10,7 @@ using SolidarityFund.Data;
 namespace SolidarityFund.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230619183657_Init")]
+    [Migration("20230621073836_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -181,6 +181,30 @@ namespace SolidarityFund.Data.Migrations
                     b.ToTable("COTISATIONS");
                 });
 
+            modelBuilder.Entity("SolidarityFund.Models.Entities.Cost", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<double>("Contribution")
+                        .HasColumnType("float");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<double>("Pension")
+                        .HasColumnType("float");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("FRAIS");
+                });
+
             modelBuilder.Entity("SolidarityFund.Models.Entities.Diocese", b =>
                 {
                     b.Property<int>("Id")
@@ -228,7 +252,7 @@ namespace SolidarityFund.Data.Migrations
 
                     b.HasIndex("PriestId");
 
-                    b.ToTable("PENSIONS");
+                    b.ToTable("ALLOCATIONS");
                 });
 
             modelBuilder.Entity("SolidarityFund.Models.Entities.Priest", b =>
@@ -253,8 +277,17 @@ namespace SolidarityFund.Data.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
+                    b.Property<bool>("IsIncardinated")
+                        .HasColumnType("bit");
+
                     b.Property<DateTime>("OrdinationDate")
                         .HasColumnType("date");
+
+                    b.Property<DateTime?>("SuspensionDate")
+                        .HasColumnType("date");
+
+                    b.Property<int?>("SuspensionReason")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 

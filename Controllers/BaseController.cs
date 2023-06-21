@@ -13,6 +13,7 @@ namespace SolidarityFund.Controllers
     public class BaseController : Controller
     {
         private ApplicationDbContext Context;
+        private CostRepository CostRepository;
         private UserManager<User> UserManager;
         private PriestRepository PriestRepository;
         private SignInManager<User> SignInManager;
@@ -22,6 +23,7 @@ namespace SolidarityFund.Controllers
         private ContributionRepository ContributionRepository;
 
         protected ApplicationDbContext _context => Context ??= HttpContext.RequestServices.GetService<ApplicationDbContext>();
+        protected CostRepository _costRepository => CostRepository ??= HttpContext.RequestServices.GetService<CostRepository>();
         protected UserManager<User> _userManager => UserManager ??= HttpContext.RequestServices.GetService<UserManager<User>>();
         protected PriestRepository _priestRepository => PriestRepository ??= HttpContext.RequestServices.GetService<PriestRepository>();
         protected SignInManager<User> _signInManager => SignInManager ??= HttpContext.RequestServices.GetService<SignInManager<User>>();

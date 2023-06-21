@@ -210,3 +210,4 @@ C:\Users\COECEPT-SIG\Desktop\Repositories\FreeLance\Caisse de Solidarité Eglise
 C:\Users\COECEPT-SIG\Desktop\Repositories\FreeLance\Caisse de Solidarité Eglise Catholique\SolidarityFund\bin\Debug\net5.0\Rotativa.AspNetCore.dll
 C:\Users\COECEPT-SIG\Desktop\Repositories\FreeLance\Caisse de Solidarité Eglise Catholique\SolidarityFund\obj\Debug\net5.0\Razor\Views\Shared\_ReportLayout.cshtml.g.cs
 C:\Users\COECEPT-SIG\Desktop\Repositories\FreeLance\Caisse de Solidarité Eglise Catholique\SolidarityFund\obj\Debug\net5.0\Razor\Views\Users\Create.cshtml.g.cs
+C:\Users\COECEPT-SIG\Desktop\Repositories\FreeLance\Caisse de Solidarité Eglise Catholique\SolidarityFund\obj\Debug\net5.0\Razor\Views\Cost\Index.cshtml.g.cs

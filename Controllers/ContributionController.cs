@@ -23,6 +23,8 @@ namespace SolidarityFund.Controllers
         public IActionResult Add()
         {
             ViewBag.Priests = new SelectList(_priestRepository.GetEligibleForContribution(), "Id", "FullName");
+            ViewBag.ContributionCosts = _costRepository.GetCosts()?.Contribution;
+
             return View();
         }
 

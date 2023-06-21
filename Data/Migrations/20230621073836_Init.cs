@@ -65,6 +65,22 @@ namespace SolidarityFund.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "FRAIS",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Pension = table.Column<double>(type: "float", nullable: false),
+                    Contribution = table.Column<double>(type: "float", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_FRAIS", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -179,6 +195,9 @@ namespace SolidarityFund.Data.Migrations
                     FullName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DateOfBirth = table.Column<DateTime>(type: "date", nullable: false),
                     OrdinationDate = table.Column<DateTime>(type: "date", nullable: false),
+                    IsIncardinated = table.Column<bool>(type: "bit", nullable: false),
+                    SuspensionReason = table.Column<int>(type: "int", nullable: true),
+                    SuspensionDate = table.Column<DateTime>(type: "date", nullable: true),
                     DioceseId = table.Column<int>(type: "int", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false)
@@ -190,6 +209,29 @@ namespace SolidarityFund.Data.Migrations
                         name: "FK_PRETRES_DIOCESES_DioceseId",
                         column: x => x.DioceseId,
                         principalTable: "DIOCESES",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ALLOCATIONS",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    PriestId = table.Column<int>(type: "int", nullable: false),
+                    Date = table.Column<DateTime>(type: "date", nullable: false),
+                    Ammount = table.Column<double>(type: "float", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ALLOCATIONS", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ALLOCATIONS_PRETRES_PriestId",
+                        column: x => x.PriestId,
+                        principalTable: "PRETRES",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -217,28 +259,10 @@ namespace SolidarityFund.Data.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "PENSIONS",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    PriestId = table.Column<int>(type: "int", nullable: false),
-                    Date = table.Column<DateTime>(type: "date", nullable: false),
-                    Ammount = table.Column<double>(type: "float", nullable: false),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_PENSIONS", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_PENSIONS_PRETRES_PriestId",
-                        column: x => x.PriestId,
-                        principalTable: "PRETRES",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
+            migrationBuilder.CreateIndex(
+                name: "IX_ALLOCATIONS_PriestId",
+                table: "ALLOCATIONS",
+                column: "PriestId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -285,11 +309,6 @@ namespace SolidarityFund.Data.Migrations
                 column: "PriestId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PENSIONS_PriestId",
-                table: "PENSIONS",
-                column: "PriestId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_PRETRES_DioceseId",
                 table: "PRETRES",
                 column: "DioceseId");
@@ -297,6 +316,9 @@ namespace SolidarityFund.Data.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "ALLOCATIONS");
+
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 
@@ -316,7 +338,7 @@ namespace SolidarityFund.Data.Migrations
                 name: "COTISATIONS");
 
             migrationBuilder.DropTable(
-                name: "PENSIONS");
+                name: "FRAIS");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

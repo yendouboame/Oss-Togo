@@ -10,6 +10,8 @@ namespace SolidarityFund.Repositories.DependencyInjection
     { 
         public static void AddRepositories(this IServiceCollection services)
         {
+            services.AddScoped<CostRepository>();
+
             services.AddScoped<PriestRepository>();
 
             services.AddScoped<DioceseRepository>();
