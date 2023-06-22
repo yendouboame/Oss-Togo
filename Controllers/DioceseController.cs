@@ -139,7 +139,7 @@ namespace SolidarityFund.Controllers
                 }
             }
             catch (Exception ex)
-            { 
+            {
                 message = $"Erreur lors de l'importation des données. Message d'erreur: {ex.Message}";
             }
 

@@ -39,8 +39,8 @@ namespace SolidarityFund.Controllers
                 .Where(p => p.Date.Year == DateTime.Now.Year && p.Date.Month == DateTime.Now.Month)
                 .Sum(p => p.Amount);
             
-            var expectedContribution = contributingPriests.Count * cost.Contribution;
-            var expectedPension = beneficiaryPriests.Count * cost.Pension;
+            var expectedContribution = contributingPriests.Count * (cost?.Contribution ?? 0);
+            var expectedPension = beneficiaryPriests.Count * (cost?.Pension ?? 0);
 
             var viewModel = new DashboardViewModel
             {
