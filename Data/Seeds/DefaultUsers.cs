@@ -2,7 +2,6 @@
 using SolidarityFund.Helpers.Constants;
 using SolidarityFund.Models.Entities;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -38,10 +37,10 @@ namespace SolidarityFund.Data.Seeds
         {
             var saUser = new User
             {
-                UserName = "obed",
-                LastName = "Degbo",
-                FirstName = "Komi Obed",
-                Email = "degbo80@gmail.com",
+                UserName = "aime",
+                LastName = "WOAGOU",
+                FirstName = "Yendouboame Aimé",
+                Email = "aimewoagou@gmail.com",
                 EmailConfirmed = true,
                 IsActive = true
             };
