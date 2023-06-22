@@ -10,8 +10,8 @@ using SolidarityFund.Data;
 namespace SolidarityFund.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230622091035_Column Ammount Changed Into Amount")]
-    partial class ColumnAmmountChangedIntoAmount
+    [Migration("20230622105608_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -224,6 +224,57 @@ namespace SolidarityFund.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("DIOCESES");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedOn = new DateTime(2023, 6, 22, 10, 56, 8, 487, DateTimeKind.Local).AddTicks(1241),
+                            IsDeleted = false,
+                            Name = "Diocèse de Dapaong"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedOn = new DateTime(2023, 6, 22, 10, 56, 8, 488, DateTimeKind.Local).AddTicks(706),
+                            IsDeleted = false,
+                            Name = "Diocèse de Kara"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CreatedOn = new DateTime(2023, 6, 22, 10, 56, 8, 488, DateTimeKind.Local).AddTicks(726),
+                            IsDeleted = false,
+                            Name = "Diocèse de Sokodé"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CreatedOn = new DateTime(2023, 6, 22, 10, 56, 8, 488, DateTimeKind.Local).AddTicks(729),
+                            IsDeleted = false,
+                            Name = "Diocèse d'Atakpamé"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            CreatedOn = new DateTime(2023, 6, 22, 10, 56, 8, 488, DateTimeKind.Local).AddTicks(730),
+                            IsDeleted = false,
+                            Name = "Diocèse de Kpalimé"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            CreatedOn = new DateTime(2023, 6, 22, 10, 56, 8, 488, DateTimeKind.Local).AddTicks(733),
+                            IsDeleted = false,
+                            Name = "Diocèse de Lomé"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            CreatedOn = new DateTime(2023, 6, 22, 10, 56, 8, 488, DateTimeKind.Local).AddTicks(734),
+                            IsDeleted = false,
+                            Name = "Diocèse d'Aného"
+                        });
                 });
 
             modelBuilder.Entity("SolidarityFund.Models.Entities.Pension", b =>
