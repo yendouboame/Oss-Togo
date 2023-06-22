@@ -20,6 +20,6 @@ namespace SolidarityFund.Models.Entities
         public DateTime Date { get; set; }
 
         [Display(Name = "Montant de l'allocation")]
-        public double Ammount { get; set; }
+        public double Amount { get; set; }
     }
 }

@@ -59,8 +59,16 @@
                                                 <a class="dropdown-item btn-delete" href="#" data-toggle="modal" data-target="#confirm-delete" data-diocese-id="@diocese.Id">Supprimer</a>
                                             }
                                             @if ((AuthorizationService.AuthorizeAsync(User, Dioceses.ImportData)).Result.Succeeded)
-                                            { 
+                                            {
                                                 <a class="dropdown-item btn-import" href="#" data-toggle="modal" data-target="#import-data" data-diocese-id="@diocese.Id" data-diocese-name="@diocese.Name">Importer la liste des prêtres</a>
+                                            }
+                                            @if ((AuthorizationService.AuthorizeAsync(User, Contributions.DownloadFile)).Result.Succeeded)
+                                            {
+                                                <a class="dropdown-item" asp-action="DownloadExcelFile" asp-controller="Contribution" asp-route-dioceseId="@diocese.Id">Télécharger la fiche de cotisations</a>
+                                            }
+                                            @if ((AuthorizationService.AuthorizeAsync(User, Pensions.DownloadFile)).Result.Succeeded)
+                                            { 
+                                                <a class="dropdown-item" asp-action="DownloadExcelFile" asp-controller="Pension" asp-route-dioceseId="@diocese.Id">Télécharger la fiche d'allocations</a>
                                             }
                                         </div>
                                     </div>

@@ -105,8 +105,10 @@ namespace SolidarityFund.Helpers.Constants
             public const string Access = "Permissions.Contributions: Accéder au module de gestion des cotisations";
             public const string Add = "Permissions.Contributions: Enregistrer les cotisations";
             public const string ViewAll = "Permissions.Contributions: Consulter la liste de toutes les cotisations";
+            public const string DownloadFile = "Permissions.Contributions: Télécharger la fiche de cotisations";
+            public const string ImportData = "Permissions.Contributions: Importer la liste des cotisations pour un diocèse";
 
-            public static List<string> Permissions() => new List<string>() { Access, Add, ViewAll };
+            public static List<string> Permissions() => new List<string>() { Access, Add, ViewAll, DownloadFile, ImportData };
         }
 
         public static class Pensions
@@ -114,8 +116,10 @@ namespace SolidarityFund.Helpers.Constants
             public const string Access = "Permissions.Pensions: Accéder au module de gestion des allocations";
             public const string Add = "Permissions.Pensions: Enregistrer les versements de pension";
             public const string ViewAll = "Permissions.Pensions: Consulter la liste de toutes les allocations versées";
+            public const string DownloadFile = "Permissions.Pensions: Télécharger la fiche d'allocations";
+            public const string ImportData = "Permissions.Pensions: Importer la liste des allocations pour un diocèse";
 
-            public static List<string> Permissions() => new List<string>() { Access, Add, ViewAll };
+            public static List<string> Permissions() => new List<string>() { Access, Add, ViewAll, DownloadFile, ImportData };
         }
 
         public static class Reports

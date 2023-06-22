@@ -40,11 +40,11 @@ namespace SolidarityFund.Repositories
             }
         }
 
-        private bool Exists(Pension pension)
+        public bool Exists(Pension pension)
         {
             return _context.Pensions
                 .Any(p => !p.IsDeleted && p.PriestId == pension.PriestId
-                 && p.Date == pension.Date && p.Ammount == pension.Ammount);
+                 && p.Date == pension.Date && p.Amount == pension.Amount);
         }
 
         public IEnumerable<Pension> ReportFilter(PensionReportViewModel pensionReport)

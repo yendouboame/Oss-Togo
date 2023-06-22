@@ -27,7 +27,7 @@ $('#customDataTable').DataTable({
 });
 
 $('#eventsDataTable').DataTable({
-    "order": [[0, 'desc']],
+    "ordering": false,
     "language": {
         "emptyTable": "Aucune donnée disponible dans le tableau",
         "decimal": ",",

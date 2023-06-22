@@ -34,12 +34,12 @@
                         <td>@(i++)</td>
                         <td>@contribution.Date.ToShortDateString()</td>
                         <td>@contribution.Priest?.Diocese?.Name</td>
-                        <td>@FormatNumberWithSpaces(contribution.Ammount) XOF</td>
+                        <td>@FormatNumberWithSpaces(contribution.Amount) XOF</td>
                     </tr>
                 }
                 <tr>
                     <td colspan="3"><strong>TOTAL</strong></td>
-                    <td>@FormatNumberWithSpaces(group.Sum(m => m.Ammount)) XOF</td>
+                    <td>@FormatNumberWithSpaces(group.Sum(m => m.Amount)) XOF</td>
                 </tr>
             </tbody>
         }

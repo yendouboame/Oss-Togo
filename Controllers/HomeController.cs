@@ -22,17 +22,36 @@ namespace SolidarityFund.Controllers
 
         public IActionResult Index()
         {
+            var cost = _costRepository.GetCosts();
+
             var dioceses = _context.Dioceses.Where(d => !d.IsDeleted).ToList();
             var priests = _context.Priests.Where(p => !p.IsDeleted && p.SuspensionReason == null).ToList();
+            var contributingPriests = _priestRepository.GetEligibleForContribution().ToList();
+            var beneficiaryPriests = _priestRepository.GetEligibleForPension().ToList();
+
             var contributions = _context.Contributions.Include(c => c.Priest).Where(c => !c.IsDeleted).ToList();
             var pensions = _context.Pensions.Include(p => p.Priest).Where(p => !p.IsDeleted).ToList();
+            
+            var currentMonthContribution = contributions
+                .Where(c => c.Date.Year == DateTime.Now.Year && c.Date.Month == DateTime.Now.Month)
+                .Sum(c => c.Amount);
+            var currentMonthPension = pensions
+                .Where(p => p.Date.Year == DateTime.Now.Year && p.Date.Month == DateTime.Now.Month)
+                .Sum(p => p.Amount);
+            
+            var expectedContribution = contributingPriests.Count * cost.Contribution;
+            var expectedPension = beneficiaryPriests.Count * cost.Pension;
 
             var viewModel = new DashboardViewModel
             {
                 DioceseCount = dioceses.Count,
                 PriestCount = priests.Count,
-                ContributionTotal = contributions.Sum(c => c.Ammount),
-                PensionTotal = pensions.Sum(p => p.Ammount),
+                ContributingPriest = contributingPriests.Count,
+                BeneficiaryPriest = beneficiaryPriests.Count,
+                CurrentMonthContribution = currentMonthContribution,
+                CurrentMonthExpectedContribution = expectedContribution,
+                CurrentMonthPension = currentMonthPension,
+                CurrentMonthExpectedPension = expectedPension,
                 LastContributions = contributions.OrderByDescending(c => c.Date).Take(5).ToList(),
                 LastPensions = pensions.OrderByDescending(p => p.Date).Take(5).ToList()
             };

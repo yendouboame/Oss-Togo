@@ -29,10 +29,24 @@ namespace SolidarityFund.Repositories
                 .ToList();
         }
 
+        public bool Exists(Priest priest)
+        {
+            return _context.Priests.Any(p =>
+            !p.IsDeleted && p.FullName == priest.FullName 
+            && p.DateOfBirth == priest.DateOfBirth && p.OrdinationDate == priest.OrdinationDate);
+        }
+
         public void Create(Priest priest)
         {
-            _context.Priests.Add(priest);
-            _context.SaveChanges();
+            if (Exists(priest))
+            { 
+                _context.Priests.Add(priest);
+                _context.SaveChanges();
+            }
+            else
+            {
+                throw new Exception("Ce prêtre est déjà enregistré");
+            }
         }
 
         public Priest Details(int priestId)

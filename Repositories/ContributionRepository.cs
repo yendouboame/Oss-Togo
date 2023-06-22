@@ -40,11 +40,11 @@ namespace SolidarityFund.Repositories
             }
         }
 
-        private bool Exists(Contribution contribution)
+        public bool Exists(Contribution contribution)
         {
             return _context.Contributions
                 .Any(c => !c.IsDeleted && c.PriestId == contribution.PriestId
-                 && c.Date == contribution.Date && c.Ammount == contribution.Ammount);
+                 && c.Date == contribution.Date && c.Amount == contribution.Amount);
         }
 
         public IEnumerable<Contribution> ReportFilter(ContributionReportViewModel contributionReport)

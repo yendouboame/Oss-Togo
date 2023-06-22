@@ -1,0 +1,32 @@
+﻿
+@{
+    ViewData["Title"] = "Importer un liste d'allocations";
+}
+
+<div class="row">
+    <div class="mx-auto my-4" style="width: 30%;">
+
+        <partial name="_StatusMessage" model='TempData["StatusMessage"]' />
+
+        <div class="card shadow">
+            <div class="card-body">
+                <h5 class="card-title"><strong>@ViewData["Title"]</strong></h5>
+                <hr />
+                <form asp-action="ImportData" method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label class="required">Nom du diocèse</label>
+                        <select name="dioceseId" class="form-control select-picker" data-live-search="true"
+                                title="-- Veuillez sélectionner --" asp-items="ViewBag.Dioceses" required></select>
+                    </div>
+                    <div class="form-group">
+                        <label class="required">Liste d'allocations'</label>
+                        <input type="file" class="form-control-file" name="pensions" accept=".xlsx, .xls" />
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        Importer
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

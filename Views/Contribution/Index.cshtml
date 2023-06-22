@@ -35,7 +35,7 @@
                         <tr>
                             <th>@Html.DisplayNameFor(model => model.Date)</th>
                             <th>@Html.DisplayNameFor(model => model.Priest)</th>
-                            <th>@Html.DisplayNameFor(model => model.Ammount)</th>
+                            <th>@Html.DisplayNameFor(model => model.Amount)</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -44,7 +44,7 @@
                             <tr>
                                 <td>@contribution.Date.ToString("dd MMM yyyy")</td>
                                 <td>@contribution.Priest?.FullName</td>
-                                <td>@FormatNumberWithSpaces(contribution.Ammount) XOF</td>
+                                <td>@FormatNumberWithSpaces(contribution.Amount) XOF</td>
                             </tr>
                         }
                     </tbody>

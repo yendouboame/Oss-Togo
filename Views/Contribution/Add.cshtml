@@ -24,9 +24,9 @@
                         <input asp-for="Date" type="date" value="@DateTime.Now.ToString("yyyy-MM-dd")" class="form-control" />
                     </div>
                     <div class="form-group">
-                        <label asp-for="Ammount" class="required"></label>
+                        <label asp-for="Amount" class="required"></label>
                         <div class="input-group mb-3">
-                            <input asp-for="Ammount" class="form-control" value="@ViewBag.ContributionCosts" readonly>
+                            <input asp-for="Amount" class="form-control" value="@ViewBag.ContributionCosts" readonly>
                             <div class="input-group-append">
                                 <span class="input-group-text">XOF</span>
                             </div>

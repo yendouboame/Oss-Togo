@@ -67,6 +67,10 @@
                                     {
                                         <a class="dropdown-item" asp-action="Add" asp-controller="Contribution">Nouvelle cotisation</a>
                                     }
+                                    @if ((AuthorizationService.AuthorizeAsync(User, Contributions.ImportData)).Result.Succeeded)
+                                    {
+                                        <a class="dropdown-item" asp-action="ImportData" asp-controller="Contribution">Importer un liste de cotisations</a>
+                                    }
                                     @if ((AuthorizationService.AuthorizeAsync(User, Contributions.ViewAll)).Result.Succeeded)
                                     {
                                         <a class="dropdown-item" asp-action="Index" asp-controller="Contribution">Liste des cotisations</a>
@@ -84,6 +88,10 @@
                                     @if ((AuthorizationService.AuthorizeAsync(User, Pensions.Add)).Result.Succeeded)
                                     {
                                         <a class="dropdown-item" asp-action="EligiblePriests" asp-controller="Pension">Attribuer une allocation</a>
+                                    }
+                                    @if ((AuthorizationService.AuthorizeAsync(User, Pensions.ImportData)).Result.Succeeded)
+                                    {
+                                        <a class="dropdown-item" asp-action="ImportData" asp-controller="Pension">Importer un liste d'allocations</a>
                                     }
                                     @if ((AuthorizationService.AuthorizeAsync(User, Pensions.ViewAll)).Result.Succeeded)
                                     {

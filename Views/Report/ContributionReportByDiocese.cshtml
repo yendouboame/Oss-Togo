@@ -15,7 +15,7 @@
             <th>#</th>
             <th>@Html.DisplayNameFor(model => model.Date)</th>
             <th>@Html.DisplayNameFor(model => model.Priest.Diocese)</th>
-            <th>@Html.DisplayNameFor(model => model.Ammount)</th>
+            <th>@Html.DisplayNameFor(model => model.Amount)</th>
         </tr>
     </thead>
     <tbody>
@@ -25,12 +25,12 @@
                 <td>@(i++)</td>
                 <td>@contribution.Date.ToShortDateString()</td>
                 <td>@contribution.Priest?.Diocese?.Name</td>
-                <td>@FormatNumberWithSpaces(contribution.Ammount) XOF</td>
+                <td>@FormatNumberWithSpaces(contribution.Amount) XOF</td>
             </tr>
         }
         <tr>
             <td colspan="3"><strong>TOTAL</strong></td>
-            <td>@FormatNumberWithSpaces(Model.Sum(m => m.Ammount)) XOF</td>
+            <td>@FormatNumberWithSpaces(Model.Sum(m => m.Amount)) XOF</td>
         </tr>
     </tbody>
 </table>

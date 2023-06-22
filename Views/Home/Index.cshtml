@@ -5,20 +5,24 @@
 }
 
 <style>
-    .zoom-effect {
-        transition: transform 0.3s ease-in-out;
+    .card.zoom-effect .fa {
+        transition: transform 0.3s;
     }
 
-        .zoom-effect:hover {
-            transform: scale(1.1);
-        }
+    .card.zoom-effect:hover .fa {
+        transform: scale(1.2);
+    }
 
     .card i {
-        font-size: 60px;
+        font-size: 120px;
         position: absolute;
         top: 10px;
-        right: 10px;
+        right: 20px;
         opacity: 0.2;
+    }
+
+    .card-text {
+        font-size: 45px;
     }
 
     table {
@@ -32,51 +36,95 @@
     <div class="col-md-3">
         <div class="card bg-primary text-white zoom-effect">
             <i class="fa fa-home"></i>
-            <div class="card-header">
-                Nombre de diocèses
+            <div class="card-header pb-0">
+                <h5 class="card-title">Nombre de diocèses</h5>
             </div>
             <div class="card-body">
-                <h5 class="card-title">@Model.DioceseCount</h5>
-                <p class="card-text">diocèses enregistrés</p>
+                <p class="card-text">@Model.DioceseCount</p>
+                <p>diocèses enregistrés</p>
             </div>
         </div>
     </div>
 
     <div class="col-md-3">
-        <div class="card bg-success text-white zoom-effect">
+        <div class="card bg-secondary text-white zoom-effect">
             <i class="fa fa-user"></i>
-            <div class="card-header">
-                Nombre de prêtres
+            <div class="card-header pb-0">
+                <h5 class="card-title">Nombre de prêtres</h5>
             </div>
             <div class="card-body">
-                <h5 class="card-title">@Model.PriestCount</h5>
-                <p class="card-text">prêtres enregistrés</p>
+                <p class="card-text">@Model.PriestCount</p>
+                <p>prêtres enregistrés</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card bg-warning text-white zoom-effect">
+            <i class="fa fa-handshake-o"></i>
+            <div class="card-header pb-0">
+                <h5 class="card-title">Prêtres cotisants</h5>
+            </div>
+            <div class="card-body">
+                <p class="card-text">@Model.ContributingPriest</p>
+                <p>prêtres cotisants mensuellement</p>
             </div>
         </div>
     </div>
 
     <div class="col-md-3">
         <div class="card bg-info text-white zoom-effect">
-            <i class="fa fa-money"></i>
-            <div class="card-header">
-                Total des cotisations
+            <i class="fa fa-handshake-o"></i>
+            <div class="card-header pb-0">
+                <h5 class="card-title">Prêtres bénéficiaires</h5>
             </div>
             <div class="card-body">
-                <h5 class="card-title">@FormatNumberWithSpaces(Model.ContributionTotal) XOF</h5>
-                <p class="card-text">cotisations enregistrées</p>
+                <p class="card-text">@Model.BeneficiaryPriest</p>
+                <p>prêtres bénéficiaires des allocations</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-5">
+    <div class="col-md-6">
+        <div class="card bg-success text-white zoom-effect">
+            <i class="fa fa-money"></i>
+            <div class="card-header pb-0">
+                <h5 class="card-title">Cotisations du mois de @DateTime.Now.ToString("MMMM yyyy")</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6 border-right">
+                        <p class="card-text">@FormatNumberWithSpaces(Model.CurrentMonthContribution) XOF</p>
+                        <p>perçus</p>
+                    </div>
+                    <div class="col-md-6 border-left">
+                        <p class="card-text">@FormatNumberWithSpaces(Model.CurrentMonthExpectedContribution) XOF</p>
+                        <p>attendus</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
-    <div class="col-md-3">
-        <div class="card bg-warning text-dark zoom-effect">
+    <div class="col-md-6">
+        <div class="card bg-danger text-white zoom-effect">
             <i class="fa fa-money"></i>
-            <div class="card-header">
-                Total des allocations
+            <div class="card-header pb-0">
+                <h5 class="card-title">Allocations du mois de @DateTime.Now.ToString("MMMM yyyy")</h5>
             </div>
             <div class="card-body">
-                <h5 class="card-title">@FormatNumberWithSpaces(Model.PensionTotal) XOF</h5>
-                <p class="card-text">allocations enregistrées</p>
+                <div class="row">
+                    <div class="col-md-6 border-right">
+                        <p class="card-text">@FormatNumberWithSpaces(Model.CurrentMonthPension) XOF</p>
+                        <p>reversés</p>
+                    </div>
+                    <div class="col-md-6 border-left">
+                        <p class="card-text">@FormatNumberWithSpaces(Model.CurrentMonthExpectedPension) XOF</p>
+                        <p>estimés</p>
+                    </div>
+                </div>                
             </div>
         </div>
     </div>
@@ -103,7 +151,7 @@
                             <tr>
                                 <td>@contribution.Date.ToShortDateString()</td>
                                 <td>@contribution.Priest.FullName</td>
-                                <td>@FormatNumberWithSpaces(contribution.Ammount) XOF</td>
+                                <td>@FormatNumberWithSpaces(contribution.Amount) XOF</td>
                             </tr>
                         }
                     </tbody>
@@ -131,7 +179,7 @@
                             <tr>
                                 <td>@pension.Date.ToShortDateString()</td>
                                 <td>@pension.Priest.FullName</td>
-                                <td>@FormatNumberWithSpaces(pension.Ammount) XOF</td>
+                                <td>@FormatNumberWithSpaces(pension.Amount) XOF</td>
                             </tr>
                         }
                     </tbody>
@@ -139,5 +187,5 @@
             </div>
         </div>
     </div>
-    </div>
+</div>
 </div>
