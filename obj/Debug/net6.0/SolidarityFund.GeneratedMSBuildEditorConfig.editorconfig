@@ -9,225 +9,225 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = SolidarityFund
 build_property.RootNamespace = SolidarityFund
-build_property.ProjectDir = C:\Users\User\Source\Repos\Oss-Togo\
+build_property.ProjectDir = C:\Users\User\source\repos\Oss-Togo\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\User\Source\Repos\Oss-Togo
+build_property.MSBuildProjectDirectory = C:\Users\User\source\repos\Oss-Togo
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/User/Source/Repos/Oss-Togo/Areas/Identity/Pages/Account/Login.cshtml]
+[C:/Users/User/source/repos/Oss-Togo/Areas/Identity/Pages/Account/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/Source/Repos/Oss-Togo/Areas/Identity/Pages/Account/_StatusMessage.cshtml]
+[C:/Users/User/source/repos/Oss-Togo/Areas/Identity/Pages/Account/_StatusMessage.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxfU3RhdHVzTWVzc2FnZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/Source/Repos/Oss-Togo/Areas/Identity/Pages/Account/_ViewImports.cshtml]
+[C:/Users/User/source/repos/Oss-Togo/Areas/Identity/Pages/Account/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxfVmlld0ltcG9ydHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/Source/Repos/Oss-Togo/Areas/Identity/Pages/_ValidationScriptsPartial.cshtml]
+[C:/Users/User/source/repos/Oss-Togo/Areas/Identity/Pages/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZhbGlkYXRpb25TY3JpcHRzUGFydGlhbC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/Source/Repos/Oss-Togo/Areas/Identity/Pages/_ViewImports.cshtml]
+[C:/Users/User/source/repos/Oss-Togo/Areas/Identity/Pages/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/Source/Repos/Oss-Togo/Areas/Identity/Pages/_ViewStart.cshtml]
+[C:/Users/User/source/repos/Oss-Togo/Areas/Identity/Pages/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/Source/Repos/Oss-Togo/Views/Contribution/Add.cshtml]
+[C:/Users/User/source/repos/Oss-Togo/Views/Contribution/Add.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udHJpYnV0aW9uXEFkZC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/Source/Repos/Oss-Togo/Views/Contribution/ImportData.cshtml]
+[C:/Users/User/source/repos/Oss-Togo/Views/Contribution/ImportData.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udHJpYnV0aW9uXEltcG9ydERhdGEuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/Source/Repos/Oss-Togo/Views/Contribution/Index.cshtml]
+[C:/Users/User/source/repos/Oss-Togo/Views/Contribution/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udHJpYnV0aW9uXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/Source/Repos/Oss-Togo/Views/Cost/Index.cshtml]
+[C:/Users/User/source/repos/Oss-Togo/Views/Cost/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29zdFxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/Source/Repos/Oss-Togo/Views/Diocese/Index.cshtml]
+[C:/Users/User/source/repos/Oss-Togo/Views/Diocese/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGlvY2VzZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/Source/Repos/Oss-Togo/Views/Diocese/_CreatePartial.cshtml]
+[C:/Users/User/source/repos/Oss-Togo/Views/Diocese/_CreatePartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGlvY2VzZVxfQ3JlYXRlUGFydGlhbC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/Source/Repos/Oss-Togo/Views/Home/Index.cshtml]
+[C:/Users/User/source/repos/Oss-Togo/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/Source/Repos/Oss-Togo/Views/Home/Privacy.cshtml]
+[C:/Users/User/source/repos/Oss-Togo/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/Source/Repos/Oss-Togo/Views/Pension/EligiblePriests.cshtml]
+[C:/Users/User/source/repos/Oss-Togo/Views/Pension/EligiblePriests.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGVuc2lvblxFbGlnaWJsZVByaWVzdHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/Source/Repos/Oss-Togo/Views/Pension/ImportData.cshtml]
+[C:/Users/User/source/repos/Oss-Togo/Views/Pension/ImportData.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGVuc2lvblxJbXBvcnREYXRhLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/Source/Repos/Oss-Togo/Views/Pension/Index.cshtml]
+[C:/Users/User/source/repos/Oss-Togo/Views/Pension/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGVuc2lvblxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/Source/Repos/Oss-Togo/Views/Priest/Create.cshtml]
+[C:/Users/User/source/repos/Oss-Togo/Views/Priest/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJpZXN0XENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/Source/Repos/Oss-Togo/Views/Priest/Edit.cshtml]
+[C:/Users/User/source/repos/Oss-Togo/Views/Priest/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJpZXN0XEVkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/Source/Repos/Oss-Togo/Views/Priest/Index.cshtml]
+[C:/Users/User/source/repos/Oss-Togo/Views/Priest/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJpZXN0XEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/Source/Repos/Oss-Togo/Views/Priest/Suspend.cshtml]
+[C:/Users/User/source/repos/Oss-Togo/Views/Priest/Suspend.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJpZXN0XFN1c3BlbmQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/Source/Repos/Oss-Togo/Views/Report/ContributionReport.cshtml]
+[C:/Users/User/source/repos/Oss-Togo/Views/Report/ContributionReport.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVwb3J0XENvbnRyaWJ1dGlvblJlcG9ydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/Source/Repos/Oss-Togo/Views/Report/ContributionReportByDiocese.cshtml]
+[C:/Users/User/source/repos/Oss-Togo/Views/Report/ContributionReportByDiocese.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVwb3J0XENvbnRyaWJ1dGlvblJlcG9ydEJ5RGlvY2VzZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/Source/Repos/Oss-Togo/Views/Report/ContributionReportByDioceseFilter.cshtml]
+[C:/Users/User/source/repos/Oss-Togo/Views/Report/ContributionReportByDioceseFilter.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVwb3J0XENvbnRyaWJ1dGlvblJlcG9ydEJ5RGlvY2VzZUZpbHRlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/Source/Repos/Oss-Togo/Views/Report/ContributionReportByPriest.cshtml]
+[C:/Users/User/source/repos/Oss-Togo/Views/Report/ContributionReportByPriest.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVwb3J0XENvbnRyaWJ1dGlvblJlcG9ydEJ5UHJpZXN0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/Source/Repos/Oss-Togo/Views/Report/ContributionReportByPriestFilter.cshtml]
+[C:/Users/User/source/repos/Oss-Togo/Views/Report/ContributionReportByPriestFilter.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVwb3J0XENvbnRyaWJ1dGlvblJlcG9ydEJ5UHJpZXN0RmlsdGVyLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/Source/Repos/Oss-Togo/Views/Report/ContributionReportFilter.cshtml]
+[C:/Users/User/source/repos/Oss-Togo/Views/Report/ContributionReportFilter.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVwb3J0XENvbnRyaWJ1dGlvblJlcG9ydEZpbHRlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/Source/Repos/Oss-Togo/Views/Report/ContributionReportGroupByDiocese.cshtml]
+[C:/Users/User/source/repos/Oss-Togo/Views/Report/ContributionReportGroupByDiocese.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVwb3J0XENvbnRyaWJ1dGlvblJlcG9ydEdyb3VwQnlEaW9jZXNlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/Source/Repos/Oss-Togo/Views/Report/ContributionReportGroupByPriest.cshtml]
+[C:/Users/User/source/repos/Oss-Togo/Views/Report/ContributionReportGroupByPriest.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVwb3J0XENvbnRyaWJ1dGlvblJlcG9ydEdyb3VwQnlQcmllc3QuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/Source/Repos/Oss-Togo/Views/Report/DioceseReport.cshtml]
+[C:/Users/User/source/repos/Oss-Togo/Views/Report/DioceseReport.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVwb3J0XERpb2Nlc2VSZXBvcnQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/Source/Repos/Oss-Togo/Views/Report/PensionReport.cshtml]
+[C:/Users/User/source/repos/Oss-Togo/Views/Report/PensionReport.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVwb3J0XFBlbnNpb25SZXBvcnQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/Source/Repos/Oss-Togo/Views/Report/PensionReportByPriest.cshtml]
+[C:/Users/User/source/repos/Oss-Togo/Views/Report/PensionReportByPriest.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVwb3J0XFBlbnNpb25SZXBvcnRCeVByaWVzdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/Source/Repos/Oss-Togo/Views/Report/PensionReportByPriestFilter.cshtml]
+[C:/Users/User/source/repos/Oss-Togo/Views/Report/PensionReportByPriestFilter.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVwb3J0XFBlbnNpb25SZXBvcnRCeVByaWVzdEZpbHRlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/Source/Repos/Oss-Togo/Views/Report/PensionReportFilter.cshtml]
+[C:/Users/User/source/repos/Oss-Togo/Views/Report/PensionReportFilter.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVwb3J0XFBlbnNpb25SZXBvcnRGaWx0ZXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/Source/Repos/Oss-Togo/Views/Report/PensionReportGroupByPriest.cshtml]
+[C:/Users/User/source/repos/Oss-Togo/Views/Report/PensionReportGroupByPriest.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVwb3J0XFBlbnNpb25SZXBvcnRHcm91cEJ5UHJpZXN0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/Source/Repos/Oss-Togo/Views/Report/PriestReport.cshtml]
+[C:/Users/User/source/repos/Oss-Togo/Views/Report/PriestReport.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVwb3J0XFByaWVzdFJlcG9ydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/Source/Repos/Oss-Togo/Views/Report/PriestReportByDiocese.cshtml]
+[C:/Users/User/source/repos/Oss-Togo/Views/Report/PriestReportByDiocese.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVwb3J0XFByaWVzdFJlcG9ydEJ5RGlvY2VzZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/Source/Repos/Oss-Togo/Views/Report/PriestReportByDioceseFilter.cshtml]
+[C:/Users/User/source/repos/Oss-Togo/Views/Report/PriestReportByDioceseFilter.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVwb3J0XFByaWVzdFJlcG9ydEJ5RGlvY2VzZUZpbHRlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/Source/Repos/Oss-Togo/Views/Report/PriestReportFilter.cshtml]
+[C:/Users/User/source/repos/Oss-Togo/Views/Report/PriestReportFilter.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVwb3J0XFByaWVzdFJlcG9ydEZpbHRlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/Source/Repos/Oss-Togo/Views/Roles/Index.cshtml]
+[C:/Users/User/source/repos/Oss-Togo/Views/Roles/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUm9sZXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/Source/Repos/Oss-Togo/Views/Roles/ManagePermissions.cshtml]
+[C:/Users/User/source/repos/Oss-Togo/Views/Roles/ManagePermissions.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUm9sZXNcTWFuYWdlUGVybWlzc2lvbnMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/Source/Repos/Oss-Togo/Views/Shared/Error.cshtml]
+[C:/Users/User/source/repos/Oss-Togo/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/Source/Repos/Oss-Togo/Views/Shared/_AuthnLayout.cshtml]
+[C:/Users/User/source/repos/Oss-Togo/Views/Shared/_AuthnLayout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9BdXRobkxheW91dC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/Source/Repos/Oss-Togo/Views/Shared/_Layout.cshtml]
+[C:/Users/User/source/repos/Oss-Togo/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/Source/Repos/Oss-Togo/Views/Shared/_LoginPartial.cshtml]
+[C:/Users/User/source/repos/Oss-Togo/Views/Shared/_LoginPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Mb2dpblBhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/Source/Repos/Oss-Togo/Views/Shared/_ReportLayout.cshtml]
+[C:/Users/User/source/repos/Oss-Togo/Views/Shared/_ReportLayout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9SZXBvcnRMYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/Source/Repos/Oss-Togo/Views/Shared/_StatusMessage.cshtml]
+[C:/Users/User/source/repos/Oss-Togo/Views/Shared/_StatusMessage.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9TdGF0dXNNZXNzYWdlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/Source/Repos/Oss-Togo/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/User/source/repos/Oss-Togo/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/Source/Repos/Oss-Togo/Views/Shared/_YesOrNoBadgePartial.cshtml]
+[C:/Users/User/source/repos/Oss-Togo/Views/Shared/_YesOrNoBadgePartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9ZZXNPck5vQmFkZ2VQYXJ0aWFsLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/Source/Repos/Oss-Togo/Views/Users/Create.cshtml]
+[C:/Users/User/source/repos/Oss-Togo/Views/Users/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnNcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/Source/Repos/Oss-Togo/Views/Users/Index.cshtml]
+[C:/Users/User/source/repos/Oss-Togo/Views/Users/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/Source/Repos/Oss-Togo/Views/Users/ManageRoles.cshtml]
+[C:/Users/User/source/repos/Oss-Togo/Views/Users/ManageRoles.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnNcTWFuYWdlUm9sZXMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/Source/Repos/Oss-Togo/Views/_ViewImports.cshtml]
+[C:/Users/User/source/repos/Oss-Togo/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/Source/Repos/Oss-Togo/Views/_ViewStart.cshtml]
+[C:/Users/User/source/repos/Oss-Togo/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 

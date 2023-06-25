@@ -11,7 +11,7 @@
 using System;
 using System.Reflection;
 
-[assembly: Microsoft.AspNetCore.Identity.UI.UIFrameworkAttribute("Bootstrap4")]
+[assembly: Microsoft.AspNetCore.Identity.UI.UIFrameworkAttribute("Bootstrap5")]
 [assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("aspnet-SolidarityFund-E9AE9638-A80E-4D89-A50B-E3C2CDD5B6E5")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("SolidarityFund")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
