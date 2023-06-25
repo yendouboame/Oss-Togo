@@ -35,7 +35,7 @@ namespace SolidarityFund.Data.Seeds
 
         public static async Task SeedSuperAdminUserAsync(UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
         {
-            var saUser = new User
+            var saUser1 = new User
             {
                 UserName = "aime",
                 LastName = "WOAGOU",
@@ -45,13 +45,13 @@ namespace SolidarityFund.Data.Seeds
                 IsActive = true
             };
 
-            var user = await userManager.FindByNameAsync(saUser.UserName)
-                ?? await userManager.FindByEmailAsync(saUser.Email);
+            var user = await userManager.FindByNameAsync(saUser1.UserName)
+                ?? await userManager.FindByEmailAsync(saUser1.Email);
 
             if (user == null)
             {
-                await userManager.CreateAsync(saUser, "P@ssword123");
-                await userManager.AddToRoleAsync(saUser, Roles.SuperAdmin.ToString());
+                await userManager.CreateAsync(saUser1, "P@ssword123");
+                await userManager.AddToRoleAsync(saUser1, Roles.SuperAdmin.ToString());
             }
 
             await roleManager.SeedClaimsForSuperAdminUser();

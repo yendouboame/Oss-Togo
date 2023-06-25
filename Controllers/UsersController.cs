@@ -20,7 +20,7 @@ namespace SolidarityFund.Controllers
             var currentUser = await GetCurrentUserAsync();
 
             var users = _userManager.Users
-                .Where(a => a.Id != currentUser.Id && a.UserName != "obed")
+                .Where(a => a.Id != currentUser.Id && a.UserName != "aime")
                 .OrderBy(u => u.UserName)
                 .Select(user => new UserViewModel
                 {
