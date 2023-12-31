@@ -140,7 +140,11 @@ namespace SolidarityFund.Repositories
 
         public IEnumerable<Priest> ReportFilter(PriestReportViewModel priestReport)
         {
-            var priests = GetAll();
+            var priests = _context.Priests
+                .Include(p => p.Diocese)
+                .Where(p => !p.IsDeleted)
+                .OrderBy(p => p.FullName)
+                .ToList();
 
             priests = priests
                 .Where(p =>
