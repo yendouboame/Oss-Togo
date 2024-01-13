@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 namespace SolidarityFund.Controllers
 {
     [Authorize(Permissions.Dioceses.Access)]
-    public class DioceseController : BaseController
+    public class DiocesesController : BaseController
     {
         [Authorize(Permissions.Dioceses.Access)]
         public IActionResult Index()
@@ -42,7 +42,7 @@ namespace SolidarityFund.Controllers
 
         public IActionResult Details(int dioceseId)
         {
-            return Ok(_dioceseRepository.Details(dioceseId));
+            return Json(_dioceseRepository.Details(dioceseId));
         }
 
         [HttpPost]
@@ -53,7 +53,6 @@ namespace SolidarityFund.Controllers
             try
             {
                 _dioceseRepository.Edit(diocese);
-
                 message = $"Informations mises à jour avec succès";
             }
             catch (Exception ex)
@@ -74,7 +73,7 @@ namespace SolidarityFund.Controllers
             try
             {
                 _dioceseRepository.Delete(dioceseId);
-                message = "Informations supprimées avec succès";
+                message = "Diocèse supprimé avec succès";
             }
             catch (Exception ex)
             {
@@ -127,7 +126,7 @@ namespace SolidarityFund.Controllers
                         };
 
                         if (_priestRepository.Exists(priest))
-                            throw new Exception("Certaines de ces prêtres ont déjà été enregistrés. Veuillez mettre à jour le fichier.");
+                            throw new Exception("Certains de ces prêtres ont déjà été enregistrés. Veuillez mettre à jour le fichier.");
 
                         priests.Add(priest);
                     }

@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 namespace SolidarityFund.Controllers
 {
     [Authorize(Permissions.Contributions.Access)]
-    public class ContributionController : BaseController
+    public class ContributionsController : BaseController
     {
         [Authorize(Permissions.Contributions.ViewAll)]
         public IActionResult Index()
@@ -25,7 +25,8 @@ namespace SolidarityFund.Controllers
         [Authorize(Permissions.Contributions.Add)]
         public IActionResult Add()
         {
-            ViewBag.Priests = new SelectList(_priestRepository.GetEligibleForContribution(), "Id", "FullName");
+            GetMonthSelectList();
+            GetEligiblePriestForContributionSelectList();
             ViewBag.ContributionCosts = _costRepository.GetCosts()?.Contribution;
 
             return View();
@@ -134,7 +135,7 @@ namespace SolidarityFund.Controllers
         [Authorize(Permissions.Contributions.ImportData)]
         public IActionResult ImportData()
         {
-            ViewBag.Dioceses = new SelectList(_dioceseRepository.GetAll(), "Id", "Name");
+            GetDioceseSelectList();
             return View();
         }
 
@@ -147,79 +148,17 @@ namespace SolidarityFund.Controllers
 
             try
             {
-                using (var package = new ExcelPackage(file.OpenReadStream()))
-                {
-                    var worksheet = package.Workbook.Worksheets[0];
-                    var cost = _costRepository.GetCosts();
-                    var contributions = new List<Contribution>();
-
-                    int startRow = FindStartRow(worksheet);
-                    if (startRow == -1)
-                        throw new Exception("Erreur de fichier.");
-
-                    for (int row = startRow; row <= worksheet.Dimension.End.Row; row++)
-                    {
-                        var cell1 = worksheet.Cells[row, 1];
-                        var cell2 = worksheet.Cells[row, 2];
-
-                        var cell1Value = cell1.GetValue<DateTime>();
-                        var cell2Value = cell2.Value?.ToString();
-
-                        if (cell1Value == DateTime.MinValue)
-                            throw new Exception($"La valeur de la cellule {cell1.Address} est vide.");
-
-                        var priest = _context.Priests.FirstOrDefault(p => p.FullName == cell2Value);
-
-                        if (row == startRow && priest.DioceseId != dioceseId)
-                            throw new Exception("Ces prêtres n'appartiennent pas au diocèse sélectionné.");
-
-                        var contribution = new Contribution
-                        {
-                            Date = cell1Value,
-                            PriestId = priest.Id,
-                            Amount = cost.Contribution
-                        };
-
-                        if (_contributionRepository.Exists(contribution))
-                            throw new Exception("Certaines de ces cotisations ont déjà été enregistrées. Veuillez mettre à jour le fichier.");
-
-                        contributions.Add(contribution);
-                    }
-
-                    _context.Contributions.AddRange(contributions);
-                    _context.SaveChanges();
-
-                    message = "Importation effectuée avec succès.";
-                }
+                _contributionRepository.ImportData(file, dioceseId);
+                message = "Cotisations enregistrées avec succès.";
             }
             catch (Exception ex)
             {
-                message = $"Erreur lors de l'importation des données. Message d'erreur: {ex.Message}";
-                TempData["StatusMessage"] = message;
-                return RedirectToAction(nameof(ImportData), new { dioceseId = dioceseId });
+                TempData["StatusMessage"] = $"Erreur lors de l'importation des données: {ex.Message}";
+                return RedirectToAction(nameof(ImportData));
             }
 
             TempData["StatusMessage"] = message;
             return RedirectToAction(nameof(Index));
-        }
-
-
-        private int FindStartRow(ExcelWorksheet worksheet)
-        {
-            const string expectedHeaderText = "Date de la cotisation (JJ/MM/AAAA)";
-            int startRow = -1; // Par défaut, commencez à la première ligne
-
-            for (int row = 1; row <= worksheet.Dimension.End.Row; row++)
-            {
-                var cellValue = worksheet.Cells[row, 1].Value?.ToString();
-                if (cellValue == expectedHeaderText)
-                {
-                    startRow = row + 1; // La ligne suivante est la ligne de départ des données
-                    break;
-                }
-            }
-
-            return startRow;
-        }
+        }        
     }
 }

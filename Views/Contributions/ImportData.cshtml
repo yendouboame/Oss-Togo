@@ -1,17 +1,16 @@
 ﻿
 @{
-    ViewData["Title"] = "Importer un liste de cotisations";
+    ViewData["PageTitle"] = "Cotisations";
+    ViewData["Title"] = ViewData["PageSubtitle"] = "Importer une liste de cotisations";
 }
 
 <div class="row">
-    <div class="mx-auto my-4" style="width: 30%;">
+    <div class="col-lg-4 col-md-6 col-sm-12 mx-auto">
 
         <partial name="_StatusMessage" model='TempData["StatusMessage"]' />
 
         <div class="card shadow">
             <div class="card-body">
-                <h5 class="card-title"><strong>@ViewData["Title"]</strong></h5>
-                <hr />
                 <form asp-action="ImportData" method="post" enctype="multipart/form-data">
                     <div class="form-group">
                         <label class="required">Nom du diocèse</label>
@@ -22,6 +21,9 @@
                         <label class="required">Liste de cotisations</label>
                         <input type="file" class="form-control-file" name="contributions" accept=".xlsx, .xls" />
                     </div>
+                    <a asp-action="Index" class="btn btn-secondary">
+                        Retour
+                    </a>
                     <button type="submit" class="btn btn-primary">
                         Importer
                     </button>

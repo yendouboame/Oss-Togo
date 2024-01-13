@@ -12,14 +12,8 @@ using System.Threading.Tasks;
 namespace SolidarityFund.Controllers
 {
     [Authorize(Permissions.Priests.Access)]
-    public class PriestController : BaseController
+    public class PriestsController : BaseController
     {
-        private void GetSelectList()
-        {
-            ViewBag.Dioceses = new SelectList(_dioceseRepository.GetAll(), "Id", "Name");
-            ViewBag.Priests = new SelectList(_priestRepository.GetAll(), "Id", "FullName");
-        }
-
         [Authorize(Permissions.Priests.Access)]
         public IActionResult Index()
         {
@@ -29,7 +23,7 @@ namespace SolidarityFund.Controllers
         [Authorize(Permissions.Priests.Create)]
         public IActionResult Create()
         {
-            GetSelectList();
+            GetDioceseSelectList();
             return View();
         }
 
@@ -56,7 +50,7 @@ namespace SolidarityFund.Controllers
         [Authorize(Permissions.Priests.Edit)]
         public IActionResult Edit(int priestId)
         {
-            GetSelectList();
+            GetDioceseSelectList();
             return View(_priestRepository.Details(priestId));
         }
 
@@ -74,7 +68,7 @@ namespace SolidarityFund.Controllers
             catch (Exception ex)
             {
                 TempData["StatusMessage"] = $"Erreur: {ex.Message}";
-                return View(priest);
+                return RedirectToAction(nameof(Edit), new { priestId = priest.Id });
             }
         }
 
@@ -87,7 +81,7 @@ namespace SolidarityFund.Controllers
             try
             {
                 _priestRepository.Delete(priestId);
-                message = "Informations supprimées avec succès.";
+                message = "Prêtre retiré de la liste avec succès.";
             }
             catch (Exception ex)
             {
@@ -101,7 +95,7 @@ namespace SolidarityFund.Controllers
         [Authorize(Permissions.Priests.Suspend)]
         public IActionResult Suspend()
         {
-            GetSelectList();
+            GetUnsuspendedPriestSelectList();
             return View();
         }
 
@@ -113,7 +107,7 @@ namespace SolidarityFund.Controllers
             {
                 _priestRepository.SuspendPriest(viewModel);
 
-                TempData["StatusMessage"] = "Fin des actions enregistrée avec succès.";
+                TempData["StatusMessage"] = "Fin des actions du prêtre enregistrée avec succès.";
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)

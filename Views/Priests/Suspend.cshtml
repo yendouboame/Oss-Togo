@@ -1,24 +1,27 @@
 ﻿@model SuspendPriestViewModel
 
 @{
-    ViewData["Title"] = "Fin des actions d'un prêtre";
+    ViewData["PageTitle"] = "Prêtres";
+    ViewData["Title"] = ViewData["PageSubtitle"] = "Fin des actions d'un prêtre";
 }
 
 <div class="row">
-    <div class="col-md-4 my-4 mx-auto">
+    <div class="col-lg-4 col-md-6 col-sm-12 mx-auto">
 
         <partial name="_StatusMessage" model='TempData["StatusMessage"]' />
 
         <div class="card shadow">
             <div class="card-body">
-                <h5 class="card-title"><strong>@ViewData["Title"]</strong></h5>
-                <hr />
                 <form asp-action="Suspend" method="post">
                     <div class="form-group">
                         <label class="required">Nom et prénom(s) du prêtre</label>
                         <select asp-for="PriestId" class="form-control select-picker" title="-- Veuillez sélectionner --"
                                 data-live-search="true" asp-items="ViewBag.Priests" required>
                         </select>
+                    </div>                    
+                    <div class="form-group">
+                        <label>Date de fin d'activité</label>
+                        <input type="date" asp-for="SuspensionDate" class="form-control" />
                     </div>
                     <div class="form-group">
                         <label class="required d-block">Motif</label>
@@ -37,7 +40,7 @@
                     </div>
                     <div>
                         <a asp-action="Index" class="btn btn-secondary">Retour</a>
-                        <button type="submit" class="btn btn-primary">Valider</button>
+                        <button type="submit" class="btn btn-success">Valider</button>
                     </div>
 
                 </form>

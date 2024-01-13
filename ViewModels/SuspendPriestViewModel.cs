@@ -9,6 +9,7 @@ namespace SolidarityFund.ViewModels
     public class SuspendPriestViewModel
     {
         public int PriestId { get; set; }
+        public DateTime? SuspensionDate { get; set; }
         public SuspensionReason Reason { get; set; }
     }
 }

@@ -6,6 +6,10 @@ using SolidarityFund.Models.Entities;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
+using System.Globalization;
+using System.Linq;
 
 namespace SolidarityFund.Controllers
 {
@@ -36,6 +40,46 @@ namespace SolidarityFund.Controllers
         {
             var user = await _userManager.GetUserAsync(HttpContext.User);
             return user;
+        }
+
+        protected void GetDioceseSelectList()
+        {
+            var dioceses = _dioceseRepository.GetAll();
+            ViewBag.Dioceses = new SelectList(dioceses, "Id", "Name");
+        }
+
+        protected void GetPriestSelectList()
+        {
+            var priests = _priestRepository.GetAll();
+            ViewBag.Priests = new SelectList(priests, "Id", "FullName");
+        }
+
+        protected void GetSuspendedPriestSelectList()
+        {
+            var priests = _priestRepository.GetSuspended();
+            ViewBag.Priests = new SelectList(priests, "Id", "FullName");
+        }
+
+        protected void GetUnsuspendedPriestSelectList()
+        {
+            var priests = _priestRepository.GetUnsuspended();
+            ViewBag.Priests = new SelectList(priests, "Id", "FullName");
+        }
+
+        protected void GetEligiblePriestForContributionSelectList()
+        {
+            var priests = _priestRepository.GetEligibleForContribution();
+            ViewBag.Priests = new SelectList(priests, "Id", "FullName");
+        }
+
+        protected void GetMonthSelectList()
+        {
+            var currentMonth = DateTime.Now.Month;
+            var monthNames = CultureInfo.CurrentCulture.DateTimeFormat.MonthNames;
+
+            ViewBag.Months = new SelectList(monthNames
+                .Select((name, index) => new { Value = index + 1, Text = name })
+                .Where(m => !string.IsNullOrEmpty(m.Text)), "Value", "Text", currentMonth);
         }
     }
 }

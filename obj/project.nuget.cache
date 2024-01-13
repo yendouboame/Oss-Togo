@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "IWt7caydf0WgzxtZ56bnOBUCwMmVDgzCBXhR8rWzsGEWhnT1d9R8DfJEoLMw3baM/w6DGyxGKdsyzm+SYF+Leg==",
+  "dgSpecHash": "6cwzKD7yh/K6CK/uo08JEgxt/ik3+Gu9K+F7ceXlwqAKEE8k0NfmAUsOHmpwCq6CVunKqg6kEma7+xGHvHykyg==",
   "success": true,
   "projectFilePath": "G:\\Repositories\\FREELANCE\\OSS-TOGO\\SolidarityFund.csproj",
   "expectedPackageFiles": [
@@ -287,7 +287,11 @@
     "C:\\Users\\pc\\.nuget\\packages\\system.threading.timer\\4.3.0\\system.threading.timer.4.3.0.nupkg.sha512",
     "C:\\Users\\pc\\.nuget\\packages\\system.windows.extensions\\6.0.0\\system.windows.extensions.6.0.0.nupkg.sha512",
     "C:\\Users\\pc\\.nuget\\packages\\system.xml.readerwriter\\4.3.0\\system.xml.readerwriter.4.3.0.nupkg.sha512",
-    "C:\\Users\\pc\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512"
+    "C:\\Users\\pc\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512",
+    "C:\\Users\\pc\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.25\\microsoft.windowsdesktop.app.ref.6.0.25.nupkg.sha512",
+    "C:\\Users\\pc\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.25\\microsoft.netcore.app.ref.6.0.25.nupkg.sha512",
+    "C:\\Users\\pc\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.25\\microsoft.aspnetcore.app.ref.6.0.25.nupkg.sha512",
+    "C:\\Users\\pc\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\6.0.25\\microsoft.netcore.app.host.win-x64.6.0.25.nupkg.sha512"
   ],
   "logs": []
 }

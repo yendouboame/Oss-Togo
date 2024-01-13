@@ -6,6 +6,8 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SolidarityFund.Data;
 
+#nullable disable
+
 namespace SolidarityFund.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
@@ -15,9 +17,10 @@ namespace SolidarityFund.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.17")
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("ProductVersion", "6.0.18")
+                .HasAnnotation("Relational:MaxIdentifierLength", 128);
+
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
@@ -43,15 +46,16 @@ namespace SolidarityFund.Data.Migrations
                         .HasDatabaseName("RoleNameIndex")
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
-                    b.ToTable("AspNetRoles");
+                    b.ToTable("AspNetRoles", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("ClaimType")
                         .HasColumnType("nvarchar(max)");
@@ -67,15 +71,16 @@ namespace SolidarityFund.Data.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("AspNetRoleClaims");
+                    b.ToTable("AspNetRoleClaims", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("ClaimType")
                         .HasColumnType("nvarchar(max)");
@@ -91,7 +96,7 @@ namespace SolidarityFund.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("AspNetUserClaims");
+                    b.ToTable("AspNetUserClaims", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
@@ -113,7 +118,7 @@ namespace SolidarityFund.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("AspNetUserLogins");
+                    b.ToTable("AspNetUserLogins", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
@@ -128,7 +133,7 @@ namespace SolidarityFund.Data.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("AspNetUserRoles");
+                    b.ToTable("AspNetUserRoles", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -147,15 +152,16 @@ namespace SolidarityFund.Data.Migrations
 
                     b.HasKey("UserId", "LoginProvider", "Name");
 
-                    b.ToTable("AspNetUserTokens");
+                    b.ToTable("AspNetUserTokens", (string)null);
                 });
 
             modelBuilder.Entity("SolidarityFund.Models.Entities.Contribution", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<double>("Amount")
                         .HasColumnType("float");
@@ -163,13 +169,16 @@ namespace SolidarityFund.Data.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("date");
-
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
+                    b.Property<int>("Month")
+                        .HasColumnType("int");
+
                     b.Property<int>("PriestId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Year")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -183,8 +192,9 @@ namespace SolidarityFund.Data.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<double>("Contribution")
                         .HasColumnType("float");
@@ -207,8 +217,9 @@ namespace SolidarityFund.Data.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -227,49 +238,49 @@ namespace SolidarityFund.Data.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedOn = new DateTime(2023, 6, 22, 10, 56, 8, 487, DateTimeKind.Local).AddTicks(1241),
+                            CreatedOn = new DateTime(2024, 1, 13, 15, 48, 50, 941, DateTimeKind.Local).AddTicks(8245),
                             IsDeleted = false,
                             Name = "Diocèse de Dapaong"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedOn = new DateTime(2023, 6, 22, 10, 56, 8, 488, DateTimeKind.Local).AddTicks(706),
+                            CreatedOn = new DateTime(2024, 1, 13, 15, 48, 50, 941, DateTimeKind.Local).AddTicks(8255),
                             IsDeleted = false,
                             Name = "Diocèse de Kara"
                         },
                         new
                         {
                             Id = 3,
-                            CreatedOn = new DateTime(2023, 6, 22, 10, 56, 8, 488, DateTimeKind.Local).AddTicks(726),
+                            CreatedOn = new DateTime(2024, 1, 13, 15, 48, 50, 941, DateTimeKind.Local).AddTicks(8256),
                             IsDeleted = false,
                             Name = "Diocèse de Sokodé"
                         },
                         new
                         {
                             Id = 4,
-                            CreatedOn = new DateTime(2023, 6, 22, 10, 56, 8, 488, DateTimeKind.Local).AddTicks(729),
+                            CreatedOn = new DateTime(2024, 1, 13, 15, 48, 50, 941, DateTimeKind.Local).AddTicks(8257),
                             IsDeleted = false,
                             Name = "Diocèse d'Atakpamé"
                         },
                         new
                         {
                             Id = 5,
-                            CreatedOn = new DateTime(2023, 6, 22, 10, 56, 8, 488, DateTimeKind.Local).AddTicks(730),
+                            CreatedOn = new DateTime(2024, 1, 13, 15, 48, 50, 941, DateTimeKind.Local).AddTicks(8257),
                             IsDeleted = false,
                             Name = "Diocèse de Kpalimé"
                         },
                         new
                         {
                             Id = 6,
-                            CreatedOn = new DateTime(2023, 6, 22, 10, 56, 8, 488, DateTimeKind.Local).AddTicks(733),
+                            CreatedOn = new DateTime(2024, 1, 13, 15, 48, 50, 941, DateTimeKind.Local).AddTicks(8258),
                             IsDeleted = false,
                             Name = "Diocèse de Lomé"
                         },
                         new
                         {
                             Id = 7,
-                            CreatedOn = new DateTime(2023, 6, 22, 10, 56, 8, 488, DateTimeKind.Local).AddTicks(734),
+                            CreatedOn = new DateTime(2024, 1, 13, 15, 48, 50, 941, DateTimeKind.Local).AddTicks(8258),
                             IsDeleted = false,
                             Name = "Diocèse d'Aného"
                         });
@@ -279,8 +290,9 @@ namespace SolidarityFund.Data.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<double>("Amount")
                         .HasColumnType("float");
@@ -308,8 +320,9 @@ namespace SolidarityFund.Data.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -416,7 +429,7 @@ namespace SolidarityFund.Data.Migrations
                         .HasDatabaseName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
-                    b.ToTable("AspNetUsers");
+                    b.ToTable("AspNetUsers", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

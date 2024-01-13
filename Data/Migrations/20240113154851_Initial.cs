@@ -1,9 +1,11 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
+#nullable disable
+
 namespace SolidarityFund.Data.Migrations
 {
-    public partial class Init : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -243,7 +245,8 @@ namespace SolidarityFund.Data.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     PriestId = table.Column<int>(type: "int", nullable: false),
-                    Date = table.Column<DateTime>(type: "date", nullable: false),
+                    Month = table.Column<int>(type: "int", nullable: false),
+                    Year = table.Column<int>(type: "int", nullable: false),
                     Amount = table.Column<double>(type: "float", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false)
@@ -264,13 +267,13 @@ namespace SolidarityFund.Data.Migrations
                 columns: new[] { "Id", "CreatedOn", "IsDeleted", "Name" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2023, 6, 22, 10, 56, 8, 487, DateTimeKind.Local).AddTicks(1241), false, "Diocèse de Dapaong" },
-                    { 2, new DateTime(2023, 6, 22, 10, 56, 8, 488, DateTimeKind.Local).AddTicks(706), false, "Diocèse de Kara" },
-                    { 3, new DateTime(2023, 6, 22, 10, 56, 8, 488, DateTimeKind.Local).AddTicks(726), false, "Diocèse de Sokodé" },
-                    { 4, new DateTime(2023, 6, 22, 10, 56, 8, 488, DateTimeKind.Local).AddTicks(729), false, "Diocèse d'Atakpamé" },
-                    { 5, new DateTime(2023, 6, 22, 10, 56, 8, 488, DateTimeKind.Local).AddTicks(730), false, "Diocèse de Kpalimé" },
-                    { 6, new DateTime(2023, 6, 22, 10, 56, 8, 488, DateTimeKind.Local).AddTicks(733), false, "Diocèse de Lomé" },
-                    { 7, new DateTime(2023, 6, 22, 10, 56, 8, 488, DateTimeKind.Local).AddTicks(734), false, "Diocèse d'Aného" }
+                    { 1, new DateTime(2024, 1, 13, 15, 48, 50, 941, DateTimeKind.Local).AddTicks(8245), false, "Diocèse de Dapaong" },
+                    { 2, new DateTime(2024, 1, 13, 15, 48, 50, 941, DateTimeKind.Local).AddTicks(8255), false, "Diocèse de Kara" },
+                    { 3, new DateTime(2024, 1, 13, 15, 48, 50, 941, DateTimeKind.Local).AddTicks(8256), false, "Diocèse de Sokodé" },
+                    { 4, new DateTime(2024, 1, 13, 15, 48, 50, 941, DateTimeKind.Local).AddTicks(8257), false, "Diocèse d'Atakpamé" },
+                    { 5, new DateTime(2024, 1, 13, 15, 48, 50, 941, DateTimeKind.Local).AddTicks(8257), false, "Diocèse de Kpalimé" },
+                    { 6, new DateTime(2024, 1, 13, 15, 48, 50, 941, DateTimeKind.Local).AddTicks(8258), false, "Diocèse de Lomé" },
+                    { 7, new DateTime(2024, 1, 13, 15, 48, 50, 941, DateTimeKind.Local).AddTicks(8258), false, "Diocèse d'Aného" }
                 });
 
             migrationBuilder.CreateIndex(

@@ -42,28 +42,28 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[G:/Repositories/FREELANCE/OSS-TOGO/Views/Contribution/Add.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udHJpYnV0aW9uXEFkZC5jc2h0bWw=
+[G:/Repositories/FREELANCE/OSS-TOGO/Views/Contributions/Add.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udHJpYnV0aW9uc1xBZGQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[G:/Repositories/FREELANCE/OSS-TOGO/Views/Contribution/ImportData.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udHJpYnV0aW9uXEltcG9ydERhdGEuY3NodG1s
+[G:/Repositories/FREELANCE/OSS-TOGO/Views/Contributions/ImportData.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udHJpYnV0aW9uc1xJbXBvcnREYXRhLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[G:/Repositories/FREELANCE/OSS-TOGO/Views/Contribution/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udHJpYnV0aW9uXEluZGV4LmNzaHRtbA==
+[G:/Repositories/FREELANCE/OSS-TOGO/Views/Contributions/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udHJpYnV0aW9uc1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [G:/Repositories/FREELANCE/OSS-TOGO/Views/Cost/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29zdFxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[G:/Repositories/FREELANCE/OSS-TOGO/Views/Diocese/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGlvY2VzZVxJbmRleC5jc2h0bWw=
+[G:/Repositories/FREELANCE/OSS-TOGO/Views/Dioceses/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGlvY2VzZXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[G:/Repositories/FREELANCE/OSS-TOGO/Views/Diocese/_CreatePartial.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGlvY2VzZVxfQ3JlYXRlUGFydGlhbC5jc2h0bWw=
+[G:/Repositories/FREELANCE/OSS-TOGO/Views/Dioceses/_CreatePartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGlvY2VzZXNcX0NyZWF0ZVBhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [G:/Repositories/FREELANCE/OSS-TOGO/Views/Home/Index.cshtml]
@@ -86,20 +86,20 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGVuc2lvblxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[G:/Repositories/FREELANCE/OSS-TOGO/Views/Priest/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJpZXN0XENyZWF0ZS5jc2h0bWw=
+[G:/Repositories/FREELANCE/OSS-TOGO/Views/Priests/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJpZXN0c1xDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[G:/Repositories/FREELANCE/OSS-TOGO/Views/Priest/Edit.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJpZXN0XEVkaXQuY3NodG1s
+[G:/Repositories/FREELANCE/OSS-TOGO/Views/Priests/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJpZXN0c1xFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[G:/Repositories/FREELANCE/OSS-TOGO/Views/Priest/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJpZXN0XEluZGV4LmNzaHRtbA==
+[G:/Repositories/FREELANCE/OSS-TOGO/Views/Priests/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJpZXN0c1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[G:/Repositories/FREELANCE/OSS-TOGO/Views/Priest/Suspend.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJpZXN0XFN1c3BlbmQuY3NodG1s
+[G:/Repositories/FREELANCE/OSS-TOGO/Views/Priests/Suspend.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJpZXN0c1xTdXNwZW5kLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [G:/Repositories/FREELANCE/OSS-TOGO/Views/Report/ContributionReport.cshtml]

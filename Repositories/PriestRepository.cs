@@ -24,7 +24,25 @@ namespace SolidarityFund.Repositories
         {
             return _context.Priests
                 .Include(p => p.Diocese)
+                .Where(p => !p.IsDeleted)
+                .OrderBy(p => p.FullName)
+                .ToList();
+        }
+
+        public IEnumerable<Priest> GetUnsuspended()
+        {
+            return _context.Priests
+                .Include(p => p.Diocese)
                 .Where(p => !p.IsDeleted && p.SuspensionReason == null)
+                .OrderBy(p => p.FullName)
+                .ToList();
+        }
+
+        public IEnumerable<Priest> GetSuspended()
+        {
+            return _context.Priests
+                .Include(p => p.Diocese)
+                .Where(p => !p.IsDeleted && p.SuspensionReason != null)
                 .OrderBy(p => p.FullName)
                 .ToList();
         }
@@ -38,7 +56,7 @@ namespace SolidarityFund.Repositories
 
         public void Create(Priest priest)
         {
-            if (Exists(priest))
+            if (!Exists(priest))
             { 
                 _context.Priests.Add(priest);
                 _context.SaveChanges();
@@ -188,7 +206,7 @@ namespace SolidarityFund.Repositories
             var priest = _context.Priests.Find(viewModel.PriestId);
 
             priest.SuspensionReason = viewModel.Reason;
-            priest.SuspensionDate = DateTime.Now;
+            priest.SuspensionDate = viewModel.SuspensionDate;
 
             _context.SaveChanges();
         }

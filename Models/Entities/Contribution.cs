@@ -14,12 +14,13 @@ namespace SolidarityFund.Models.Entities
         public int PriestId { get; set; }
         [Display(Name = "Nom et prénom(s) du prêtre")]
         public virtual Priest Priest { get; set; }
-
-        [Display(Name = "Date de cotisation")]
-        [Column(TypeName = "date")]
-        public DateTime Date { get; set; }
+        public int Month { get; set; }
+        public int Year { get; set; }
 
         [Display(Name = "Montant de la cotisation")]
         public double Amount { get; set; }
+
+        [Display(Name = "Période de cotisation")]
+        public DateTime Date => new DateTime(Year, Month, 1);
     }
 }

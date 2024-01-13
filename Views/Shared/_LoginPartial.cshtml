@@ -9,7 +9,7 @@
             <a class="nav-link text-dark dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Hello @User.FindFirst("FullName").Value!
             </a>
-            <div class="dropdown-menu dropdown-hover" aria-labelledby="navbarDropdown">
+            <div class="dropdown-menu dropdown-menu-right dropdown-hover" aria-labelledby="navbarDropdown">
                 @*<a asp-area="Identity" asp-page="/Account/Manage/Index" class="dropdown-item px-4">Profil</a>*@
                 <form class="dropdown-item p-0" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
                     <button type="submit" class="nav-link btn btn-link text-dark px-4">Déconnexion</button>

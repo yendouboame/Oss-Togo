@@ -25,13 +25,13 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
+                        @*<li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Accueil</a>
-                        </li>
+                        </li>*@
                         @if ((AuthorizationService.AuthorizeAsync(User, Dioceses.Access)).Result.Succeeded)
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-controller="Diocese" asp-action="Index">Diocèses</a>
+                                <a class="nav-link text-dark" asp-controller="Dioceses" asp-action="Index">Diocèses</a>
                             </li>
                         }
                         @if ((AuthorizationService.AuthorizeAsync(User, Priests.Access)).Result.Succeeded)
@@ -43,15 +43,15 @@
                                 <div class="dropdown-menu" aria-labelledby="dr5">
                                     @if ((AuthorizationService.AuthorizeAsync(User, Priests.Create)).Result.Succeeded)
                                     {
-                                        <a class="dropdown-item" asp-action="Create" asp-controller="Priest">Ajouter un prêtre</a>
+                                        <a class="dropdown-item" asp-action="Create" asp-controller="Priests">Ajouter un prêtre</a>
                                     }
                                     @if ((AuthorizationService.AuthorizeAsync(User, Priests.ViewAll)).Result.Succeeded)
                                     {
-                                        <a class="dropdown-item" asp-action="Index" asp-controller="Priest">Liste de tous les prêtres</a>
+                                        <a class="dropdown-item" asp-action="Index" asp-controller="Priests">Liste de tous les prêtres</a>
                                     }
                                     @if ((AuthorizationService.AuthorizeAsync(User, Priests.Suspend)).Result.Succeeded)
                                     {
-                                        <a class="dropdown-item" asp-action="Suspend" asp-controller="Priest">Fin des actions d'un prêtre</a>
+                                        <a class="dropdown-item" asp-action="Suspend" asp-controller="Priests">Fin des actions d'un prêtre</a>
                                     }
                                 </div>
                             </li>
@@ -65,15 +65,15 @@
                                 <div class="dropdown-menu" aria-labelledby="dr1">
                                     @if ((AuthorizationService.AuthorizeAsync(User, Contributions.Add)).Result.Succeeded)
                                     {
-                                        <a class="dropdown-item" asp-action="Add" asp-controller="Contribution">Nouvelle cotisation</a>
+                                        <a class="dropdown-item" asp-action="Add" asp-controller="Contributions">Nouvelle cotisation</a>
                                     }
                                     @if ((AuthorizationService.AuthorizeAsync(User, Contributions.ImportData)).Result.Succeeded)
                                     {
-                                        <a class="dropdown-item" asp-action="ImportData" asp-controller="Contribution">Importer un liste de cotisations</a>
+                                        <a class="dropdown-item" asp-action="ImportData" asp-controller="Contributions">Importer une liste de cotisations</a>
                                     }
                                     @if ((AuthorizationService.AuthorizeAsync(User, Contributions.ViewAll)).Result.Succeeded)
                                     {
-                                        <a class="dropdown-item" asp-action="Index" asp-controller="Contribution">Liste des cotisations</a>
+                                        <a class="dropdown-item" asp-action="Index" asp-controller="Contributions">Historique des cotisations</a>
                                     }
                                 </div>
                             </li>
@@ -175,6 +175,11 @@
     </header>
     <div class="container-fluid">
         <main role="main" class="pb-3 mt-4">
+            <div class="text-center">
+                <h2><strong>@ViewData["PageTitle"]</strong></h2>
+                <p>@ViewData["PageSubtitle"]</p>
+            </div>
+
             @RenderBody()
         </main>
     </div>
