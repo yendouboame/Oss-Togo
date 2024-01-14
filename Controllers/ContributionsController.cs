@@ -19,7 +19,7 @@ namespace SolidarityFund.Controllers
         [Authorize(Permissions.Contributions.ViewAll)]
         public IActionResult Index()
         {
-            return View(_contributionRepository.GetAll());
+            return View(_contributionRepository.GetAllPartial());
         }
 
         [Authorize(Permissions.Contributions.Add)]

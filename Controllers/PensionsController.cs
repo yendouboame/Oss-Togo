@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 namespace SolidarityFund.Controllers
 {
     [Authorize(Permissions.Pensions.Access)]
-    public class PensionController : BaseController
+    public class PensionsController : BaseController
     {
         [Authorize(Permissions.Pensions.ViewAll)]
         public IActionResult Index()
@@ -25,26 +25,29 @@ namespace SolidarityFund.Controllers
         [Authorize(Permissions.Pensions.Add)]
         public IActionResult EligiblePriests()
         {
+            GetMonthSelectList();
             ViewBag.PensionCosts = _costRepository.GetCosts()?.Pension;
             return View(_priestRepository.GetEligibleForPension());
         }
 
         [HttpPost]
         [Authorize(Permissions.Pensions.Add)]
-        public IActionResult New(Pension pension)
+        public IActionResult Add(Pension pension)
         {
+            string message = string.Empty;
+
             try
             {
-                _pensionRepository.New(pension);
-
-                TempData["StatusMessage"] = "Allocation enregistrée avec succès";
-                return RedirectToAction(nameof(Index));
+                _pensionRepository.Add(pension);
+                message = "Paiement enregistré avec succès";
             }
             catch (Exception ex)
             {
-                TempData["StatusMessage"] = $"Erreur: {ex.Message}";
-                return RedirectToAction(nameof(EligiblePriests));
+                message = $"Erreur: {ex.Message}";
             }
+
+            TempData["StatusMessage"] = message;
+            return RedirectToAction(nameof(EligiblePriests));
         }
 
         [Authorize(Permissions.Pensions.DownloadFile)]
@@ -136,7 +139,7 @@ namespace SolidarityFund.Controllers
             return View();
         }
 
-        [Authorize(Permissions.Pensions.ImportData)]
+        /*[Authorize(Permissions.Pensions.ImportData)]
         [HttpPost]
         public IActionResult ImportData(int dioceseId)
         {
@@ -173,7 +176,7 @@ namespace SolidarityFund.Controllers
 
                         var pension = new Pension
                         {
-                            Date = cell1Value,
+                            //Date = cell1Value,
                             PriestId = priest.Id,
                             Amount = cost.Pension
                         };
@@ -218,6 +221,6 @@ namespace SolidarityFund.Controllers
             }
 
             return startRow;
-        }
+        }*/
     }
 }

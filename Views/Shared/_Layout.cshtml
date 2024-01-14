@@ -87,15 +87,15 @@
                                 <div class="dropdown-menu" aria-labelledby="dr2">
                                     @if ((AuthorizationService.AuthorizeAsync(User, Pensions.Add)).Result.Succeeded)
                                     {
-                                        <a class="dropdown-item" asp-action="EligiblePriests" asp-controller="Pension">Attribuer une allocation</a>
+                                        <a class="dropdown-item" asp-action="EligiblePriests" asp-controller="Pensions">Attribuer une allocation</a>
                                     }
-                                    @if ((AuthorizationService.AuthorizeAsync(User, Pensions.ImportData)).Result.Succeeded)
+                                    @*@if ((AuthorizationService.AuthorizeAsync(User, Pensions.ImportData)).Result.Succeeded)
                                     {
-                                        <a class="dropdown-item" asp-action="ImportData" asp-controller="Pension">Importer un liste d'allocations</a>
-                                    }
+                                        <a class="dropdown-item" asp-action="ImportData" asp-controller="Pensions">Importer un liste d'allocations</a>
+                                    }*@
                                     @if ((AuthorizationService.AuthorizeAsync(User, Pensions.ViewAll)).Result.Succeeded)
                                     {
-                                        <a class="dropdown-item" asp-action="Index" asp-controller="Pension">Liste des allocations</a>
+                                        <a class="dropdown-item" asp-action="Index" asp-controller="Pensions">Historique des allocations</a>
                                     }
                                 </div>
                             </li>

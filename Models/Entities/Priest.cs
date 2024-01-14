@@ -39,6 +39,9 @@ namespace SolidarityFund.Models.Entities
         [Display(Name = "Diocèse")]
         public virtual Diocese Diocese { get; set; }
 
+        [Display(Name = "Dernier paiement de l'allocation")]
+        public DateTime? LastPensionPaymentDate { get; set; }
+
         public virtual ICollection<Contribution> Contributions { get; set; }
         public virtual ICollection<Pension> Pensions { get; set; }
 

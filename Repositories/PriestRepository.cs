@@ -145,7 +145,7 @@ namespace SolidarityFund.Repositories
                 {
                     priest.Pensions = _context.Pensions
                         .Where(p => p.PriestId == priest.Id)
-                        .OrderByDescending(p => p.Date)
+                        .OrderByDescending(p => p.Year).ThenByDescending(p => p.Month)
                         .Take(1)
                         .ToList();
 
@@ -156,8 +156,66 @@ namespace SolidarityFund.Repositories
             return eligiblePriests;
         }
 
-        public IEnumerable<Priest> ReportFilter(PriestReportViewModel priestReport)
+        public void UpdateLastPensionPaymentDate(int priestId, DateTime paymentDate)
         {
+            var priest = _context.Priests.SingleOrDefault(p => p.Id == priestId);
+            if (priest == null)
+            {
+                throw new Exception("Prêtre introuvable.");
+            }
+
+            // Mettez à jour la date seulement si elle est plus récente
+            if (priest.LastPensionPaymentDate == null || priest.LastPensionPaymentDate < paymentDate)
+            {
+                priest.LastPensionPaymentDate = paymentDate;
+            }
+        }
+
+
+        public PriestReportResultViewModel ReportFilter(PriestReportViewModel vm)
+        {
+            var model = new PriestReportResultViewModel();
+            model.DoBStartDate = vm.DoBStartDate;
+            model.DoBEndDate = vm.DoBEndDate;
+            if (vm.Age.HasValue)
+            {
+                switch (vm.Age)
+                {
+                    case PriestAgeInterval.LessThanSeventy:
+                        model.Age = "Moins de 70 ans";
+                        break;
+                    case PriestAgeInterval.Seventy:
+                        model.Age = "70 ans";
+                        break;
+                    case PriestAgeInterval.MoreThanSeventy:
+                        model.Age = "Plus de 70 ans";
+                        break;
+                    default:
+                        model.Age = string.Empty;
+                        break;
+                }
+            }
+            if (vm.SuspensionReason.HasValue)
+            {
+                switch (vm.SuspensionReason)
+                {
+                    case SuspensionReason.Death:
+                        model.SuspensionReason = "Décès";
+                        break;
+                    case SuspensionReason.Resignation:
+                        model.SuspensionReason = "Démission";
+                        break;
+                    case SuspensionReason.Excardination:
+                        model.SuspensionReason = "Excardination";
+                        break;
+                    default:
+                        model.SuspensionReason = string.Empty;
+                        break;
+                }
+            }
+            model.OrdinationStartDate = vm.OrdinationStartDate;
+            model.OrdinationEndDate = vm.OrdinationEndDate;
+
             var priests = _context.Priests
                 .Include(p => p.Diocese)
                 .Where(p => !p.IsDeleted)
@@ -166,22 +224,23 @@ namespace SolidarityFund.Repositories
 
             priests = priests
                 .Where(p =>
-                    (!priestReport.DoBStartDate.HasValue || p.DateOfBirth >= priestReport.DoBStartDate.Value) &&
-                    (!priestReport.DoBEndDate.HasValue || p.DateOfBirth <= priestReport.DoBEndDate.Value) &&
-                    (!priestReport.Age.HasValue ||
-                        (priestReport.Age == PriestAgeInterval.LessThanSeventy && p.Age < 70) ||
-                        (priestReport.Age == PriestAgeInterval.Seventy && p.Age == 70) ||
-                        (priestReport.Age == PriestAgeInterval.MoreThanSeventy && p.Age > 70)) &&
-                    (!priestReport.SuspensionReason.HasValue ||
-                        (priestReport.SuspensionReason == SuspensionReason.Death && p.SuspensionReason == SuspensionReason.Death) ||
-                        (priestReport.SuspensionReason == SuspensionReason.Resignation && p.SuspensionReason == SuspensionReason.Resignation) ||
-                        (priestReport.SuspensionReason == SuspensionReason.Excardination && p.SuspensionReason == SuspensionReason.Resignation)) &&
-                    (!priestReport.OrdinationStartDate.HasValue || p.OrdinationDate >= priestReport.OrdinationStartDate.Value) &&
-                    (!priestReport.OrdinationEndDate.HasValue || p.OrdinationDate <= priestReport.OrdinationEndDate.Value)
+                    (!vm.DoBStartDate.HasValue || p.DateOfBirth >= vm.DoBStartDate.Value) &&
+                    (!vm.DoBEndDate.HasValue || p.DateOfBirth <= vm.DoBEndDate.Value) &&
+                    (!vm.Age.HasValue ||
+                        (vm.Age == PriestAgeInterval.LessThanSeventy && p.Age < 70) ||
+                        (vm.Age == PriestAgeInterval.Seventy && p.Age == 70) ||
+                        (vm.Age == PriestAgeInterval.MoreThanSeventy && p.Age > 70)) &&
+                    (!vm.SuspensionReason.HasValue ||
+                        (vm.SuspensionReason == SuspensionReason.Death && p.SuspensionReason == SuspensionReason.Death) ||
+                        (vm.SuspensionReason == SuspensionReason.Resignation && p.SuspensionReason == SuspensionReason.Resignation) ||
+                        (vm.SuspensionReason == SuspensionReason.Excardination && p.SuspensionReason == SuspensionReason.Resignation)) &&
+                    (!vm.OrdinationStartDate.HasValue || p.OrdinationDate >= vm.OrdinationStartDate.Value) &&
+                    (!vm.OrdinationEndDate.HasValue || p.OrdinationDate <= vm.OrdinationEndDate.Value)
                 )
                 .ToList();
 
-            return priests;
+            model.Priests = priests;
+            return model;
         }
 
         public IEnumerable<IGrouping<Diocese, Priest>> ReportByDioceseFilter(List<CheckBoxViewModel> dioceses)

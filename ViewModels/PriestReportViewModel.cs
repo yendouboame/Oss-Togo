@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SolidarityFund.Models.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,5 +15,16 @@ namespace SolidarityFund.ViewModels
         public SuspensionReason? SuspensionReason { get; set; }
         public DateTime? OrdinationStartDate { get; set; }
         public DateTime? OrdinationEndDate { get; set; }
+    }
+
+    public class PriestReportResultViewModel
+    {
+        public DateTime? DoBStartDate { get; set; }
+        public DateTime? DoBEndDate { get; set; }
+        public string Age { get; set; }
+        public string SuspensionReason { get; set; }
+        public DateTime? OrdinationStartDate { get; set; }
+        public DateTime? OrdinationEndDate { get; set; }
+        public IList<Priest> Priests { get; set; }
     }
 }

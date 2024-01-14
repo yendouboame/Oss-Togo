@@ -12,39 +12,78 @@ namespace SolidarityFund.Repositories
     public class PensionRepository
     {
         private readonly ApplicationDbContext _context;
+        private readonly PriestRepository _priestRepository;
 
         public PensionRepository(ApplicationDbContext context)
         {
             _context = context;
+            _priestRepository = new PriestRepository(context);
+        }
+
+        public IEnumerable<Pension> GetAllPartial()
+        {
+            // Déterminez d'abord l'année pour laquelle récupérer les contributions
+            int year = DateTime.Now.Year;
+            var pensions = _context.Pensions
+                .Include(c => c.Priest.Diocese)
+                .Where(c => !c.IsDeleted && c.Year == year)
+                .OrderByDescending(c => c.Year).ThenByDescending(c => c.Month)
+                .ToList();
+
+            // Si aucune contribution n'est trouvée pour l'année en cours, essayez l'année précédente
+            if (!pensions.Any())
+            {
+                year = DateTime.Now.AddYears(-1).Year;
+                pensions = _context.Pensions
+                    .Include(c => c.Priest.Diocese)
+                    .Where(c => !c.IsDeleted && c.Year == year)
+                    .OrderByDescending(c => c.Year).ThenByDescending(c => c.Month)
+                    .ToList();
+            }
+
+            return pensions;
         }
 
         public IEnumerable<Pension> GetAll()
         {
             return _context.Pensions
-                .Include(p => p.Priest)
+                .Include(p => p.Priest.Diocese)
                 .Where(p => !p.IsDeleted)
-                .OrderByDescending(p => p.Date)
+                .OrderByDescending(p => p.Year).ThenByDescending(p => p.Month)
                 .ToList();
         }
 
-        public void New(Pension pension)
+        public void Add(Pension pension)
         {
             if (!Exists(pension))
             {
-                _context.Pensions.Add(pension);
-                _context.SaveChanges();
+                using var transaction = _context.Database.BeginTransaction();
+
+                try
+                {
+                    _priestRepository.UpdateLastPensionPaymentDate(pension.PriestId, pension.Date);
+                    _context.Pensions.Add(pension);
+                    _context.SaveChanges();
+
+                    transaction.Commit();
+                }
+                catch (Exception)
+                {
+                    transaction.Rollback();
+                    throw;
+                }
             }
             else
             {
-                throw new Exception("Cette pension a déjà été allouée");
+                throw new Exception("Cette allocation a déjà été versée.");
             }
         }
 
-        public bool Exists(Pension pension)
+        private bool Exists(Pension pension)
         {
             return _context.Pensions
                 .Any(p => !p.IsDeleted && p.PriestId == pension.PriestId
-                 && p.Date == pension.Date && p.Amount == pension.Amount);
+                 && p.Year == pension.Year && p.Month == pension.Month && p.Amount == pension.Amount);
         }
 
         public IEnumerable<Pension> ReportFilter(PensionReportViewModel pensionReport)

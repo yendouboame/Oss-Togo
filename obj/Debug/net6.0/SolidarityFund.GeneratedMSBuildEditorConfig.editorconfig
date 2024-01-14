@@ -74,16 +74,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[G:/Repositories/FREELANCE/OSS-TOGO/Views/Pension/EligiblePriests.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGVuc2lvblxFbGlnaWJsZVByaWVzdHMuY3NodG1s
+[G:/Repositories/FREELANCE/OSS-TOGO/Views/Pensions/EligiblePriests.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGVuc2lvbnNcRWxpZ2libGVQcmllc3RzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[G:/Repositories/FREELANCE/OSS-TOGO/Views/Pension/ImportData.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGVuc2lvblxJbXBvcnREYXRhLmNzaHRtbA==
+[G:/Repositories/FREELANCE/OSS-TOGO/Views/Pensions/ImportData.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGVuc2lvbnNcSW1wb3J0RGF0YS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[G:/Repositories/FREELANCE/OSS-TOGO/Views/Pension/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGVuc2lvblxJbmRleC5jc2h0bWw=
+[G:/Repositories/FREELANCE/OSS-TOGO/Views/Pensions/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGVuc2lvbnNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [G:/Repositories/FREELANCE/OSS-TOGO/Views/Priests/Create.cshtml]

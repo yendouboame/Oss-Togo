@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SolidarityFund.Data;
 
@@ -11,9 +12,10 @@ using SolidarityFund.Data;
 namespace SolidarityFund.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240114170240_Table Priests Updated Column LastPensionPaymentDate Added")]
+    partial class TablePriestsUpdatedColumnLastPensionPaymentDateAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -238,49 +240,49 @@ namespace SolidarityFund.Data.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedOn = new DateTime(2024, 1, 14, 17, 46, 16, 312, DateTimeKind.Local).AddTicks(3591),
+                            CreatedOn = new DateTime(2024, 1, 14, 17, 2, 40, 335, DateTimeKind.Local).AddTicks(2236),
                             IsDeleted = false,
                             Name = "Diocèse de Dapaong"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedOn = new DateTime(2024, 1, 14, 17, 46, 16, 312, DateTimeKind.Local).AddTicks(3606),
+                            CreatedOn = new DateTime(2024, 1, 14, 17, 2, 40, 335, DateTimeKind.Local).AddTicks(2247),
                             IsDeleted = false,
                             Name = "Diocèse de Kara"
                         },
                         new
                         {
                             Id = 3,
-                            CreatedOn = new DateTime(2024, 1, 14, 17, 46, 16, 312, DateTimeKind.Local).AddTicks(3607),
+                            CreatedOn = new DateTime(2024, 1, 14, 17, 2, 40, 335, DateTimeKind.Local).AddTicks(2248),
                             IsDeleted = false,
                             Name = "Diocèse de Sokodé"
                         },
                         new
                         {
                             Id = 4,
-                            CreatedOn = new DateTime(2024, 1, 14, 17, 46, 16, 312, DateTimeKind.Local).AddTicks(3607),
+                            CreatedOn = new DateTime(2024, 1, 14, 17, 2, 40, 335, DateTimeKind.Local).AddTicks(2249),
                             IsDeleted = false,
                             Name = "Diocèse d'Atakpamé"
                         },
                         new
                         {
                             Id = 5,
-                            CreatedOn = new DateTime(2024, 1, 14, 17, 46, 16, 312, DateTimeKind.Local).AddTicks(3608),
+                            CreatedOn = new DateTime(2024, 1, 14, 17, 2, 40, 335, DateTimeKind.Local).AddTicks(2250),
                             IsDeleted = false,
                             Name = "Diocèse de Kpalimé"
                         },
                         new
                         {
                             Id = 6,
-                            CreatedOn = new DateTime(2024, 1, 14, 17, 46, 16, 312, DateTimeKind.Local).AddTicks(3609),
+                            CreatedOn = new DateTime(2024, 1, 14, 17, 2, 40, 335, DateTimeKind.Local).AddTicks(2251),
                             IsDeleted = false,
                             Name = "Diocèse de Lomé"
                         },
                         new
                         {
                             Id = 7,
-                            CreatedOn = new DateTime(2024, 1, 14, 17, 46, 16, 312, DateTimeKind.Local).AddTicks(3609),
+                            CreatedOn = new DateTime(2024, 1, 14, 17, 2, 40, 335, DateTimeKind.Local).AddTicks(2251),
                             IsDeleted = false,
                             Name = "Diocèse d'Aného"
                         });
@@ -300,16 +302,13 @@ namespace SolidarityFund.Data.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("date");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<int>("Month")
-                        .HasColumnType("int");
-
                     b.Property<int>("PriestId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Year")
                         .HasColumnType("int");
 
                     b.HasKey("Id");

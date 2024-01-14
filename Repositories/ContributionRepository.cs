@@ -24,7 +24,7 @@ namespace SolidarityFund.Repositories
             _costRepository = new CostRepository(context);
         }
 
-        public IEnumerable<Contribution> GetAll()
+        public IEnumerable<Contribution> GetAllPartial()
         {
             // Déterminez d'abord l'année pour laquelle récupérer les contributions
             int year = DateTime.Now.Year;
@@ -45,6 +45,16 @@ namespace SolidarityFund.Repositories
                     .ToList();
             }
 
+            return contributions;
+        }
+
+        public IEnumerable<Contribution> GetAll()
+        {
+            var contributions = _context.Contributions
+                .Include(c => c.Priest.Diocese)
+                .Where(c => !c.IsDeleted)
+                .OrderByDescending(c => c.Year).ThenByDescending(c => c.Month)
+                .ToList();
             return contributions;
         }
 
