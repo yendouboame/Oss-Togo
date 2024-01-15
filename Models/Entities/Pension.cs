@@ -18,7 +18,7 @@ namespace SolidarityFund.Models.Entities
         public int Year { get; set; }
 
         [Display(Name = "Montant de l'allocation")]
-        public double Amount { get; set; }
+        public decimal Amount { get; set; }
 
         [Display(Name = "Période du paiement de l'allocation")]
         public DateTime Date => new DateTime(Year, Month, 1);

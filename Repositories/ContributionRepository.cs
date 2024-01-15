@@ -10,6 +10,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static SolidarityFund.Helpers.Constants.Enumerations;
 
 namespace SolidarityFund.Repositories
 {
@@ -233,50 +234,65 @@ namespace SolidarityFund.Repositories
             return stringBuilder.ToString().Normalize(NormalizationForm.FormC);
         }
 
-        public IEnumerable<Contribution> ReportFilter(ContributionReportViewModel contributionReport)
+        public ContributionReportResultViewModel ReportFilter(ContributionReportViewModel vm)
         {
-            var contributions = GetAll().ToList();
+            var model = new ContributionReportResultViewModel();
+            var startMonthName = vm.StartMonth.HasValue ? CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(vm.StartMonth.Value) : string.Empty;
+            var startYear = vm.StartYear.HasValue ? vm.StartYear.Value.ToString() : string.Empty;
+            model.StartDate = $"{startMonthName} {startYear}".Trim();
 
-            contributions = contributions
-                .Where(c => !contributionReport.StartDate.HasValue || c.Date >= contributionReport.StartDate.Value)
-                .Where(c => !contributionReport.EndDate.HasValue || c.Date <= contributionReport.EndDate.Value)
-                .ToList();
+            var endMonthName = vm.EndMonth.HasValue ? CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(vm.EndMonth.Value) : string.Empty;
+            var endYear = vm.EndYear.HasValue ? vm.EndYear.Value.ToString() : string.Empty;
+            model.EndDate = $"{endMonthName} {endYear}".Trim();
 
-            return contributions;
+            model.Contributions = ApplyFilter(vm).ToList();
+            return model;
         }
 
-        public IEnumerable<IGrouping<Priest, Contribution>> ReportFilterGroupByPriest(ContributionReportViewModel contributionReport)
+        public ContributionReportGroupByPriestResultViewModel ReportFilterGroupByPriest(ContributionReportViewModel vm)
         {
-            var contributions = GetAll().ToList();
+            var model = new ContributionReportGroupByPriestResultViewModel();
+            var startMonthName = vm.StartMonth.HasValue ? CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(vm.StartMonth.Value) : string.Empty;
+            var startYear = vm.StartYear.HasValue ? vm.StartYear.Value.ToString() : string.Empty;
+            model.StartDate = $"{startMonthName} {startYear}".Trim();
 
-            contributions = contributions
-                .Where(c => !contributionReport.StartDate.HasValue || c.Date >= contributionReport.StartDate.Value)
-                .Where(c => !contributionReport.EndDate.HasValue || c.Date <= contributionReport.EndDate.Value)
-                .OrderByDescending(c => c.Date)
-                .ToList();
-            
-            var groupedByPriest = contributions.GroupBy(c => c.Priest);
+            var endMonthName = vm.EndMonth.HasValue ? CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(vm.EndMonth.Value) : string.Empty;
+            var endYear = vm.EndYear.HasValue ? vm.EndYear.Value.ToString() : string.Empty;
+            model.EndDate = $"{endMonthName} {endYear}".Trim();
 
-            return groupedByPriest;
+            model.Contributions = ApplyFilter(vm).GroupBy(c => c.Priest);
+            return model;
         }
 
-        public IEnumerable<IGrouping<Diocese, Contribution>> ReportFilterGroupByDiocese(ContributionReportViewModel contributionReport)
+        public ContributionReportGroupByDioceseResultViewModel ReportFilterGroupByDiocese(ContributionReportViewModel vm)
         {
-            var contributions = _context.Contributions
-                .Include(c => c.Priest).ThenInclude(p => p.Diocese)
-                .Where(c => !c.IsDeleted)
-                .ToList();
+            var model = new ContributionReportGroupByDioceseResultViewModel();
+            var startMonthName = vm.StartMonth.HasValue ? CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(vm.StartMonth.Value) : string.Empty;
+            var startYear = vm.StartYear.HasValue ? vm.StartYear.Value.ToString() : string.Empty;
+            model.StartDate = $"{startMonthName} {startYear}".Trim();
 
-            contributions = contributions
-                .Where(c => !contributionReport.StartDate.HasValue || c.Date >= contributionReport.StartDate.Value)
-                .Where(c => !contributionReport.EndDate.HasValue || c.Date <= contributionReport.EndDate.Value)
-                .OrderByDescending(c => c.Date)
-                .ToList();
+            var endMonthName = vm.EndMonth.HasValue ? CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(vm.EndMonth.Value) : string.Empty;
+            var endYear = vm.EndYear.HasValue ? vm.EndYear.Value.ToString() : string.Empty;
+            model.EndDate = $"{endMonthName} {endYear}".Trim();
 
-            var groupedByDiocese = contributions.GroupBy(c => c.Priest.Diocese);
+            var result = ApplyFilter(vm);
 
-            return groupedByDiocese;
+            model.Contributions = result.GroupBy(c => c.Priest.Diocese);
+            return model;
+                
         }
+
+
+        private IEnumerable<Contribution> ApplyFilter(ContributionReportViewModel contributionReport)
+        {
+            return GetAll()
+                .Where(c => !contributionReport.StartMonth.HasValue || c.Month >= contributionReport.StartMonth.Value)
+                .Where(c => !contributionReport.StartYear.HasValue || c.Year >= contributionReport.StartYear.Value)
+                .Where(c => !contributionReport.EndMonth.HasValue || c.Month <= contributionReport.EndMonth.Value)
+                .Where(c => !contributionReport.EndYear.HasValue || c.Year <= contributionReport.EndYear.Value)
+                .OrderBy(c => c.Year).ThenBy(c => c.Month);
+        }
+
 
         public IEnumerable<Contribution> ReportByPriestFilter(ContributionReportByPriestViewModel contributionReport)
         {

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Contribution>
+﻿@model ContributionReportResultViewModel
 
 @{
     ViewData["Title"] = "Etat des cotisations";
@@ -7,30 +7,47 @@
     int i = 1;
 }
 
-<h2 class="text-center mb-4 border-bottom"><strong>@ViewData["Title"]</strong></h2>
+<h4 class="text-center text-uppercase my-3"><strong>@ViewData["Title"]</strong></h4>
+
+<table class="table table-sm table-bordered text-center mb-4" style="font-size: 13px;">
+    <thead>
+        <tr>
+            <th>Période de cotisation (début)</th>
+            <th>Période de cotisation (fin)</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>@Model.StartDate</td>
+            <td>@Model.EndDate</td>
+        </tr>
+    </tbody>
+</table>
 
 <table class="table table-bordered text-center">
     <thead class="thead-light">
         <tr>
-            <th>#</th>
-            <th>@Html.DisplayNameFor(model => model.Date)</th>
-            <th>@Html.DisplayNameFor(model => model.Priest)</th>
-            <th>@Html.DisplayNameFor(model => model.Amount)</th>
+            <th style="vertical-align: middle" class="autofill">#</th>
+            <th style="vertical-align: middle" class="text-left">Période de cotisation</th>
+            <th style="vertical-align: middle" class="text-left">Nom et prénom(s) du prêtre</th>
+            <th style="vertical-align: middle">Diocèse</th>
+            <th style="vertical-align: middle">Montant</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var contribution in Model)
+        @foreach (var contribution in Model.Contributions)
         {
             <tr>
-                <td>@(i++)</td>
-                <td>@contribution.Date.ToShortDateString()</td>
-                <td>@contribution.Priest?.FullName</td>
+                <td class="autofill">@(i++)</td>
+                <td class="text-left">@contribution.Date.ToString("MMMM yyyy")</td>
+                <td class="text-left">@contribution.Priest?.FullName</td>
+                <td>@contribution.Priest?.Diocese?.Name</td>
                 <td>@FormatNumberWithSpaces(contribution.Amount) XOF</td>
             </tr>
         }
         <tr>
-            <td colspan="3"><strong>TOTAL</strong></td>
-            <td>@FormatNumberWithSpaces(Model.Sum(m => m.Amount)) XOF</td>
+            <th colspan="4">TOTAL</th>
+            <th>@FormatNumberWithSpaces(Model.Contributions.Sum(m => m.Amount)) XOF</th>
         </tr>
     </tbody>
 </table>

@@ -10,7 +10,8 @@ namespace SolidarityFund.ViewModels
     {
         public int DioceseCount { get; set; }
         public int PriestCount { get; set; }
-        public double ContributingPriest { get; set; }
+        public decimal Contributions { get; set; }
+        public decimal Pensions { get; set; }
         public double BeneficiaryPriest { get; set; }
         public double CurrentMonthContribution { get; set; }
         public double CurrentMonthPension { get; set; }

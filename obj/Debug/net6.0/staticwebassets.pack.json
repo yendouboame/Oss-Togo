@@ -25,6 +25,22 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "G:\\Repositories\\FREELANCE\\OSS-TOGO\\wwwroot\\img\\icons8-cathédrale-50.png",
+      "PackagePath": "staticwebassets\\img\\icons8-cathédrale-50.png"
+    },
+    {
+      "Id": "G:\\Repositories\\FREELANCE\\OSS-TOGO\\wwwroot\\img\\icons8-don-50.png",
+      "PackagePath": "staticwebassets\\img\\icons8-don-50.png"
+    },
+    {
+      "Id": "G:\\Repositories\\FREELANCE\\OSS-TOGO\\wwwroot\\img\\icons8-loan-50.png",
+      "PackagePath": "staticwebassets\\img\\icons8-loan-50.png"
+    },
+    {
+      "Id": "G:\\Repositories\\FREELANCE\\OSS-TOGO\\wwwroot\\img\\icons8-prêtre-50.png",
+      "PackagePath": "staticwebassets\\img\\icons8-prêtre-50.png"
+    },
+    {
       "Id": "G:\\Repositories\\FREELANCE\\OSS-TOGO\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },

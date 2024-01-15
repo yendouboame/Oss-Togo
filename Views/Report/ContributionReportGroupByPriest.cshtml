@@ -1,61 +1,65 @@
-﻿@model IEnumerable<IGrouping<Priest, Contribution>>
+﻿@model ContributionReportGroupByPriestResultViewModel
 
 @{
     ViewData["Title"] = "Etat des cotisations groupés par prêtre";
     Layout = "_ReportLayout";
 }
 
-<h2 class="text-center mb-4 border-bottom"><strong>@ViewData["Title"]</strong></h2>
+<h4 class="text-center text-uppercase my-3"><strong>@ViewData["Title"]</strong></h4>
+
+<table class="table table-sm table-bordered text-center mb-4" style="font-size: 13px;">
+    <thead>
+        <tr>
+            <th>Période de cotisation (début)</th>
+            <th>Période de cotisation (fin)</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>@Model.StartDate</td>
+            <td>@Model.EndDate</td>
+        </tr>
+    </tbody>
+</table>
 
 <table class="table table-bordered text-center">
-    @if (Model.Count() > 0)
+    <thead class="thead-light">
+        <tr>
+            <th>#</th>
+            <th>Période de cotisation</th>
+            <th>Montant de la cotisation</th>
+        </tr>
+    </thead>
+    @foreach (var group in Model.Contributions)
     {
-        @foreach (var group in Model)
-        {
-            int i = 1;
-            <thead class="thead-dark">
-                <tr>
-                    <th colspan="4">@group.Key?.FullName</th>
-                </tr>
-            </thead>
-            <thead class="thead-light">
-                <tr>
-                    <th>#</th>
-                    <th>Date de cotisation</th>
-                    <th>Nom et prénom(s) du prêtre</th>
-                    <th>Montant de la cotisation</th>
-                </tr>
-            </thead>
-            <tbody>
+        int index = 0;
+        <thead class="thead-dark">
+            <tr>
+                <th colspan="4">@group.Key.FullName</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (group.Count() > 0)
+            {
                 @foreach (var contribution in group)
                 {
                     <tr>
-                        <td>@(i++)</td>
-                        <td>@contribution.Date.ToShortDateString()</td>
-                        <td>@contribution.Priest?.FullName</td>
+                        <td>@(++index)</td>
+                        <td>@contribution.Date.ToString("MMMM yyyy")</td>
                         <td>@FormatNumberWithSpaces(contribution.Amount) XOF</td>
                     </tr>
                 }
                 <tr>
-                    <td colspan="3"><strong>TOTAL</strong></td>
-                    <td>@FormatNumberWithSpaces(group.Sum(m => m.Amount)) XOF</td>
+                    <th colspan="2">TOTAL</th>
+                    <th>@FormatNumberWithSpaces(group.Sum(m => m.Amount)) XOF</th>
                 </tr>
-            </tbody>
-        }
-    }
-    else
-    {
-        <thead>
-            <tr>
-                <th>Date de cotisation</th>
-                <th>Nom et prénom(s) du prêtre</th>
-                <th>Montant de la cotisation</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr role="group" class="bg-light text-center">
-                <td colspan="3">Aucune entrée correspondante trouvée</td>
-            </tr>
+            }
+            else
+            {
+                <tr role="group" class="bg-light text-center">
+                    <td colspan="3">Aucune contisation enregistrée pour ce prêtre</td>
+                </tr>
+            }
         </tbody>
     }
 </table>

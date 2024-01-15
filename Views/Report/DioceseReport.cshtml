@@ -7,14 +7,14 @@
     int i = 1;
 }
 
-<h2 class="text-center mb-4 border-bottom"><strong>@ViewData["Title"]</strong></h2>
+<h4 class="text-center text-uppercase my-3"><strong>@ViewData["Title"]</strong></h4>
 
 <table class="table table-bordered text-center">
     <thead class="thead-dark">
         <tr>
-            <th>#</th>
-            <th>@Html.DisplayNameFor(model => model.Name)</th>
-            <th>Nombre de prêtres</th>
+            <th class="autofill">#</th>
+            <th class="text-left">@Html.DisplayNameFor(model => model.Name)</th>
+            <th class="autofill">Nombre de prêtres</th>
         </tr>
     </thead>
     <tbody>
@@ -22,7 +22,7 @@
         {
             <tr>
                 <td>@(i++)</td>
-                <td>@diocese.Name</td>
+                <td class="text-left">@diocese.Name</td>
                 <td>@diocese.Priests.Count</td>
             </tr>
         }

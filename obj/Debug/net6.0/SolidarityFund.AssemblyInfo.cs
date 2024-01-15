@@ -16,7 +16,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SolidarityFund")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5fc16e8580116f1bcecb44dbdb22ac268e08e485")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+53c936b22cd8825e4a106f4d076152eee59c0024")]
 [assembly: System.Reflection.AssemblyProductAttribute("SolidarityFund")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SolidarityFund")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

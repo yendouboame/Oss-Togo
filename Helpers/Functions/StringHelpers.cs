@@ -8,7 +8,7 @@ namespace SolidarityFund.Helpers.Functions
 {
     public static class StringHelpers
     {
-        public static string FormatNumberWithSpaces(double number)
+        public static string FormatNumberWithSpaces(decimal number)
         {
             return number.ToString("N0", CultureInfo.GetCultureInfo("fr-FR"));
         }

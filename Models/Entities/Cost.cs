@@ -12,8 +12,8 @@ namespace SolidarityFund.Models.Entities
     public class Cost : BaseModel
     {
         [Display(Name = "Frais d'allocation")]
-        public double Pension { get; set; }
+        public decimal Pension { get; set; }
         [Display(Name = "Frais de cotisation")]
-        public double Contribution { get; set; }
+        public decimal Contribution { get; set; }
     }
 }

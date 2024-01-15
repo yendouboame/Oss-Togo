@@ -81,5 +81,14 @@ namespace SolidarityFund.Controllers
                 .Select((name, index) => new { Value = index + 1, Text = name })
                 .Where(m => !string.IsNullOrEmpty(m.Text)), "Value", "Text", currentMonth);
         }
+
+        protected void GetEmptyMonthSelectList()
+        {
+            var monthNames = CultureInfo.CurrentCulture.DateTimeFormat.MonthNames;
+
+            ViewBag.Months = new SelectList(monthNames
+                .Select((name, index) => new { Value = index + 1, Text = name })
+                .Where(m => !string.IsNullOrEmpty(m.Text)), "Value", "Text");
+        }
     }
 }

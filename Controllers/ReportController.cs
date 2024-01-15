@@ -42,6 +42,7 @@ namespace SolidarityFund.Controllers
 
         public IActionResult ContributionReportFilter()
         {
+            GetEmptyMonthSelectList();
             return View();
         }
 

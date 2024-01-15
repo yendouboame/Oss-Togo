@@ -243,22 +243,36 @@ namespace SolidarityFund.Repositories
             return model;
         }
 
-        public IEnumerable<IGrouping<Diocese, Priest>> ReportByDioceseFilter(List<CheckBoxViewModel> dioceses)
+        public IEnumerable<Diocese> ReportByDioceseFilter(List<CheckBoxViewModel> vm)
         {
-            var selectedDioceses = dioceses
+            var selectedDioceses = vm
                 .Where(d => d.IsSelected)
                 .Select(d => d.ValueCode)
                 .ToList();
 
-            var priests = _context.Priests
-                .Include(p => p.Diocese)
-                .Where(p => !p.IsDeleted && selectedDioceses.Contains(p.Diocese.Id))
-                .ToList();
+            var dioceses = _context.Dioceses
+                .Include(d => d.Priests)
+                .Where(d => selectedDioceses.Contains(d.Id)).ToList();
 
-            var groupedByDiocese = priests.GroupBy(p => p.Diocese);
-
-            return groupedByDiocese;
+            return dioceses;
         }
+
+        //public IEnumerable<IGrouping<Diocese, Priest>> ReportByDioceseFilter(List<CheckBoxViewModel> dioceses)
+        //{
+        //    var selectedDioceses = dioceses
+        //        .Where(d => d.IsSelected)
+        //        .Select(d => d.ValueCode)
+        //        .ToList();
+
+        //    var priests = _context.Priests
+        //        .Include(p => p.Diocese)
+        //        .Where(p => !p.IsDeleted && selectedDioceses.Contains(p.Diocese.Id))
+        //        .ToList();
+
+        //    var groupedByDiocese = priests.GroupBy(p => p.Diocese);
+
+        //    return groupedByDiocese;
+        //}
 
         public void SuspendPriest(SuspendPriestViewModel viewModel)
         {
