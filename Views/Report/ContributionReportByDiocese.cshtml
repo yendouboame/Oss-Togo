@@ -4,33 +4,36 @@
     ViewData["Title"] = "Etat des cotisations par diocèse";
     Layout = "_ReportLayout";
 
-    int i = 1;
+    int index = 0;
 }
 
-<h2 class="text-center mb-4 border-bottom"><strong>@ViewData["Title"]</strong></h2>
+<h4 class="text-center text-uppercase my-3"><strong>@ViewData["Title"]</strong></h4>
 
 <table class="table table-bordered text-center">
+    <thead class="thead-dark">
+        <tr>
+            <th colspan="3">@Model.FirstOrDefault()?.Priest?.Diocese?.Name</th>
+        </tr>
+    </thead>
     <thead class="thead-light">
         <tr>
             <th>#</th>
-            <th>@Html.DisplayNameFor(model => model.Date)</th>
-            <th>@Html.DisplayNameFor(model => model.Priest.Diocese)</th>
-            <th>@Html.DisplayNameFor(model => model.Amount)</th>
+            <th>Période de cotisation</th>
+            <th>Montant de la cotisation</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var contribution in Model)
+        @foreach (var contribution in Model.GroupBy(c => c.Date))
         {
             <tr>
-                <td>@(i++)</td>
-                <td>@contribution.Date.ToShortDateString()</td>
-                <td>@contribution.Priest?.Diocese?.Name</td>
-                <td>@FormatNumberWithSpaces(contribution.Amount) XOF</td>
+                <td>@(++index)</td>
+                <td>@contribution.Key.ToString("MMMM yyyy")</td>
+                <td>@FormatNumberWithSpaces(contribution.Sum(c => c.Amount)) XOF</td>
             </tr>
         }
         <tr>
-            <td colspan="3"><strong>TOTAL</strong></td>
-            <td>@FormatNumberWithSpaces(Model.Sum(m => m.Amount)) XOF</td>
+            <th colspan="2">TOTAL</th>
+            <th>@FormatNumberWithSpaces(Model.Sum(m => m.Amount)) XOF</th>
         </tr>
     </tbody>
 </table>

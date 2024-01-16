@@ -1,36 +1,62 @@
-﻿@model IEnumerable<Pension>
+﻿@model PensionReportResultViewModel
 
 @{
     ViewData["Title"] = "Etat des allocations";
     Layout = "_ReportLayout";
 
-    int i = 1;
+    int index = 0;
 }
 
-<h2 class="text-center mb-4 border-bottom"><strong>@ViewData["Title"]</strong></h2>
+<h4 class="text-center text-uppercase my-3"><strong>@ViewData["Title"]</strong></h4>
+
+<table class="table table-sm table-bordered text-center mb-5">
+    <thead>
+        <tr>
+            <th>Période de cotisation (début)</th>
+            <th>Période de cotisation (fin)</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>@Model.StartDate</td>
+            <td>@Model.EndDate</td>
+        </tr>
+    </tbody>
+</table>
 
 <table class="table table-bordered text-center">
     <thead class="thead-light">
         <tr>
             <th>#</th>
-            <th>@Html.DisplayNameFor(model => model.Date)</th>
-            <th>@Html.DisplayNameFor(model => model.Priest)</th>
-            <th>@Html.DisplayNameFor(model => model.Amount)</th>
+            <th>Période de paiement de l'allocation</th>
+            <th>Nom et prénom(s) du prêtre</th>
+            <th>Nom du diocèse</th>
+            <th>Montant</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var pension in Model)
+        @if (Model.Pensions.Count > 0)
         {
+            @foreach (var pension in Model.Pensions)
+            {
+                <tr>
+                    <td>@(++index)</td>
+                    <td>@pension.Date.ToString("MMMM yyyy")</td>
+                    <td>@pension.Priest.FullName</td>
+                    <td>@pension.Priest.Diocese.Name</td>
+                    <td>@FormatNumberWithSpaces(pension.Amount) XOF</td>
+                </tr>
+            }
             <tr>
-                <td>@(i++)</td>
-                <td>@pension.Date.ToShortDateString()</td>
-                <td>@pension.Priest?.FullName</td>
-                <td>@FormatNumberWithSpaces(pension.Amount) XOF</td>
+                <th colspan="4">TOTAL</th>
+                <th>@FormatNumberWithSpaces(Model.Pensions.Sum(m => m.Amount)) XOF</th>
             </tr>
         }
-        <tr>
-            <td colspan="3"><strong>TOTAL</strong></td>
-            <td>@FormatNumberWithSpaces(Model.Sum(m => m.Amount)) XOF</td>
-        </tr>
+        else
+        {
+            <tr role="group" class="bg-light text-center">
+                <td colspan="5">Aucune allocation n'a été versée pendant cette période</td>
+            </tr>
+        }
     </tbody>
 </table>

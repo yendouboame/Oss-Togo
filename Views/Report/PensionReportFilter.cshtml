@@ -18,25 +18,35 @@
 </style>
 
 <div class="row">
-    <div class="col-md-12 my-4">
-        <div class="card shadow mx-auto" style="width: 40%;">
+    <div class="col-lg-4 col-md-6 col-sm-12 mx-auto my-4">
+        <div class="card shadow">
             <div class="card-body">
                 <h5 class="card-title"><strong>@ViewData["Title"]</strong></h5>
                 <hr />
                 <form asp-action="PensionReport" method="post">
                     <fieldset class="form-group border pt-1 px-3 pb-3">
-                        <legend class="w-auto px-2">Date de l'allocation</legend>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group m-0">
-                                    <label>Entre le</label>
-                                    <input type="date" class="form-control-sm" asp-for="StartDate">
+                        <legend class="w-auto px-2">Période de l'allocation</legend>
+                        <div class="form-group">
+                            <label class="mb-0">De</label>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <select asp-for="StartMonth" class="form-control-sm select-picker" data-live-search="true"
+                                            title="-- Veuillez sélectionner --" asp-items="ViewBag.Months"></select>
+                                </div>
+                                <div class="col-md-6">
+                                    <input asp-for="StartYear" class="form-control-sm" value="@DateTime.Now.Year" />
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group m-0">
-                                    <label>Et le</label>
-                                    <input type="date" class="form-control-sm" asp-for="EndDate">
+                        </div>
+                        <div class="form-group">
+                            <label class="mb-0">A</label>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <select asp-for="EndMonth" class="form-control-sm select-picker" data-live-search="true"
+                                            title="-- Veuillez sélectionner --" asp-items="ViewBag.Months"></select>
+                                </div>
+                                <div class="col-md-6">
+                                    <input asp-for="EndYear" class="form-control-sm" value="@DateTime.Now.Year" />
                                 </div>
                             </div>
                         </div>

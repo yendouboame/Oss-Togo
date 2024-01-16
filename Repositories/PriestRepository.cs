@@ -25,7 +25,6 @@ namespace SolidarityFund.Repositories
             return _context.Priests
                 .Include(p => p.Diocese)
                 .Where(p => !p.IsDeleted)
-                .OrderBy(p => p.FullName)
                 .ToList();
         }
 
@@ -34,7 +33,6 @@ namespace SolidarityFund.Repositories
             return _context.Priests
                 .Include(p => p.Diocese)
                 .Where(p => !p.IsDeleted && p.SuspensionReason == null)
-                .OrderBy(p => p.FullName)
                 .ToList();
         }
 
@@ -43,7 +41,6 @@ namespace SolidarityFund.Repositories
             return _context.Priests
                 .Include(p => p.Diocese)
                 .Where(p => !p.IsDeleted && p.SuspensionReason != null)
-                .OrderBy(p => p.FullName)
                 .ToList();
         }
 
@@ -134,21 +131,13 @@ namespace SolidarityFund.Repositories
             var eligiblePriests = new List<Priest>();
 
             var allPriests = _context.Priests
-                .Include(p => p.Pensions)
                 .Where(p => !p.IsDeleted && p.SuspensionReason == null)
-                .OrderBy(p => p.FullName)
                 .ToList();
 
             foreach (var priest in allPriests)
             {
                 if (priest.Age >= 70 && currentDate >= priest.DateOfBirth.AddYears(70).AddMonths(1))
                 {
-                    priest.Pensions = _context.Pensions
-                        .Where(p => p.PriestId == priest.Id)
-                        .OrderByDescending(p => p.Year).ThenByDescending(p => p.Month)
-                        .Take(1)
-                        .ToList();
-
                     eligiblePriests.Add(priest);
                 }
             }

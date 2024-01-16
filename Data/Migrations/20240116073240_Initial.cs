@@ -72,8 +72,8 @@ namespace SolidarityFund.Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Pension = table.Column<double>(type: "float", nullable: false),
-                    Contribution = table.Column<double>(type: "float", nullable: false),
+                    Pension = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Contribution = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
@@ -201,6 +201,7 @@ namespace SolidarityFund.Data.Migrations
                     SuspensionReason = table.Column<int>(type: "int", nullable: true),
                     SuspensionDate = table.Column<DateTime>(type: "date", nullable: true),
                     DioceseId = table.Column<int>(type: "int", nullable: false),
+                    LastPensionPaymentDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
@@ -222,8 +223,9 @@ namespace SolidarityFund.Data.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     PriestId = table.Column<int>(type: "int", nullable: false),
-                    Date = table.Column<DateTime>(type: "date", nullable: false),
-                    Amount = table.Column<double>(type: "float", nullable: false),
+                    Month = table.Column<int>(type: "int", nullable: false),
+                    Year = table.Column<int>(type: "int", nullable: false),
+                    Amount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
@@ -247,7 +249,7 @@ namespace SolidarityFund.Data.Migrations
                     PriestId = table.Column<int>(type: "int", nullable: false),
                     Month = table.Column<int>(type: "int", nullable: false),
                     Year = table.Column<int>(type: "int", nullable: false),
-                    Amount = table.Column<double>(type: "float", nullable: false),
+                    Amount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
@@ -267,13 +269,13 @@ namespace SolidarityFund.Data.Migrations
                 columns: new[] { "Id", "CreatedOn", "IsDeleted", "Name" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2024, 1, 13, 15, 48, 50, 941, DateTimeKind.Local).AddTicks(8245), false, "Diocèse de Dapaong" },
-                    { 2, new DateTime(2024, 1, 13, 15, 48, 50, 941, DateTimeKind.Local).AddTicks(8255), false, "Diocèse de Kara" },
-                    { 3, new DateTime(2024, 1, 13, 15, 48, 50, 941, DateTimeKind.Local).AddTicks(8256), false, "Diocèse de Sokodé" },
-                    { 4, new DateTime(2024, 1, 13, 15, 48, 50, 941, DateTimeKind.Local).AddTicks(8257), false, "Diocèse d'Atakpamé" },
-                    { 5, new DateTime(2024, 1, 13, 15, 48, 50, 941, DateTimeKind.Local).AddTicks(8257), false, "Diocèse de Kpalimé" },
-                    { 6, new DateTime(2024, 1, 13, 15, 48, 50, 941, DateTimeKind.Local).AddTicks(8258), false, "Diocèse de Lomé" },
-                    { 7, new DateTime(2024, 1, 13, 15, 48, 50, 941, DateTimeKind.Local).AddTicks(8258), false, "Diocèse d'Aného" }
+                    { 1, new DateTime(2024, 1, 16, 7, 32, 39, 843, DateTimeKind.Local).AddTicks(4307), false, "Diocèse de Dapaong" },
+                    { 2, new DateTime(2024, 1, 16, 7, 32, 39, 843, DateTimeKind.Local).AddTicks(4320), false, "Diocèse de Kara" },
+                    { 3, new DateTime(2024, 1, 16, 7, 32, 39, 843, DateTimeKind.Local).AddTicks(4321), false, "Diocèse de Sokodé" },
+                    { 4, new DateTime(2024, 1, 16, 7, 32, 39, 843, DateTimeKind.Local).AddTicks(4321), false, "Diocèse d'Atakpamé" },
+                    { 5, new DateTime(2024, 1, 16, 7, 32, 39, 843, DateTimeKind.Local).AddTicks(4322), false, "Diocèse de Kpalimé" },
+                    { 6, new DateTime(2024, 1, 16, 7, 32, 39, 843, DateTimeKind.Local).AddTicks(4322), false, "Diocèse de Lomé" },
+                    { 7, new DateTime(2024, 1, 16, 7, 32, 39, 843, DateTimeKind.Local).AddTicks(4323), false, "Diocèse d'Aného" }
                 });
 
             migrationBuilder.CreateIndex(

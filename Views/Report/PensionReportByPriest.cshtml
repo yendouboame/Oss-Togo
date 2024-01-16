@@ -1,36 +1,48 @@
-﻿@model IEnumerable<Pension>
+﻿@model Priest
 
 @{
     ViewData["Title"] = "Etat des allocations par prêtre";
     Layout = "_ReportLayout";
 
-    int i = 1;
+    int index = 0;
 }
 
-<h2 class="text-center mb-4 border-bottom"><strong>@ViewData["Title"]</strong></h2>
+<h4 class="text-center text-uppercase my-3"><strong>@ViewData["Title"]</strong></h4>
 
 <table class="table table-bordered text-center">
+    <thead class="thead-dark">
+        <tr>
+            <th colspan="3">@Model.FullName</th>
+        </tr>
+    </thead>
     <thead class="thead-light">
         <tr>
             <th>#</th>
-            <th>@Html.DisplayNameFor(model => model.Date)</th>
-            <th>@Html.DisplayNameFor(model => model.Priest)</th>
-            <th>@Html.DisplayNameFor(model => model.Amount)</th>
+            <th>Période du paiement de l'allocation	</th>
+            <th>Montant de l'allocation</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var pension in Model)
+        @if (Model.Pensions.Count > 0)
         {
+            @foreach (var pension in Model.Pensions)
+            {
+                <tr>
+                    <td>@(++index)</td>
+                    <td>@pension.Date.ToString("MMMM yyyy")</td>
+                    <td>@FormatNumberWithSpaces(pension.Amount) XOF</td>
+                </tr>
+            }
             <tr>
-                <td>@(i++)</td>
-                <td>@pension.Date.ToShortDateString()</td>
-                <td>@pension.Priest?.FullName</td>
-                <td>@FormatNumberWithSpaces(pension.Amount) XOF</td>
+                <th colspan="2">TOTAL</th>
+                <th>@FormatNumberWithSpaces(Model.Pensions.Sum(m => m.Amount)) XOF</th>
             </tr>
         }
-        <tr>
-            <td colspan="3"><strong>TOTAL</strong></td>
-            <td>@FormatNumberWithSpaces(Model.Sum(m => m.Amount)) XOF</td>
-        </tr>
+        else
+        {
+            <tr role="group" class="bg-light text-center">
+                <td colspan="3">Aucune allocation n'a été versée à ce prêtre</td>
+            </tr>
+        }
     </tbody>
 </table>

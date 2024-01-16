@@ -80,8 +80,9 @@ namespace SolidarityFund.Controllers
 
         public IActionResult ContributionReportByPriestFilter()
         {
-            var priests = new SelectList(_priestRepository.GetAll(), "Id", "FullName");
-            return View(priests);
+            GetPriestSelectList();
+            GetEmptyMonthSelectList();
+            return View();
         }
 
         [HttpPost]
@@ -92,8 +93,9 @@ namespace SolidarityFund.Controllers
 
         public IActionResult ContributionReportByDioceseFilter()
         {
-            var dioceses = new SelectList(_dioceseRepository.GetAll(), "Id", "Name");
-            return View(dioceses);
+            GetDioceseSelectList();
+            GetEmptyMonthSelectList();
+            return View();
         }
 
         [HttpPost]
@@ -102,8 +104,10 @@ namespace SolidarityFund.Controllers
             return new ViewAsPdf(_contributionRepository.ReportByDioceseFilter(contributionReport));
         }
 
+        #region Pension Reports
         public IActionResult PensionReportFilter()
         {
+            GetEmptyMonthSelectList();
             return View();
         }
 
@@ -128,8 +132,10 @@ namespace SolidarityFund.Controllers
 
         public IActionResult PensionReportByPriestFilter()
         {
-            var priests = new SelectList(_priestRepository.GetAll(), "Id", "FullName");
-            return View(priests);
+            GetEligiblePriestForPensionSelectList();
+            GetEmptyMonthSelectList();
+            
+            return View();
         }
 
         [HttpPost]
@@ -137,5 +143,6 @@ namespace SolidarityFund.Controllers
         {
             return new ViewAsPdf(_pensionRepository.ReportByPriestFilter(pensionReport));
         }
+        #endregion
     }
 }

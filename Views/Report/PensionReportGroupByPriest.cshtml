@@ -1,62 +1,46 @@
-﻿@model IEnumerable<IGrouping<Priest, Pension>>
+﻿@model IEnumerable<Priest>
 
 @{
     ViewData["Title"] = "Etat des allocations groupés par prêtre";
     Layout = "_ReportLayout";
 }
 
-<h2 class="text-center mb-4 border-bottom"><strong>@ViewData["Title"]</strong></h2>
+<h4 class="text-center text-uppercase my-3"><strong>@ViewData["Title"]</strong></h4>
 
 <table class="table table-bordered text-center">
-    @if (Model.Count() > 0)
+    <thead class="thead-light">
+        <tr>
+            <th>#</th>
+            <th>Période du paiement de l'allocation</th>
+            <th>Nom du diocèse</th>
+            <th>Montant de l'allocation</th>
+        </tr>
+    </thead>
+    @foreach (var priest in Model)
     {
-        @foreach (var group in Model)
-        {
-            int i = 1;
-
-            <thead class="thead-dark">
-                <tr>
-                    <th colspan="4">@group.Key?.FullName</th>
-                </tr>
-            </thead>
-            <thead class="thead-light">
-                <tr>
-                    <th>#</th>
-                    <th>Date de l'allocation</th>
-                    <th>Nom et prénom(s) du prêtre</th>
-                    <th>Montant de l'allocation</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var pension in group)
-                {
-                    <tr>
-                        <td>@(i++)</td>
-                        <td>@pension.Date.ToShortDateString()</td>
-                        <td>@pension.Priest?.FullName</td>
-                        <td>@FormatNumberWithSpaces(pension.Amount) XOF</td>
-                    </tr>
-                }
-                <tr>
-                    <td colspan="3"><strong>TOTAL</strong></td>
-                    <td>@FormatNumberWithSpaces(group.Sum(m => m.Amount)) XOF</td>
-                </tr>
-            </tbody>
-        }
-    }
-    else
-    {
-        <thead>
+        <thead class="thead-dark">
             <tr>
-                <th>Date de l'allocation</th>
-                <th>Nom et prénom(s) du prêtre</th>
-                <th>Montant de l'allocation</th>
+                <th colspan="4">@priest.FullName</th>
             </tr>
         </thead>
-        <tbody>
+        @if (priest.Pensions.Count > 0)
+        {
+            int index = 0;
+            @foreach (var pension in priest.Pensions)
+            {
+                <tr>
+                    <td>@(++index)</td>
+                    <td>@pension.Date.ToString("MMMM yyyy")</td>
+                    <td>@pension.Priest.Diocese.Name</td>
+                    <td>@FormatNumberWithSpaces(pension.Amount) XOF</td>
+                </tr>
+            }
+        }
+        else
+        {
             <tr role="group" class="bg-light text-center">
-                <td colspan="3">Aucune entrée correspondante trouvée</td>
+                <td colspan="4">Aucune allocation n'a été versée à ce prêtre</td>
             </tr>
-        </tbody>
+        }
     }
 </table>

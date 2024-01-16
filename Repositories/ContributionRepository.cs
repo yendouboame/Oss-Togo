@@ -6,6 +6,7 @@ using SolidarityFund.Models.Entities;
 using SolidarityFund.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -27,24 +28,30 @@ namespace SolidarityFund.Repositories
 
         public IEnumerable<Contribution> GetAllPartial()
         {
-            // Déterminez d'abord l'année pour laquelle récupérer les contributions
-            int year = DateTime.Now.Year;
-            var contributions = _context.Contributions
-                .Include(c => c.Priest.Diocese)
-                .Where(c => !c.IsDeleted && c.Year == year)
-                .OrderByDescending(c => c.Year).ThenByDescending(c => c.Month)
-                .ToList();
+            var contributions = GetCurrentYearContributions();
 
             // Si aucune contribution n'est trouvée pour l'année en cours, essayez l'année précédente
             if (!contributions.Any())
             {
-                year = DateTime.Now.AddYears(-1).Year;
+                int year = DateTime.Now.AddYears(-1).Year;
                 contributions = _context.Contributions
                     .Include(c => c.Priest.Diocese)
                     .Where(c => !c.IsDeleted && c.Year == year)
                     .OrderByDescending(c => c.Year).ThenByDescending(c => c.Month)
                     .ToList();
             }
+
+            return contributions;
+        }
+
+        public IEnumerable<Contribution> GetCurrentYearContributions()
+        {
+            int year = DateTime.Now.Year;
+            var contributions = _context.Contributions
+                .Include(c => c.Priest.Diocese)
+                .Where(c => !c.IsDeleted && c.Year == year)
+                .OrderByDescending(c => c.Year).ThenByDescending(c => c.Month)
+                .ToList();
 
             return contributions;
         }
@@ -62,6 +69,10 @@ namespace SolidarityFund.Repositories
 
         public void Add(Contribution contribution)
         {
+            if (contribution.Amount == 0)
+            {
+                throw new Exception("Veuillez paramétrer les frais de cotisation avant tout enregistrement.");
+            }
             if (!Exists(contribution))
             {
                 _context.Contributions.Add(contribution);
@@ -282,38 +293,47 @@ namespace SolidarityFund.Repositories
                 
         }
 
-
-        private IEnumerable<Contribution> ApplyFilter(ContributionReportViewModel contributionReport)
+        private IEnumerable<Contribution> ApplyFilter(ContributionReportViewModel vm)
         {
-            return GetAll()
-                .Where(c => !contributionReport.StartMonth.HasValue || c.Month >= contributionReport.StartMonth.Value)
-                .Where(c => !contributionReport.StartYear.HasValue || c.Year >= contributionReport.StartYear.Value)
-                .Where(c => !contributionReport.EndMonth.HasValue || c.Month <= contributionReport.EndMonth.Value)
-                .Where(c => !contributionReport.EndYear.HasValue || c.Year <= contributionReport.EndYear.Value)
-                .OrderBy(c => c.Year).ThenBy(c => c.Month);
-        }
-
-
-        public IEnumerable<Contribution> ReportByPriestFilter(ContributionReportByPriestViewModel contributionReport)
-        {
-            var contributions = GetAll()
-                .Where(c => c.PriestId == contributionReport.PriestId)
-                .Where(c => !contributionReport.StartDate.HasValue || c.Date >= contributionReport.StartDate.Value)
-                .Where(c => !contributionReport.EndDate.HasValue || c.Date <= contributionReport.EndDate.Value)
+            var contributions = _context.Contributions
+                .Include(c => c.Priest.Diocese)
+                .Where(c =>
+                    (!vm.StartMonth.HasValue || c.Month >= vm.StartMonth.Value) &&
+                    (!vm.StartYear.HasValue || c.Year >= vm.StartYear.Value) &&
+                    (!vm.EndMonth.HasValue || c.Month <= vm.EndMonth.Value) &&
+                    (!vm.EndYear.HasValue || c.Year <= vm.EndYear.Value))
+                .OrderBy(c => c.Year).ThenBy(c => c.Month)
                 .ToList();
-
+                
             return contributions;
         }
 
-        public IEnumerable<Contribution> ReportByDioceseFilter(ContributionReportByDioceseViewModel contributionReport)
-        {
-            var contributions = GetAll()
-                .Where(c => c.Priest.DioceseId == contributionReport.DioceseId)
-                .Where(c => !contributionReport.StartDate.HasValue || c.Date >= contributionReport.StartDate.Value)
-                .Where(c => !contributionReport.EndDate.HasValue || c.Date <= contributionReport.EndDate.Value)
-                .ToList();
 
-            return contributions;
+        public Priest ReportByPriestFilter(ContributionReportByPriestViewModel vm)
+        {
+            var priest = _context.Priests
+                .Include(p => p.Contributions.Where(con =>
+                    (!vm.StartMonth.HasValue || con.Month >= vm.StartMonth.Value) &&
+                    (!vm.StartYear.HasValue || con.Year >= vm.StartYear.Value) &&
+                    (!vm.EndMonth.HasValue || con.Month <= vm.EndMonth.Value) &&
+                    (!vm.EndYear.HasValue || con.Year <= vm.EndYear.Value)))
+                .FirstOrDefault(p => p.Id == vm.PriestId);
+
+            return priest;
+        }
+
+        public IEnumerable<Contribution> ReportByDioceseFilter(ContributionReportByDioceseViewModel vm)
+        {
+            var query = _context.Contributions
+                .AsNoTracking() // Si vous ne modifiez pas ces entités
+                .Include(c => c.Priest.Diocese)
+                .Where(c => c.Priest.DioceseId == vm.DioceseId &&
+                            (!vm.StartMonth.HasValue || c.Month >= vm.StartMonth.Value) &&
+                            (!vm.StartYear.HasValue || c.Year >= vm.StartYear.Value) &&
+                            (!vm.EndMonth.HasValue || c.Month <= vm.EndMonth.Value) &&
+                            (!vm.EndYear.HasValue || c.Year <= vm.EndYear.Value));
+
+            return query.ToList();
         }
     }
 }

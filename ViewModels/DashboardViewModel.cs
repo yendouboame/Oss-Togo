@@ -12,11 +12,11 @@ namespace SolidarityFund.ViewModels
         public int PriestCount { get; set; }
         public decimal Contributions { get; set; }
         public decimal Pensions { get; set; }
-        public double BeneficiaryPriest { get; set; }
-        public double CurrentMonthContribution { get; set; }
-        public double CurrentMonthPension { get; set; }
-        public double CurrentMonthExpectedContribution { get; set; }
-        public double CurrentMonthExpectedPension { get; set; }
+        public int PriestsDeceased { get; set; }
+        public int PriestsResigned { get; set; }
+        public int PriestsExcardinated { get; set; }
+
+
         public List<Contribution> LastContributions { get; set; }
         public List<Pension> LastPensions { get; set; }
     }

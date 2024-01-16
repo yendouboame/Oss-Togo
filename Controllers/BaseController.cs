@@ -72,6 +72,12 @@ namespace SolidarityFund.Controllers
             ViewBag.Priests = new SelectList(priests, "Id", "FullName");
         }
 
+        protected void GetEligiblePriestForPensionSelectList()
+        {
+            var priests = _priestRepository.GetEligibleForPension();
+            ViewBag.Priests = new SelectList(priests, "Id", "FullName");
+        }
+
         protected void GetMonthSelectList()
         {
             var currentMonth = DateTime.Now.Month;

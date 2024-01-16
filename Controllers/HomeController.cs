@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using static SolidarityFund.Helpers.Constants.Enumerations;
 
 namespace SolidarityFund.Controllers
 {
@@ -26,8 +27,8 @@ namespace SolidarityFund.Controllers
 
             var dioceses = _dioceseRepository.GetAll().ToList();
             var priests = _priestRepository.GetAll().ToList();
-            var contributions = _contributionRepository.GetAllPartial().ToList();
-            var pensions = _pensionRepository.GetAllPartial().ToList();
+            var contributions = _contributionRepository.GetCurrentYearContributions().ToList();
+            var pensions = _pensionRepository.GetCurrentYearPensions().ToList();
 
 
             var contributingPriests = _priestRepository.GetEligibleForContribution().ToList();
@@ -50,7 +51,9 @@ namespace SolidarityFund.Controllers
                 PriestCount = priests.Count,
                 Contributions = contributions.Sum(c => c.Amount),
                 Pensions = pensions.Sum(p => p.Amount),
-
+                PriestsDeceased = priests.Count(p => p.SuspensionReason == SuspensionReason.Death),
+                PriestsResigned = priests.Count(p => p.SuspensionReason == SuspensionReason.Resignation),
+                PriestsExcardinated = priests.Count(p => p.SuspensionReason == SuspensionReason.Excardination)
 
                 //BeneficiaryPriest = beneficiaryPriests.Count,
                 //CurrentMonthContribution = currentMonthContribution,

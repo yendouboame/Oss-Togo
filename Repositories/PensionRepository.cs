@@ -4,8 +4,10 @@ using SolidarityFund.Models.Entities;
 using SolidarityFund.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
+using static SolidarityFund.Helpers.Constants.Permissions;
 
 namespace SolidarityFund.Repositories
 {
@@ -22,24 +24,30 @@ namespace SolidarityFund.Repositories
 
         public IEnumerable<Pension> GetAllPartial()
         {
-            // Déterminez d'abord l'année pour laquelle récupérer les contributions
-            int year = DateTime.Now.Year;
-            var pensions = _context.Pensions
-                .Include(c => c.Priest.Diocese)
-                .Where(c => !c.IsDeleted && c.Year == year)
-                .OrderByDescending(c => c.Year).ThenByDescending(c => c.Month)
-                .ToList();
+            var pensions = GetCurrentYearPensions();
 
             // Si aucune contribution n'est trouvée pour l'année en cours, essayez l'année précédente
             if (!pensions.Any())
             {
-                year = DateTime.Now.AddYears(-1).Year;
+                int year = DateTime.Now.AddYears(-1).Year;
                 pensions = _context.Pensions
                     .Include(c => c.Priest.Diocese)
                     .Where(c => !c.IsDeleted && c.Year == year)
                     .OrderByDescending(c => c.Year).ThenByDescending(c => c.Month)
                     .ToList();
             }
+
+            return pensions;
+        }
+
+        public IEnumerable<Pension> GetCurrentYearPensions()
+        {
+            int year = DateTime.Now.Year;
+            var pensions = _context.Pensions
+                .Include(c => c.Priest.Diocese)
+                .Where(c => !c.IsDeleted && c.Year == year)
+                .OrderByDescending(c => c.Year).ThenByDescending(c => c.Month)
+                .ToList();
 
             return pensions;
         }
@@ -55,6 +63,10 @@ namespace SolidarityFund.Repositories
 
         public void Add(Pension pension)
         {
+            if (pension.Amount == 0)
+            {
+                throw new Exception("Veuillez paramétrer les frais d'allocation avant tout enregistrement.");
+            }
             if (!Exists(pension))
             {
                 using var transaction = _context.Database.BeginTransaction();
@@ -86,41 +98,63 @@ namespace SolidarityFund.Repositories
                  && p.Year == pension.Year && p.Month == pension.Month && p.Amount == pension.Amount);
         }
 
-        public IEnumerable<Pension> ReportFilter(PensionReportViewModel pensionReport)
+        public PensionReportResultViewModel ReportFilter(PensionReportViewModel vm)
         {
-            var pensions = GetAll().ToList();
+            var model = new PensionReportResultViewModel();
+            var startMonthName = vm.StartMonth.HasValue ? CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(vm.StartMonth.Value) : string.Empty;
+            var startYear = vm.StartYear.HasValue ? vm.StartYear.Value.ToString() : string.Empty;
+            model.StartDate = $"{startMonthName} {startYear}".Trim();
 
-            pensions = pensions
-                .Where(p => !pensionReport.StartDate.HasValue || p.Date >= pensionReport.StartDate.Value)
-                .Where(p => !pensionReport.EndDate.HasValue || p.Date <= pensionReport.EndDate.Value)
-                .ToList();
+            var endMonthName = vm.EndMonth.HasValue ? CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(vm.EndMonth.Value) : string.Empty;
+            var endYear = vm.EndYear.HasValue ? vm.EndYear.Value.ToString() : string.Empty;
+            model.EndDate = $"{endMonthName} {endYear}".Trim();
+            
+            model.Pensions = ApplyFilter(vm).ToList();
+
+            return model;
+        }
+
+        private IEnumerable<Pension> ApplyFilter(PensionReportViewModel vm)
+        {
+            var pensions = _context.Pensions.Include(p => p.Priest.Diocese)
+                .Where(p => !vm.StartMonth.HasValue || p.Month >= vm.StartMonth.Value)
+                .Where(p => !vm.StartYear.HasValue || p.Year >= vm.StartYear.Value)
+                .Where(p => !vm.EndMonth.HasValue || p.Month <= vm.EndMonth.Value)
+                .Where(p => !vm.EndYear.HasValue || p.Year <= vm.EndYear.Value)
+                .OrderBy(p => p.Year).ThenBy(p => p.Month);
 
             return pensions;
         }
 
-        public IEnumerable<IGrouping<Priest, Pension>> ReportFilterGroupByPriest(PensionReportViewModel pensionReport)
+        public IEnumerable<Priest> ReportFilterGroupByPriest(PensionReportViewModel vm)
         {
-            var pensions = GetAll().ToList();
+            var priestsEligibleForPension = _priestRepository.GetEligibleForPension();
 
-            pensions = pensions
-                .Where(p => !pensionReport.StartDate.HasValue || p.Date >= pensionReport.StartDate.Value)
-                .Where(p => !pensionReport.EndDate.HasValue || p.Date <= pensionReport.EndDate.Value)
+            var priestsWithPensions = _context.Priests
+                .Include(p => p.Diocese)
+                .Include(p => p.Pensions.Where(pen =>
+                    (!vm.StartMonth.HasValue || pen.Month >= vm.StartMonth.Value) &&
+                    (!vm.StartYear.HasValue || pen.Year >= vm.StartYear.Value) &&
+                    (!vm.EndMonth.HasValue || pen.Month <= vm.EndMonth.Value) &&
+                    (!vm.EndYear.HasValue || pen.Year <= vm.EndYear.Value)))
+                .Where(p => priestsEligibleForPension.Contains(p))
                 .ToList();
 
-            var groupedByPriest = pensions.GroupBy(p => p.Priest);
 
-            return groupedByPriest;
+            return priestsWithPensions;
         }
 
-        public IEnumerable<Pension> ReportByPriestFilter(PensionReportByPriestViewModel pensionReport)
+        public Priest ReportByPriestFilter(PensionReportByPriestViewModel vm)
         {
-            var pensions = GetAll()
-                .Where(p => p.PriestId == pensionReport.PriestId)
-                .Where(p => !pensionReport.StartDate.HasValue || p.Date >= pensionReport.StartDate.Value)
-                .Where(p => !pensionReport.EndDate.HasValue || p.Date <= pensionReport.EndDate.Value)
-                .ToList();
+            var priestWithPensions = _context.Priests
+                .Include(p => p.Pensions.Where(pen =>
+                    (!vm.StartMonth.HasValue || pen.Month >= vm.StartMonth.Value) &&
+                    (!vm.StartYear.HasValue || pen.Year >= vm.StartYear.Value) &&
+                    (!vm.EndMonth.HasValue || pen.Month <= vm.EndMonth.Value) &&
+                    (!vm.EndYear.HasValue || pen.Year <= vm.EndYear.Value)))
+                .FirstOrDefault(p => p.Id == vm.PriestId);
 
-            return pensions;
+            return priestWithPensions;
         }
     }
 }

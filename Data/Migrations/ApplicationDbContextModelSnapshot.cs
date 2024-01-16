@@ -163,8 +163,8 @@ namespace SolidarityFund.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<double>("Amount")
-                        .HasColumnType("float");
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -196,8 +196,8 @@ namespace SolidarityFund.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<double>("Contribution")
-                        .HasColumnType("float");
+                    b.Property<decimal>("Contribution")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -205,8 +205,8 @@ namespace SolidarityFund.Data.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<double>("Pension")
-                        .HasColumnType("float");
+                    b.Property<decimal>("Pension")
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
 
@@ -238,49 +238,49 @@ namespace SolidarityFund.Data.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedOn = new DateTime(2024, 1, 14, 17, 46, 16, 312, DateTimeKind.Local).AddTicks(3591),
+                            CreatedOn = new DateTime(2024, 1, 16, 7, 32, 39, 843, DateTimeKind.Local).AddTicks(4307),
                             IsDeleted = false,
                             Name = "Diocèse de Dapaong"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedOn = new DateTime(2024, 1, 14, 17, 46, 16, 312, DateTimeKind.Local).AddTicks(3606),
+                            CreatedOn = new DateTime(2024, 1, 16, 7, 32, 39, 843, DateTimeKind.Local).AddTicks(4320),
                             IsDeleted = false,
                             Name = "Diocèse de Kara"
                         },
                         new
                         {
                             Id = 3,
-                            CreatedOn = new DateTime(2024, 1, 14, 17, 46, 16, 312, DateTimeKind.Local).AddTicks(3607),
+                            CreatedOn = new DateTime(2024, 1, 16, 7, 32, 39, 843, DateTimeKind.Local).AddTicks(4321),
                             IsDeleted = false,
                             Name = "Diocèse de Sokodé"
                         },
                         new
                         {
                             Id = 4,
-                            CreatedOn = new DateTime(2024, 1, 14, 17, 46, 16, 312, DateTimeKind.Local).AddTicks(3607),
+                            CreatedOn = new DateTime(2024, 1, 16, 7, 32, 39, 843, DateTimeKind.Local).AddTicks(4321),
                             IsDeleted = false,
                             Name = "Diocèse d'Atakpamé"
                         },
                         new
                         {
                             Id = 5,
-                            CreatedOn = new DateTime(2024, 1, 14, 17, 46, 16, 312, DateTimeKind.Local).AddTicks(3608),
+                            CreatedOn = new DateTime(2024, 1, 16, 7, 32, 39, 843, DateTimeKind.Local).AddTicks(4322),
                             IsDeleted = false,
                             Name = "Diocèse de Kpalimé"
                         },
                         new
                         {
                             Id = 6,
-                            CreatedOn = new DateTime(2024, 1, 14, 17, 46, 16, 312, DateTimeKind.Local).AddTicks(3609),
+                            CreatedOn = new DateTime(2024, 1, 16, 7, 32, 39, 843, DateTimeKind.Local).AddTicks(4322),
                             IsDeleted = false,
                             Name = "Diocèse de Lomé"
                         },
                         new
                         {
                             Id = 7,
-                            CreatedOn = new DateTime(2024, 1, 14, 17, 46, 16, 312, DateTimeKind.Local).AddTicks(3609),
+                            CreatedOn = new DateTime(2024, 1, 16, 7, 32, 39, 843, DateTimeKind.Local).AddTicks(4323),
                             IsDeleted = false,
                             Name = "Diocèse d'Aného"
                         });
@@ -294,8 +294,8 @@ namespace SolidarityFund.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<double>("Amount")
-                        .HasColumnType("float");
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
